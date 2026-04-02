@@ -1,0 +1,54 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "photos"
+public_folder: "/photos"
+
+collections:
+
+  - name: "photos"
+    label: "Photography"
+    label_singular: "Photo"
+    folder: "_data/photos"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Location", name: "location", widget: "string", hint: "e.g. Warsaw, 2024" }
+      - { label: "Photo", name: "image", widget: "image" }
+      - { label: "Aspect Ratio", name: "ratio", widget: "select", options: ["16/7", "4/3", "21/9", "3/4", "1/1", "16/9"], default: "4/3" }
+      - { label: "Description (optional)", name: "description", widget: "text", required: false }
+
+  - name: "research"
+    label: "Research Papers"
+    label_singular: "Paper"
+    folder: "_data/research"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Journal / Venue", name: "venue", widget: "string", hint: "e.g. Transportation Research Part A, 2025" }
+      - { label: "DOI Link", name: "doi", widget: "string", required: false, hint: "e.g. https://doi.org/10.1016/..." }
+      - { label: "PDF File (optional)", name: "pdf", widget: "file", required: false, hint: "Upload the PDF to show it inline on the site" }
+      - { label: "Abstract / Notes", name: "abstract", widget: "text", required: false }
+      - label: "Tags"
+        name: "tags"
+        widget: "list"
+        hint: "Add tags like: Spatial Analysis, Warsaw, Q1"
+
+  - name: "thoughts"
+    label: "Thoughts & Posts"
+    label_singular: "Post"
+    folder: "_data/thoughts"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "datetime" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options: ["Research", "Photography", "Academia", "Personal", "Travel"]
+      - { label: "Excerpt", name: "excerpt", widget: "text", hint: "Short preview shown on the card (2-3 sentences)" }
+      - { label: "Full Content", name: "body", widget: "markdown" }
