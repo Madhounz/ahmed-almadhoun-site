@@ -15,8 +15,8 @@ abstract: Digital shadowing uses powerful simulation technologies to mimic
   planners with relevant knowledge.
 tags:
   - PTV Vissim
-  - traffic simulation
-  - urban congestion
-  - transportation modelling
-  - digital shadowing
+  - Traffic simulation
+  - Urban congestion
+  - Transportation modelling
+  - Digital shadowing
 ---
