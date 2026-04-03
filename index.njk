@@ -263,7 +263,7 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
     {% if research and research.length %}
       {% for paper in research %}
       <div class="r-item">
-        <span class="r-num">{{ loop.index | string | padStart(3, '0') }}</span>
+        <span class="r-num">{{ loop.index }}</span>
         <div class="r-body">
           <h3>{{ paper.title }}</h3>
           <p>{{ paper.venue }}</p>
