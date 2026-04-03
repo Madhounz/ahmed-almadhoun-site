@@ -1,6 +1,6 @@
 ---
-title: "Transport Poverty in Freight Transportation: Engineering Challenges,
-  Impacts, and Strategic Solutions for Improved Economic Connectivity"
+title: Transport Poverty in Freight Transportation - Engineering Challenges,
+  Impacts, and Strategic Solutions for Improved Economic Connectivity
 venue: PhD Thesis, Warsaw University of Technology, Faculty of Transport, 2028
 abstract: This research examines transport poverty in freight transportation,
   focusing on how infrastructure limitations, accessibility gaps, and logistical
