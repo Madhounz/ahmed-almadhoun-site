@@ -1,6 +1,6 @@
 backend:
   name: github
-repo: Madhounz/ahmed-almadhoun-site
+  repo: Madhounz/ahmed-almadhoun-site
   branch: main
 
 media_folder: "photos"
