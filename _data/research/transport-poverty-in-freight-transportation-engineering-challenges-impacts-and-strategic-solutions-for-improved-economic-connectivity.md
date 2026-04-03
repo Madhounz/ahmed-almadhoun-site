@@ -10,12 +10,12 @@ abstract: This research examines transport poverty in freight transportation,
   accessibility. A combination of analytical and simulation-based approaches is
   used to assess network performance and identify areas of intervention.
 tags:
-  - Transport Poverty
-  - Freight Transportation
+  - Transport poverty
+  - Freight transportation
   - Logistics
   - Accessibility
   - Infrastructure
-  - Economic Connectivity
-  - Supply Chains
-  - Transport Engineering
+  - Economic connectivity
+  - Supply chains
+  - Transport engineering
 ---
