@@ -13,8 +13,6 @@ collections:
     label_singular: "Photo"
     folder: "_data/photos"
     create: true
-    format: json
-    extension: json
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
@@ -28,8 +26,6 @@ collections:
     label_singular: "Paper"
     folder: "_data/research"
     create: true
-    format: json
-    extension: json
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
@@ -44,8 +40,6 @@ collections:
     label_singular: "Post"
     folder: "_data/thoughts"
     create: true
-    format: json
-    extension: json
     slug: "{{year}}-{{month}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
