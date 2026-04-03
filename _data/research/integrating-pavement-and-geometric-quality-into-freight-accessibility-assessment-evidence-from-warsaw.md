@@ -22,6 +22,10 @@ abstract: >
   identifying infrastructure related transport poverty and prioritising
   maintenance investments.
 tags:
-  - Accessibility; Freight transport; Pavement condition; Infrastructure equity;
-    Warsaw; Transport poverty
+  - Accessibility
+  - Freight transport
+  - Pavement condition
+  - Infrastructure equity
+  - Warsaw
+  - Transport poverty
 ---
