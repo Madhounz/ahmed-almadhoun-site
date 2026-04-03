@@ -34,9 +34,8 @@ function parseFrontMatter(content) {
       result[key] = items.length ? items : undefined;
       continue;
     }
-    if ((val.startsWith('"') && val.endsWith('"')) ||
-        (val.startsWith("'") && val.endsWith("'"))) {
-      val = val.slice(1, -1);
+    if ((val.startsWith('"') || val.startsWith("'"))) {
+      val = val.replace(/^["']/, '').replace(/["']$/, '');
     }
     result[key] = val;
     i++;
