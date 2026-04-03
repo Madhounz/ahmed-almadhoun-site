@@ -1,6 +1,6 @@
 ---
-title: "Integrating Pavement and Geometric Quality into Freight Accessibility
-  Assessment: Evidence from Warsaw"
+title: Integrating Pavement and Geometric Quality into Freight Accessibility
+  Assessment - Evidence from Warsaw
 venue: To be Published
 abstract: >
   Freight accessibility depends not only on network connectivity but also on the
