@@ -34,8 +34,15 @@ function parseFrontMatter(content) {
       result[key] = items.length ? items : undefined;
       continue;
     }
-    if ((val.startsWith('"') || val.startsWith("'"))) {
-      val = val.replace(/^["']/, '').replace(/["']$/, '');
+    if (val.startsWith('"')) {
+      let full = val;
+      while (!full.slice(1).includes('"') && i + 1 < lines.length) {
+        i++;
+        full += ' ' + lines[i].trim();
+      }
+      val = full.replace(/^"/, '').replace(/"$/, '');
+    } else if (val.startsWith("'")) {
+      val = val.replace(/^'/, '').replace(/'$/, '');
     }
     result[key] = val;
     i++;
