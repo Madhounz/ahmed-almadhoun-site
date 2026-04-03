@@ -1,7 +1,7 @@
 ---
 title: Smart city planning for inclusive post‑war urban reconstruction -
   integrating electromobility and freight accessibility
-venue: Oficyna Wydawnicza Politechniki Warszawskiej, 2025
+venue: Publishing House of the Warsaw University of Technology, 2025
 abstract: >
   Reconstructing cities after war is not only a task of rebuilding damaged
   infrastructure. It is also a rare chance to apply modern planning ideas and
