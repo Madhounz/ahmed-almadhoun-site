@@ -1,6 +1,6 @@
 ---
 title: The 79th street in Musaffah Abu Dhabi – The Simulation-Based Alternatives
-venue: Transportation Research Procedia, 2026
+venue: Transportation Research Procedia/TRANSOM2025, 2026
 doi: https://doi.org/10.1016/j.trpro.2025.12.010
 abstract: Digital shadowing uses powerful simulation technologies to mimic
   real-world traffic networks, allowing data-driven solutions to improve urban
