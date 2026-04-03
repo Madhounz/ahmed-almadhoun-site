@@ -223,8 +223,8 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   <p class="gallery-intro reveal">Each frame is a question asked with light. <em>Warsaw's geometry, foreign streets, quiet moments.</em> The same eye that reads a freight corridor reads a composition.</p>
 
   <div class="cinema-scroll reveal" id="cinema">
-    {% if collections.photos and collections.photos.length %}
-      {% for photo in collections.photos %}
+    {% if photos and photos.length %}
+      {% for photo in photos %}
       <div class="cinema-item" data-title="{{ photo.title }}" data-loc="{{ photo.location }}">
         <div class="photo-placeholder" style="aspect-ratio:{{ photo.ratio or '4/3' }}">
           {% if photo.image %}
@@ -260,8 +260,8 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   </div>
   <div class="research-list reveal">
 
-    {% if collections.research and collections.research.length %}
-      {% for paper in collections.research %}
+    {% if research and research.length %}
+      {% for paper in research %}
       <div class="r-item">
         <span class="r-num">{{ loop.index | string | padStart(3, '0') }}</span>
         <div class="r-body">
@@ -327,8 +327,8 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
     <h2 class="s-title">Ideas, notes<br><em>& observations.</em></h2>
   </div>
   <div class="thoughts-grid reveal">
-    {% if collections.thoughts and collections.thoughts.length %}
-      {% for post in collections.thoughts %}
+    {% if thoughts and thoughts.length %}
+      {% for post in thoughts %}
       <div class="thought-card">
         <div class="t-date">{{ post.date | dateDisplay }}</div>
         <h3 class="t-title">{{ post.title }}</h3>
