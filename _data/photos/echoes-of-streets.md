@@ -1,6 +1,7 @@
 ---
-title: Echoes of Streets
-location: Krakow
-image: /photos/topost.jpg
-ratio: 4/3
+title: "Echoes of Streets"
+location: "Krakow, 2024"
+image: "/photos/echoes-of-streets.jpg"
+ratio: "4/3"
+description: ""
 ---
