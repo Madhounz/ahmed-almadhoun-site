@@ -182,7 +182,19 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   </div>
   <iframe style="flex:1;border:none" id="pdf-frame" src=""></iframe>
 </div>
-
+<div id="post-overlay">
+  <div class="post-curtain"></div>
+  <button class="post-close" onclick="closePost()">Close ✕</button>
+  <div class="post-inner">
+    <div class="post-meta">
+      <span id="post-date"></span>
+      <span id="post-cat"></span>
+    </div>
+    <h1 class="post-title" id="post-title"></h1>
+    <div class="post-divider"></div>
+    <div class="post-body" id="post-body"></div>
+  </div>
+</div>
 <nav>
   <a href="#hero" class="nav-logo">A.A.</a>
   <ul class="nav-links">
