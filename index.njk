@@ -109,7 +109,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .photo-cell:hover .photo-caption{opacity:1}
 .photo-caption span{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
 .photo-footer{margin-top:24px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
-.photo-footer p{font-size:14px;color:var(--muted)}
 .photo-footer a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none}
 .photo-footer a:hover{text-decoration:underline}
 #about{background:var(--bg)}
@@ -249,7 +248,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         {% for paper in research %}
         <div class="r-card">
           <div class="r-num">{% if loop.index < 10 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</div>
-          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}<span class="r-toggle">+</span></h3>
+          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){this.closest('.r-card').classList.toggle('open');event.preventDefault()}" tabindex="0" role="button" aria-expanded="false">{{ paper.title }}<span class="r-toggle">+</span></h3>
           <p class="r-abstract">{{ paper.abstract }}</p>
           {% if paper.tags %}
           <div class="r-tags">
@@ -267,7 +266,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% else %}
         <div class="r-card">
           <div class="r-num">01</div>
-          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">Freight Accessibility in Warsaw Corridors<span class="r-toggle">+</span></h3>
+          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){this.closest('.r-card').classList.toggle('open');event.preventDefault()}" tabindex="0" role="button" aria-expanded="false">Freight Accessibility in Warsaw Corridors<span class="r-toggle">+</span></h3>
           <p class="r-abstract">A spatial framework measuring how well urban logistics corridors serve the areas they connect. Applied to Warsaw's freight network to identify hidden penalties in infrastructure quality and corridor performance.</p>
           <div class="r-tags"><span class="r-tag">Spatial Analysis</span><span class="r-tag">Warsaw</span><span class="r-tag">Q1 Target</span></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
@@ -352,15 +351,16 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     <div class="thoughts-grid reveal">
       {% if thoughts and thoughts.length %}
         {% for post in thoughts %}
-        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | escape }}">
+        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" >
           <div class="t-date">{{ post.date | dateDisplay }}</div>
           <h3 class="t-title">{{ post.title }}</h3>
           <p class="t-excerpt">{{ post.excerpt }}</p>
           <span class="t-cat">{{ post.category }}</span>
+          <div class="t-body-source" hidden>{{ post.body | safe }}</div>
         </div>
         {% endfor %}
       {% else %}
-        <div class="t-card" data-title="Why freight never gets mentioned when we talk about transport poverty" data-date="April 2026" data-cat="Research" data-excerpt="Everyone talks about buses, metros, and whether poor neighbourhoods have access to jobs. Nobody asks whether the businesses in those neighbourhoods can actually receive goods." data-body="">
+        <div class="t-card" data-title="Why freight never gets mentioned when we talk about transport poverty" data-date="April 2026" data-cat="Research" data-excerpt="Everyone talks about buses, metros, and whether poor neighbourhoods have access to jobs. Nobody asks whether the businesses in those neighbourhoods can actually receive goods.">
           <div class="t-date">April 2026</div>
           <h3 class="t-title">Why freight never gets mentioned when we talk about transport poverty</h3>
           <p class="t-excerpt">Everyone talks about buses, metros, and whether poor neighbourhoods have access to jobs. Nobody asks whether the businesses in those neighbourhoods can actually receive goods.</p>
@@ -405,9 +405,22 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   <img id="lb-img" src="" alt="">
 </div>
 
-<button id="theme-btn" onclick="document.body.classList.toggle('dark-mode');this.textContent=document.body.classList.contains('dark-mode')?'Light':'Dark'">Dark</button>
+<button id="theme-btn" onclick="
+  document.body.classList.toggle('dark-mode');
+  const dark=document.body.classList.contains('dark-mode');
+  this.textContent=dark?'Light':'Dark';
+  localStorage.setItem('theme',dark?'dark':'light');
+">Dark</button>
 
 <script>
+(function(){
+  const saved=localStorage.getItem('theme');
+  if(saved==='dark'){
+    document.body.classList.add('dark-mode');
+    const btn=document.getElementById('theme-btn');
+    if(btn)btn.textContent='Light';
+  }
+})();
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
 },{threshold:.07});
@@ -429,7 +442,7 @@ function closeLb(){
 document.querySelectorAll('.photo-cell').forEach(cell=>{
   cell.addEventListener('click',()=>{
     const img=cell.querySelector('img');
-    if(img) openLb(img.src);
+    if(img&&img.src) openLb(img.src);
   });
 });
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
@@ -440,13 +453,10 @@ document.querySelectorAll('.t-card').forEach(card=>{
     document.getElementById('post-heading').textContent=card.dataset.title||'';
     document.getElementById('post-date').textContent=card.dataset.date||'';
     document.getElementById('post-cat').textContent=card.dataset.cat||'';
-    const raw=card.dataset.body||'';
+    const src=card.querySelector('.t-body-source');
+    const body=src?src.innerHTML.trim():'';
     const exc=card.dataset.excerpt||'';
-    if(raw && raw.trim()){
-      document.getElementById('post-body').innerHTML=raw;
-    } else {
-      document.getElementById('post-body').innerHTML='<p>'+exc+'</p>';
-    }
+    document.getElementById('post-body').innerHTML=body||'<p>'+exc+'</p>';
     const po=document.getElementById('post-overlay');
     po.style.display='flex';
     requestAnimationFrame(()=>requestAnimationFrame(()=>po.classList.add('visible')));
@@ -460,6 +470,12 @@ function closePost(){
   setTimeout(()=>{po.style.display='none';document.body.style.overflow='';},350);
 }
 window.closePost=closePost;
+document.querySelectorAll('.r-title').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const open=t.closest('.r-card').classList.contains('open');
+    t.setAttribute('aria-expanded',open);
+  });
+});
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
