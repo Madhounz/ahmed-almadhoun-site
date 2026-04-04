@@ -355,7 +355,7 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   <div class="thoughts-grid reveal">
     {% if thoughts and thoughts.length %}
       {% for post in thoughts %}
-      <div class="thought-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}">
+      <div class="thought-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | striptags | truncate(2000) }}">
         <div class="t-date">{{ post.date | dateDisplay }}</div>
         <h3 class="t-title">{{ post.title }}</h3>
         <p class="t-excerpt">{{ post.excerpt }}</p>
@@ -460,7 +460,8 @@ document.querySelectorAll('.thought-card').forEach(card=>{
     document.getElementById('post-title').textContent=card.dataset.title||'';
     document.getElementById('post-date').textContent=card.dataset.date||'';
     document.getElementById('post-cat').textContent=card.dataset.cat||'';
-    document.getElementById('post-body').innerHTML='<p>'+(card.dataset.excerpt||'')+'</p>';
+    const bodyText = card.dataset.body || card.dataset.excerpt || '';
+    document.getElementById('post-body').innerHTML = bodyText.split(/\n+/).filter(l=>l.trim()).map(l=>'<p>'+l.trim()+'</p>').join('');
     document.getElementById('post-overlay').classList.add('open');
     document.body.style.overflow='hidden';
   });
