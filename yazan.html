@@ -2,19 +2,61 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>You've Been Summoned</title>
+<title>...</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:#000;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;text-align:center;flex-direction:column;gap:24px}
-h1{font-size:clamp(32px,6vw,72px);color:#ff4444}
-p{font-size:18px;color:#aaa;max-width:500px;line-height:1.6}
-.small{font-size:13px;color:#444;margin-top:40px}
+body{background:#0a0a0a;color:#fff;font-family:monospace;display:flex;align-items:center;justify-content:center;min-height:100vh;flex-direction:column;gap:0;overflow:hidden}
+.eye{font-size:80px;animation:blink 4s infinite}
+@keyframes blink{0%,90%,100%{opacity:1}95%{opacity:0}}
+.line1{font-size:13px;letter-spacing:0.4em;text-transform:uppercase;color:#444;margin-top:40px;animation:fadein 3s ease forwards;opacity:0}
+.line2{font-size:28px;letter-spacing:0.1em;color:#cc3333;margin-top:16px;animation:fadein 3s ease 2s forwards;opacity:0}
+.line3{font-size:13px;color:#333;margin-top:60px;animation:fadein 2s ease 5s forwards;opacity:0;letter-spacing:0.2em}
+.line4{font-size:11px;color:#222;margin-top:12px;animation:fadein 2s ease 7s forwards;opacity:0;letter-spacing:0.15em}
+.cursor{animation:cursor 1s infinite}
+@keyframes cursor{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes fadein{to{opacity:1}}
+.glitch{position:relative}
+.glitch::before,.glitch::after{content:attr(data-text);position:absolute;left:0;top:0}
+.glitch::before{color:#0ff;clip:rect(0,900px,0,0);animation:glitch1 2s infinite linear}
+.glitch::after{color:#f0f;clip:rect(0,900px,0,0);animation:glitch2 2s infinite linear}
+@keyframes glitch1{0%{clip:rect(42px,9999px,44px,0)}20%{clip:rect(12px,9999px,59px,0)}40%{clip:rect(85px,9999px,90px,0)}60%{clip:rect(33px,9999px,40px,0)}80%{clip:rect(67px,9999px,72px,0)}100%{clip:rect(42px,9999px,44px,0)}}
+@keyframes glitch2{0%{clip:rect(65px,9999px,70px,0);transform:translate(-2px)}25%{clip:rect(20px,9999px,25px,0);transform:translate(2px)}50%{clip:rect(88px,9999px,93px,0);transform:translate(-2px)}75%{clip:rect(44px,9999px,49px,0);transform:translate(2px)}100%{clip:rect(65px,9999px,70px,0);transform:translate(-2px)}}
 </style>
 </head>
 <body>
-<h1>YAZAN.</h1>
-<p>You were not supposed to find this.<br>But here you are.</p>
-<p style="color:#ff4444">Ahmed knows what you did.</p>
-<div class="small">this page will self-destruct<br>(it won't)</div>
+
+<div class="eye">👁</div>
+<div class="line1">INITIALIZING...</div>
+<div class="line2 glitch" data-text="YAZAN DETECTED">YAZAN DETECTED</div>
+<div class="line3">YOUR LOCATION HAS BEEN LOGGED <span class="cursor">_</span></div>
+<div class="line4">ahmed.almadhoun@pw.edu.pl ALREADY KNOWS</div>
+
+<script>
+// Spooky typing effect after 9 seconds
+setTimeout(()=>{
+  const d=document.createElement('div');
+  d.style.cssText='font-size:11px;color:#1a1a1a;margin-top:20px;letter-spacing:0.15em;transition:color 3s ease';
+  d.textContent='this is fine. everything is fine.';
+  document.body.appendChild(d);
+  setTimeout(()=>d.style.color='#444',100);
+},9000);
+
+// Play ominous tone using Web Audio
+window.addEventListener('click',()=>{
+  const ctx=new AudioContext();
+  [80,160,240].forEach((freq,i)=>{
+    const o=ctx.createOscillator();
+    const g=ctx.createGain();
+    o.connect(g);g.connect(ctx.destination);
+    o.frequency.value=freq;
+    o.type='sine';
+    g.gain.setValueAtTime(0,ctx.currentTime+i*0.8);
+    g.gain.linearRampToValueAtTime(0.08,ctx.currentTime+i*0.8+0.3);
+    g.gain.linearRampToValueAtTime(0,ctx.currentTime+i*0.8+2);
+    o.start(ctx.currentTime+i*0.8);
+    o.stop(ctx.currentTime+i*0.8+2);
+  });
+},{ once:true });
+</script>
 </body>
 </html>
