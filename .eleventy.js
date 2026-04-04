@@ -13,15 +13,30 @@ function readMd(folderName) {
         if (!m) return null;
         const obj = {};
         let cur = null;
-        for (const line of m[1].split('\n')) {
+        const lines = m[1].split('\n');
+        let i = 0;
+        while (i < lines.length) {
+          const line = lines[i];
           if (/^[a-z]/.test(line)) {
             const c = line.indexOf(':');
-            if (c === -1) continue;
+            if (c === -1) { i++; continue; }
             cur = line.slice(0, c).trim();
-            obj[cur] = line.slice(c + 1).trim().replace(/^["']|["']$/g, '');
-          } else if (cur && /^\s+\S/.test(line)) {
+            const val = line.slice(c + 1).trim();
+            if (val === '') {
+              const items = [];
+              i++;
+              while (i < lines.length && /^\s*-\s/.test(lines[i])) {
+                items.push(lines[i].replace(/^\s*-\s*/, '').trim());
+                i++;
+              }
+              obj[cur] = items;
+              continue;
+            }
+            obj[cur] = val.replace(/^["']|["']$/g, '');
+          } else if (cur && /^\s+\S/.test(line) && typeof obj[cur] === 'string') {
             obj[cur] += ' ' + line.trim().replace(/^["']|["']$/g, '');
           }
+          i++;
         }
         return obj;
       } catch(e) { return null; }
