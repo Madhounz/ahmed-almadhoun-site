@@ -121,6 +121,22 @@ section{padding:110px 52px;position:relative}
 .t-date{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
 .t-title{font-size:22px;font-weight:300;color:var(--white);line-height:1.25;margin-bottom:12px;letter-spacing:-.01em}
 .t-excerpt{font-size:14px;line-height:1.75;color:var(--muted)}
+#post-overlay{position:fixed;inset:0;z-index:600;background:#060606;display:none;flex-direction:column;overflow-y:auto;cursor:default}
+#post-overlay.open{display:flex}
+.post-curtain{position:fixed;top:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .8s ease;z-index:601}
+#post-overlay.open .post-curtain{transform:scaleX(1)}
+.post-inner{max-width:680px;margin:0 auto;padding:120px 40px 80px;opacity:0;transform:translateY(24px);transition:opacity .7s ease .4s,transform .7s ease .4s}
+#post-overlay.open .post-inner{opacity:1;transform:translateY(0)}
+.post-meta{font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:rgba(201,168,76,0.6);margin-bottom:40px;display:flex;gap:24px}
+.post-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(36px,6vw,72px);font-weight:300;line-height:1.05;letter-spacing:-.02em;color:#f0ede6;margin-bottom:48px}
+.post-title em{font-style:italic;color:#c9a84c}
+.post-divider{width:48px;height:1px;background:#c9a84c;margin-bottom:48px;opacity:.5}
+.post-body{font-family:'Cormorant Garamond',Georgia,serif;font-size:20px;font-weight:300;line-height:1.9;color:rgba(240,237,230,0.7)}
+.post-body p{margin-bottom:28px}
+.post-close{position:fixed;top:32px;right:40px;font-family:'Space Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:rgba(240,237,230,0.35);background:none;border:none;cursor:pointer;transition:color .2s;z-index:602}
+.post-close:hover{color:#c9a84c}
+.thought-card .t-title{cursor:pointer;transition:color .3s}
+.thought-card:hover .t-title{color:#c9a84c}
 .t-cat{display:inline-block;margin-top:20px;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:4px 12px;border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.6)}
 #contact{background:var(--black);text-align:center}
 .contact-inner{max-width:600px;margin:0 auto}
@@ -325,12 +341,12 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   <div class="thoughts-grid reveal">
     {% if thoughts and thoughts.length %}
       {% for post in thoughts %}
-      <div class="thought-card">
-        <div class="t-date">{{ post.date | dateDisplay }}</div>
-        <h3 class="t-title">{{ post.title }}</h3>
-        <p class="t-excerpt">{{ post.excerpt }}</p>
-        <span class="t-cat">{{ post.category }}</span>
-      </div>
+      <div class="thought-card" onclick="openPost('{{ post.title }}','{{ post.date | dateDisplay }}','{{ post.category }}','{{ post.body | replace("'","&#39;") | replace('"','&quot;') | nl2br }}')">
+  <div class="t-date">{{ post.date | dateDisplay }}</div>
+  <h3 class="t-title">{{ post.title }}</h3>
+  <p class="t-excerpt">{{ post.excerpt }}</p>
+  <span class="t-cat">{{ post.category }}</span>
+</div>
       {% endfor %}
     {% else %}
       <div class="thought-card">
@@ -425,6 +441,19 @@ function closePdf(){
 document.querySelectorAll('.r-body h3').forEach(h=>{
   h.addEventListener('click',()=>h.closest('.r-item').classList.toggle('open'));
 });
+function openPost(title,date,cat,body){
+  document.getElementById('post-title').textContent=title;
+  document.getElementById('post-date').textContent=date;
+  document.getElementById('post-cat').textContent=cat;
+  document.getElementById('post-body').innerHTML=body.split('\n').filter(l=>l.trim()).map(l=>'<p>'+l+'</p>').join('');
+  document.getElementById('post-overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePost(){
+  document.getElementById('post-overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+window.closePost=closePost;
 window.openPdf=openPdf;
 window.closePdf=closePdf;
 </script>
