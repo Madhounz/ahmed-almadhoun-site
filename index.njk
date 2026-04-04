@@ -27,6 +27,7 @@ permalink: /index.html
   --sans:'Inter',system-ui,sans-serif;
   --serif:'Fraunces',Georgia,serif;
 }
+body.dark-mode nav{background:rgba(26,29,36,0.92);border-bottom:1px solid rgba(255,255,255,0.04)}
 body.dark-mode{
   --bg:#1a1d24;
   --surface:#20232d;
@@ -40,8 +41,8 @@ body.dark-mode{
   --accent-mid:#c07e38;
   --accent-light:#2a2010;
 }
-#theme-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:9px 16px;border-radius:5px;cursor:pointer;transition:all .25s}
-#theme-btn:hover{color:var(--text);border-color:var(--border-light)}
+#theme-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:9px 16px;border-radius:5px;cursor:pointer;transition:all .25s;opacity:.72}
+#theme-btn:hover{color:var(--text);border-color:var(--border-light);opacity:1}
 html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden}
 nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,0.08);padding:0 40px}
@@ -82,10 +83,12 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .r-card:first-child{border-top:1px solid var(--border-light)}
 .r-card:hover{background:var(--surface);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.03)}
 .r-num{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--faint);margin-bottom:9px;font-family:var(--sans)}
-.r-title{font-family:var(--serif);font-size:21px;font-weight:300;line-height:1.25;color:var(--text);margin-bottom:9px;letter-spacing:-0.01em;cursor:pointer;transition:color .2s}
+.r-title{font-family:var(--serif);font-size:21px;font-weight:300;line-height:1.25;color:var(--text);margin-bottom:9px;letter-spacing:-0.01em;cursor:pointer;transition:color .2s;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
 .r-title:hover{color:var(--accent)}
-.r-abstract{display:none;margin-top:14px;font-size:14px;line-height:1.75;color:var(--muted);border-left:2px solid var(--border);padding-left:14px}
-.r-card.open .r-abstract{display:block}
+.r-toggle{font-family:var(--sans);font-size:16px;font-weight:300;color:var(--faint);flex-shrink:0;transition:transform .25s ease,color .25s ease;line-height:1}
+.r-card.open .r-toggle{transform:rotate(45deg);color:var(--accent)}
+.r-abstract{max-height:0;overflow:hidden;margin-top:0;font-size:14px;line-height:1.75;color:var(--muted);border-left:2px solid var(--border);padding-left:14px;transition:max-height .4s ease,margin-top .3s ease,opacity .3s ease;opacity:0}
+.r-card.open .r-abstract{max-height:600px;margin-top:14px;opacity:1}
 .r-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;margin-top:14px}
 .r-tag{font-size:11px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;padding:4px 9px;border-radius:3px;background:var(--accent-light);color:var(--accent)}
 .r-link{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-bottom:1px solid transparent;transition:border-color .2s}
@@ -105,7 +108,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .photo-caption{position:absolute;bottom:0;left:0;right:0;padding:28px 14px 12px;background:linear-gradient(to top,rgba(0,0,0,0.72),transparent);opacity:0;transition:opacity .3s}
 .photo-cell:hover .photo-caption{opacity:1}
 .photo-caption span{font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
-.photo-footer{margin-top:20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.photo-footer{margin-top:24px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .photo-footer p{font-size:14px;color:var(--muted)}
 .photo-footer a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none}
 .photo-footer a:hover{text-decoration:underline}
@@ -245,8 +248,8 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% if research and research.length %}
         {% for paper in research %}
         <div class="r-card">
-          <div class="r-num">{% if loop.index < 10 %}00{{ loop.index }}{% elif loop.index < 100 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</div>
-          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}</h3>
+          <div class="r-num">{% if loop.index < 10 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</div>
+          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}<span class="r-toggle">+</span></h3>
           <p class="r-abstract">{{ paper.abstract }}</p>
           {% if paper.tags %}
           <div class="r-tags">
@@ -263,8 +266,8 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         {% endfor %}
       {% else %}
         <div class="r-card">
-          <div class="r-num">001</div>
-          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">Freight Accessibility in Warsaw Corridors</h3>
+          <div class="r-num">01</div>
+          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">Freight Accessibility in Warsaw Corridors<span class="r-toggle">+</span></h3>
           <p class="r-abstract">A spatial framework measuring how well urban logistics corridors serve the areas they connect. Applied to Warsaw's freight network to identify hidden penalties in infrastructure quality and corridor performance.</p>
           <div class="r-tags"><span class="r-tag">Spatial Analysis</span><span class="r-tag">Warsaw</span><span class="r-tag">Q1 Target</span></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
@@ -297,7 +300,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% endif %}
     </div>
     <div class="photo-footer">
-      <p>Shooting on film-style settings, grain, stillness, and quiet geometry.</p>
       <a href="https://www.instagram.com/fotozitake/" target="_blank">@fotozitake on Instagram &rarr;</a>
     </div>
   </div>
@@ -350,7 +352,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     <div class="thoughts-grid reveal">
       {% if thoughts and thoughts.length %}
         {% for post in thoughts %}
-        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | striptags | truncate(3000, true, '') }}">
+        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | escape }}">
           <div class="t-date">{{ post.date | dateDisplay }}</div>
           <h3 class="t-title">{{ post.title }}</h3>
           <p class="t-excerpt">{{ post.excerpt }}</p>
@@ -358,7 +360,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         </div>
         {% endfor %}
       {% else %}
-        <div class="t-card">
+        <div class="t-card" data-title="Why freight never gets mentioned when we talk about transport poverty" data-date="April 2026" data-cat="Research" data-excerpt="Everyone talks about buses, metros, and whether poor neighbourhoods have access to jobs. Nobody asks whether the businesses in those neighbourhoods can actually receive goods." data-body="">
           <div class="t-date">April 2026</div>
           <h3 class="t-title">Why freight never gets mentioned when we talk about transport poverty</h3>
           <p class="t-excerpt">Everyone talks about buses, metros, and whether poor neighbourhoods have access to jobs. Nobody asks whether the businesses in those neighbourhoods can actually receive goods.</p>
@@ -438,8 +440,13 @@ document.querySelectorAll('.t-card').forEach(card=>{
     document.getElementById('post-heading').textContent=card.dataset.title||'';
     document.getElementById('post-date').textContent=card.dataset.date||'';
     document.getElementById('post-cat').textContent=card.dataset.cat||'';
-    const raw=card.dataset.body||card.dataset.excerpt||'';
-    document.getElementById('post-body').innerHTML=raw.split(/\n+/).filter(l=>l.trim()).map(l=>'<p>'+l.trim()+'</p>').join('');
+    const raw=card.dataset.body||'';
+    const exc=card.dataset.excerpt||'';
+    if(raw && raw.trim()){
+      document.getElementById('post-body').innerHTML=raw;
+    } else {
+      document.getElementById('post-body').innerHTML='<p>'+exc+'</p>';
+    }
     const po=document.getElementById('post-overlay');
     po.style.display='flex';
     requestAnimationFrame(()=>requestAnimationFrame(()=>po.classList.add('visible')));
