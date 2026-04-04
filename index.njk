@@ -27,7 +27,6 @@ permalink: /index.html
   --sans:'Inter',system-ui,sans-serif;
   --serif:'Fraunces',Georgia,serif;
 }
-
 body.dark-mode{
   --bg:#1a1d24;
   --surface:#20232d;
@@ -43,19 +42,15 @@ body.dark-mode{
 }
 #theme-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-family:var(--sans);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:9px 16px;border-radius:5px;cursor:pointer;transition:all .25s}
 #theme-btn:hover{color:var(--text);border-color:var(--border-light)}
-
 html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden}
-
 nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,0.08);padding:0 40px}
 .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
 .nav-name{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:-0.01em}
 .nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;letter-spacing:0.01em;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
-
 .wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
-
 #hero{padding:100px 40px 96px;max-width:var(--max);margin:0 auto}
 .hero-location{font-size:11.5px;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--faint);margin-bottom:28px}
 .hero-name{font-family:var(--serif);font-size:clamp(54px,7.5vw,94px);font-weight:300;line-height:.97;letter-spacing:-0.03em;color:var(--text);margin-bottom:6px}
@@ -69,11 +64,9 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .btn-outline{background:transparent;color:var(--text);border:1.5px solid var(--border)}
 .btn-outline:hover{border-color:var(--accent);color:var(--accent)}
 .hero-cred{font-size:12px;color:var(--faint);letter-spacing:0.01em}
-
 .section{padding:84px 0;border-top:1px solid var(--border)}
 .section-label{font-size:11px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
 .section-title{font-family:var(--serif);font-size:clamp(26px,3.8vw,38px);font-weight:300;line-height:1.1;letter-spacing:-0.02em;color:var(--text);margin-bottom:36px;opacity:.92}
-
 #what{background:var(--surface)}
 .what-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:start}
 .what-text p{font-size:17px;line-height:1.82;color:var(--muted)}
@@ -83,22 +76,22 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .pill-dot{width:5px;height:5px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px}
 .pill-text{font-size:14px;font-weight:500;color:var(--text);margin-bottom:3px}
 .pill-sub{font-size:13px;color:var(--muted);line-height:1.5}
-
 #research{background:var(--bg)}
 .research-list{display:flex;flex-direction:column}
 .r-card{padding:32px 0;border-bottom:1px solid var(--border-light);display:block;transition:background .3s ease,box-shadow .3s ease}
 .r-card:first-child{border-top:1px solid var(--border-light)}
-.r-card:hover{background:var(--surface);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.03);}
-.r-num{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--faint);margin-bottom:9px}
-.r-title{font-family:var(--serif);font-size:21px;font-weight:300;line-height:1.25;color:var(--text);margin-bottom:9px;letter-spacing:-0.01em}
-.r-desc{font-size:14.5px;line-height:1.72;color:var(--muted);margin-bottom:14px;max-width:600px}
-.r-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.r-card:hover{background:var(--surface);box-shadow:inset 0 0 0 1px rgba(0,0,0,0.03)}
+.r-num{font-size:11px;font-weight:600;letter-spacing:0.1em;color:var(--faint);margin-bottom:9px;font-family:var(--sans)}
+.r-title{font-family:var(--serif);font-size:21px;font-weight:300;line-height:1.25;color:var(--text);margin-bottom:9px;letter-spacing:-0.01em;cursor:pointer;transition:color .2s}
+.r-title:hover{color:var(--accent)}
+.r-abstract{display:none;margin-top:14px;font-size:14px;line-height:1.75;color:var(--muted);border-left:2px solid var(--border);padding-left:14px}
+.r-card.open .r-abstract{display:block}
+.r-tags{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px;margin-top:14px}
 .r-tag{font-size:11px;font-weight:500;letter-spacing:0.05em;text-transform:uppercase;padding:4px 9px;border-radius:3px;background:var(--accent-light);color:var(--accent)}
 .r-link{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none;display:inline-flex;align-items:center;gap:5px;border-bottom:1px solid transparent;transition:border-color .2s}
 .r-link:hover{border-color:var(--accent)}
 .r-link svg{width:11px;height:11px}
 .r-meta{font-size:11.5px;color:var(--faint);text-align:left;margin-top:14px;line-height:1.6;letter-spacing:0.01em}
-
 #photography{background:var(--surface)}
 .photo-intro{font-size:15px;line-height:1.75;color:var(--muted);max-width:520px;margin-bottom:28px;margin-top:-12px}
 .photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
@@ -116,7 +109,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .photo-footer p{font-size:14px;color:var(--muted)}
 .photo-footer a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none}
 .photo-footer a:hover{text-decoration:underline}
-
 #about{background:var(--bg)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
 .about-text p{font-size:16.5px;line-height:1.85;color:var(--muted);margin-bottom:20px}
@@ -127,47 +119,6 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .fact-label{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin-bottom:4px}
 .fact-value{font-size:14.5px;font-weight:500;color:var(--text);margin-bottom:2px}
 .fact-sub{font-size:13px;color:var(--muted)}
-
-footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--surface2)}
-.footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
-.footer-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--text)}
-.footer-desc{font-size:12.5px;color:var(--faint);margin-top:3px}
-.footer-links{display:flex;gap:20px}
-.footer-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s}
-.footer-links a:hover{color:var(--text)}
-
-#lb{display:none;position:fixed;inset:0;background:rgba(4,3,2,0.97);backdrop-filter:blur(2px);z-index:1000;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .3s}
-#lb.open{display:flex}
-#lb.visible{opacity:1}
-#lb img{max-width:90vw;max-height:90vh;object-fit:contain}
-#lb-close{position:absolute;top:24px;right:32px;background:none;border:none;color:rgba(255,255,255,0.45);font-size:12px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);font-weight:500;transition:color .2s}
-#lb-close:hover{color:rgba(255,255,255,.85)}
-
-.reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .nav-links{display:none}
-  #hero{padding:64px 20px 56px}
-  .wrap{padding:0 20px}
-  .section{padding:56px 0}
-  .what-grid,.about-grid{grid-template-columns:1fr;gap:32px}
-  .photo-grid{grid-template-columns:1fr 1fr}
-  .photo-cell:nth-child(1),.photo-cell:nth-child(4){grid-column:span 1;aspect-ratio:4/3}
-  .photo-cell:nth-child(2){aspect-ratio:4/3}
-  .r-card{display:block}
-  footer{padding:28px 20px}
-  .footer-inner{flex-direction:column;align-items:flex-start}
-}
-
-.r-abstract{display:none;margin-top:14px;font-size:14px;line-height:1.75;color:var(--muted);border-left:2px solid var(--border);padding-left:14px}
-.r-card.open .r-abstract{display:block}
-.r-title{cursor:pointer;transition:color .2s}
-.r-title:hover{color:var(--accent)}
-.r-toggle{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);margin-top:10px;display:inline-block;transition:color .2s;cursor:pointer;background:none;border:none;font-family:var(--sans);padding:0}
-.r-toggle:hover{color:var(--accent)}
-
 #thoughts{background:var(--surface)}
 .thoughts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px}
 .t-card{background:var(--bg);padding:28px 24px;cursor:pointer;position:relative;overflow:hidden;transition:background .25s}
@@ -178,7 +129,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 .t-title{font-family:var(--serif);font-size:20px;font-weight:300;line-height:1.25;color:var(--text);margin-bottom:10px;letter-spacing:-0.01em}
 .t-excerpt{font-size:13.5px;line-height:1.7;color:var(--muted)}
 .t-cat{display:inline-block;margin-top:16px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:var(--accent-light);color:var(--accent)}
-
 #post-overlay{position:fixed;inset:0;z-index:600;background:#1c1a17;display:none;flex-direction:column;overflow-y:auto;cursor:default;opacity:0;transition:opacity .35s}
 #post-overlay.open{display:flex}
 #post-overlay.visible{opacity:1}
@@ -186,17 +136,44 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 #post-overlay.visible .post-curtain{transform:scaleX(1)}
 .post-inner{max-width:660px;margin:0 auto;padding:100px 40px 80px;opacity:0;transform:translateY(20px);transition:opacity .6s ease .3s,transform .6s ease .3s}
 #post-overlay.visible .post-inner{opacity:1;transform:translateY(0)}
-.post-meta{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.5);margin-bottom:36px;display:flex;gap:20px}
+.post-meta{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,149,90,0.5);margin-bottom:36px;display:flex;gap:20px}
 .post-heading{font-family:'Fraunces',Georgia,serif;font-size:clamp(34px,5.5vw,60px);font-weight:300;line-height:1.05;letter-spacing:-0.025em;color:#ede8df;margin-bottom:36px}
-.post-rule{width:36px;height:1px;background:rgba(201,168,76,0.4);margin-bottom:40px}
+.post-rule{width:36px;height:1px;background:rgba(201,149,90,0.4);margin-bottom:40px}
 .post-body{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:300;line-height:1.9;color:rgba(237,232,223,0.68)}
 .post-body p{margin-bottom:24px}
 .post-close{position:fixed;top:28px;right:36px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(237,232,223,0.3);background:none;border:none;cursor:pointer;transition:color .2s;z-index:602}
 .post-close:hover{color:rgba(237,232,223,.8)}
+footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--surface2)}
+.footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.footer-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--text)}
+.footer-desc{font-size:12.5px;color:var(--faint);margin-top:3px}
+.footer-links{display:flex;gap:20px}
+.footer-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--text)}
+#lb{display:none;position:fixed;inset:0;background:rgba(4,3,2,0.97);backdrop-filter:blur(2px);z-index:1000;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .3s}
+#lb.open{display:flex}
+#lb.visible{opacity:1}
+#lb img{max-width:90vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:24px;right:32px;background:none;border:none;color:rgba(255,255,255,0.45);font-size:12px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);font-weight:500;transition:color .2s}
+#lb-close:hover{color:rgba(255,255,255,.85)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  #hero{padding:64px 20px 56px}
+  .wrap{padding:0 20px}
+  .section{padding:56px 0}
+  .what-grid,.about-grid{grid-template-columns:1fr;gap:32px}
+  .photo-grid{grid-template-columns:1fr 1fr}
+  .photo-cell:nth-child(1),.photo-cell:nth-child(4){grid-column:span 1;aspect-ratio:4/3}
+  .photo-cell:nth-child(2){aspect-ratio:4/3}
+  footer{padding:28px 20px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
 </style>
 </head>
 <body>
-
 <nav>
   <div class="nav-inner">
     <a href="#hero" class="nav-name">Ahmed Almadhoun</a>
@@ -268,34 +245,32 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% if research and research.length %}
         {% for paper in research %}
         <div class="r-card">
-          <div>
-            <div class="r-num">{% if loop.index < 10 %}00{{ loop.index }}{% elif loop.index < 100 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</div>
-            <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}</h3>
-            <p class="r-abstract">{{ paper.abstract }}</p>
-            {% if paper.tags %}
-            <div class="r-tags">
-              {% for tag in paper.tags %}<span class="r-tag">{{ tag }}</span>{% endfor %}
-            </div>
-            {% endif %}
-            <div class="r-actions" style="display:flex;gap:10px;flex-wrap:wrap">
-              {% if paper.pdf %}<button onclick="openPdf('{{ paper.pdf }}','{{ paper.title }}')" style="background:none;border:none;padding:0;cursor:pointer;font-family:inherit" class="r-link">Read Paper <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></button>{% endif %}
-              {% if paper.doi %}<a href="{{ paper.doi }}" target="_blank" class="r-link">DOI Link <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>{% endif %}
-              <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
-            </div>
+          <div class="r-num">{% if loop.index < 10 %}00{{ loop.index }}{% elif loop.index < 100 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</div>
+          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}</h3>
+          <p class="r-abstract">{{ paper.abstract }}</p>
+          {% if paper.tags %}
+          <div class="r-tags">
+            {% for tag in paper.tags %}<span class="r-tag">{{ tag }}</span>{% endfor %}
+          </div>
+          {% endif %}
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
+            {% if paper.pdf %}<button onclick="window.open('{{ paper.pdf }}','_blank')" style="background:none;border:none;padding:0;cursor:pointer;font-family:inherit" class="r-link">Read Paper <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></button>{% endif %}
+            {% if paper.doi %}<a href="{{ paper.doi }}" target="_blank" class="r-link">DOI Link <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>{% endif %}
+            <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
           </div>
           <div class="r-meta">{{ paper.venue }}</div>
         </div>
         {% endfor %}
       {% else %}
         <div class="r-card">
-          <div>
-            <div class="r-num">01</div>
-            <h3 class="r-title">Freight Accessibility in Warsaw Corridors</h3>
-            <p class="r-desc">A spatial framework measuring how well urban logistics corridors serve the areas they connect. Applied to Warsaw's freight network to identify hidden penalties in infrastructure quality and corridor performance.</p>
-            <div class="r-tags"><span class="r-tag">Spatial Analysis</span><span class="r-tag">Warsaw</span><span class="r-tag">Q1 Target</span></div>
+          <div class="r-num">001</div>
+          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">Freight Accessibility in Warsaw Corridors</h3>
+          <p class="r-abstract">A spatial framework measuring how well urban logistics corridors serve the areas they connect. Applied to Warsaw's freight network to identify hidden penalties in infrastructure quality and corridor performance.</p>
+          <div class="r-tags"><span class="r-tag">Spatial Analysis</span><span class="r-tag">Warsaw</span><span class="r-tag">Q1 Target</span></div>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
             <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
           </div>
-          <div class="r-meta">WUT · 2025<br>Transportation Research Part A</div>
+          <div class="r-meta">WUT · 2025 · Transportation Research Part A</div>
         </div>
       {% endif %}
     </div>
@@ -322,6 +297,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% endif %}
     </div>
     <div class="photo-footer">
+      <p>Shooting on film-style settings, grain, stillness, and quiet geometry.</p>
       <a href="https://www.instagram.com/fotozitake/" target="_blank">@fotozitake on Instagram &rarr;</a>
     </div>
   </div>
@@ -365,7 +341,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   </div>
 </section>
 
-
 <section id="thoughts" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -375,7 +350,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     <div class="thoughts-grid reveal">
       {% if thoughts and thoughts.length %}
         {% for post in thoughts %}
-        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | striptags }}">
+        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | striptags | truncate(3000, true, '') }}">
           <div class="t-date">{{ post.date | dateDisplay }}</div>
           <h3 class="t-title">{{ post.title }}</h3>
           <p class="t-excerpt">{{ post.excerpt }}</p>
@@ -428,6 +403,8 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   <img id="lb-img" src="" alt="">
 </div>
 
+<button id="theme-btn" onclick="document.body.classList.toggle('dark-mode');this.textContent=document.body.classList.contains('dark-mode')?'Light':'Dark'">Dark</button>
+
 <script>
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
@@ -455,32 +432,34 @@ document.querySelectorAll('.photo-cell').forEach(cell=>{
 });
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
 document.getElementById('lb-close').addEventListener('click',closeLb);
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
 
 document.querySelectorAll('.t-card').forEach(card=>{
   card.addEventListener('click',()=>{
     document.getElementById('post-heading').textContent=card.dataset.title||'';
     document.getElementById('post-date').textContent=card.dataset.date||'';
     document.getElementById('post-cat').textContent=card.dataset.cat||'';
-    const raw = card.dataset.body || card.dataset.excerpt || '';
-    document.getElementById('post-body').innerHTML = raw.split(/\n+/).filter(l=>l.trim()).map(l=>'<p>'+l.trim()+'</p>').join('');
+    const raw=card.dataset.body||card.dataset.excerpt||'';
+    document.getElementById('post-body').innerHTML=raw.split(/\n+/).filter(l=>l.trim()).map(l=>'<p>'+l.trim()+'</p>').join('');
     const po=document.getElementById('post-overlay');
     po.style.display='flex';
     requestAnimationFrame(()=>requestAnimationFrame(()=>po.classList.add('visible')));
     document.body.style.overflow='hidden';
   });
 });
+
 function closePost(){
   const po=document.getElementById('post-overlay');
   po.classList.remove('visible');
   setTimeout(()=>{po.style.display='none';document.body.style.overflow='';},350);
 }
 window.closePost=closePost;
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePost()});
 
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){
+    if(document.getElementById('post-overlay').classList.contains('visible')) closePost();
+    else closeLb();
+  }
+});
 </script>
-
-<button id="theme-btn" onclick="document.body.classList.toggle('dark-mode');this.textContent=document.body.classList.contains('dark-mode')?'Light':'Dark'">Light</button>
-
 </body>
 </html>
