@@ -182,6 +182,7 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   </div>
   <iframe style="flex:1;border:none" id="pdf-frame" src=""></iframe>
 </div>
+
 <div id="post-overlay">
   <div class="post-curtain"></div>
   <button class="post-close" onclick="closePost()">Close ✕</button>
@@ -195,6 +196,7 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
     <div class="post-body" id="post-body"></div>
   </div>
 </div>
+
 <nav>
   <a href="#hero" class="nav-logo">A.A.</a>
   <ul class="nav-links">
@@ -353,11 +355,11 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   <div class="thoughts-grid reveal">
     {% if thoughts and thoughts.length %}
       {% for post in thoughts %}
-      <div class="thought-card" onclick="openPost('{{ post.title }}','{{ post.date | dateDisplay }}','{{ post.category }}','{{ post.body | replace("'","&#39;") | replace('"','&quot;') | nl2br }}')">
-  <div class="t-date">{{ post.date | dateDisplay }}</div>
-  <h3 class="t-title">{{ post.title }}</h3>
-  <p class="t-excerpt">{{ post.excerpt }}</p>
-  <span class="t-cat">{{ post.category }}</span>
+      <div class="thought-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}">
+        <div class="t-date">{{ post.date | dateDisplay }}</div>
+        <h3 class="t-title">{{ post.title }}</h3>
+        <p class="t-excerpt">{{ post.excerpt }}</p>
+        <span class="t-cat">{{ post.category }}</span>
 </div>
       {% endfor %}
     {% else %}
@@ -453,14 +455,16 @@ function closePdf(){
 document.querySelectorAll('.r-body h3').forEach(h=>{
   h.addEventListener('click',()=>h.closest('.r-item').classList.toggle('open'));
 });
-function openPost(title,date,cat,body){
-  document.getElementById('post-title').textContent=title;
-  document.getElementById('post-date').textContent=date;
-  document.getElementById('post-cat').textContent=cat;
-  document.getElementById('post-body').innerHTML=body.split('\n').filter(l=>l.trim()).map(l=>'<p>'+l+'</p>').join('');
-  document.getElementById('post-overlay').classList.add('open');
-  document.body.style.overflow='hidden';
-}
+document.querySelectorAll('.thought-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    document.getElementById('post-title').textContent=card.dataset.title||'';
+    document.getElementById('post-date').textContent=card.dataset.date||'';
+    document.getElementById('post-cat').textContent=card.dataset.cat||'';
+    document.getElementById('post-body').innerHTML='<p>'+(card.dataset.excerpt||'')+'</p>';
+    document.getElementById('post-overlay').classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
 function closePost(){
   document.getElementById('post-overlay').classList.remove('open');
   document.body.style.overflow='';
