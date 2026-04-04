@@ -57,6 +57,10 @@ module.exports = function(eleventyConfig) {
     if (!date) return "";
     return new Date(date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long' });
   });
+  eleventyConfig.addFilter("striptags", function(str) {
+  if (!str) return '';
+  return str.replace(/[#*`_~\[\]]/g, '').trim();
+});
 eleventyConfig.addFilter("nl2br", function(str) {
   if (!str) return '';
   return str.replace(/\n/g, '\\n');
