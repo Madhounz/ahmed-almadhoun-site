@@ -248,7 +248,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         {% for paper in research %}
         <div class="r-card">
           <div class="r-num">{% if loop.index < 10 %}0{{ loop.index }}{% else %}{{ loop.index }}{% endif %}</div>
-          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){this.closest('.r-card').classList.toggle('open');event.preventDefault()}" tabindex="0" role="button" aria-expanded="false">{{ paper.title }}<span class="r-toggle">+</span></h3>
+          <h3 class="r-title" onclick="toggleResearch(this)" onkeydown="if(event.key==='Enter'||event.key===' '){toggleResearch(this);event.preventDefault()}" tabindex="0" role="button" aria-expanded="false">{{ paper.title }}<span class="r-toggle">+</span></h3>
           <p class="r-abstract">{{ paper.abstract }}</p>
           {% if paper.tags %}
           <div class="r-tags">
@@ -266,7 +266,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% else %}
         <div class="r-card">
           <div class="r-num">01</div>
-          <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')" onkeydown="if(event.key==='Enter'||event.key===' '){this.closest('.r-card').classList.toggle('open');event.preventDefault()}" tabindex="0" role="button" aria-expanded="false">Freight Accessibility in Warsaw Corridors<span class="r-toggle">+</span></h3>
+          <h3 class="r-title" onclick="toggleResearch(this)" onkeydown="if(event.key==='Enter'||event.key===' '){toggleResearch(this);event.preventDefault()}" tabindex="0" role="button" aria-expanded="false">Freight Accessibility in Warsaw Corridors<span class="r-toggle">+</span></h3>
           <p class="r-abstract">A spatial framework measuring how well urban logistics corridors serve the areas they connect. Applied to Warsaw's freight network to identify hidden penalties in infrastructure quality and corridor performance.</p>
           <div class="r-tags"><span class="r-tag">Spatial Analysis</span><span class="r-tag">Warsaw</span><span class="r-tag">Q1 Target</span></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
@@ -469,13 +469,14 @@ function closePost(){
   po.classList.remove('visible');
   setTimeout(()=>{po.style.display='none';document.body.style.overflow='';},350);
 }
+function toggleResearch(el){
+  const card=el.closest('.r-card');
+  const isOpen=card.classList.toggle('open');
+  el.setAttribute('aria-expanded',isOpen?'true':'false');
+}
+window.toggleResearch=toggleResearch;
 window.closePost=closePost;
-document.querySelectorAll('.r-title').forEach(t=>{
-  t.addEventListener('click',()=>{
-    const open=t.closest('.r-card').classList.contains('open');
-    t.setAttribute('aria-expanded',open);
-  });
-});
+
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
