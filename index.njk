@@ -269,7 +269,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         {% for paper in research %}
         <div class="r-card">
           <div>
-            <div class="r-num">{{ loop.index }}</div>
+            <div class="r-num">{{ loop.index | toString | padStart(3, '0') }}</div>
             <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}</h3>
             <p class="r-abstract">{{ paper.abstract }}</p>
             {% if paper.tags %}
