@@ -323,6 +323,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% endif %}
     </div>
     <div class="photo-footer">
+      <p>Photography focused on stillness, structure, and quiet geometry in everyday environments.</p>
       <a href="https://www.instagram.com/fotozitake/" target="_blank">@fotozitake on Instagram &rarr;</a>
     </div>
   </div>
@@ -376,7 +377,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     <div class="thoughts-grid reveal">
       {% if thoughts and thoughts.length %}
         {% for post in thoughts %}
-        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}">
+        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" data-body="{{ post.body | striptags }}">
           <div class="t-date">{{ post.date | dateDisplay }}</div>
           <h3 class="t-title">{{ post.title }}</h3>
           <p class="t-excerpt">{{ post.excerpt }}</p>
@@ -463,7 +464,8 @@ document.querySelectorAll('.t-card').forEach(card=>{
     document.getElementById('post-heading').textContent=card.dataset.title||'';
     document.getElementById('post-date').textContent=card.dataset.date||'';
     document.getElementById('post-cat').textContent=card.dataset.cat||'';
-    document.getElementById('post-body').innerHTML='<p>'+(card.dataset.excerpt||'')+'</p>';
+    const raw = card.dataset.body || card.dataset.excerpt || '';
+    document.getElementById('post-body').innerHTML = raw.split(/\n+/).filter(l=>l.trim()).map(l=>'<p>'+l.trim()+'</p>').join('');
     const po=document.getElementById('post-overlay');
     po.style.display='flex';
     requestAnimationFrame(()=>requestAnimationFrame(()=>po.classList.add('visible')));
