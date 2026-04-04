@@ -53,6 +53,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addGlobalData("photos", () => readMd('photos'));
   eleventyConfig.addGlobalData("research", () => readMd('research'));
   eleventyConfig.addGlobalData("thoughts", () => readMd('thoughts'));
+  eleventyConfig.addPassthroughCopy("ahmed-almadhoun-cv.pdf");
 
   eleventyConfig.addFilter("dateDisplay", function(date) {
     if (!date) return "";
