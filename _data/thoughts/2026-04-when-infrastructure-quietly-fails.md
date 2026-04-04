@@ -6,42 +6,36 @@ excerpt: Most infrastructure does not fail dramatically. It continues to
   function, but introduces small frictions that gradually reshape how systems
   perform.
 ---
-<!--StartFragment-->
+### When infrastructure quietly fails
 
-Most infrastructure does not fail dramatically.
+Infrastructure rarely fails in a visible or dramatic way.
 
-It does not collapse.\
-It does not stop working.
+It does not collapse, nor does it cease to function.
+It continues to carry traffic and connect locations.
 
-It continues to exist, to carry traffic, to connect places.
+However, over time, it begins to introduce small but persistent inefficiencies.
 
-But it begins to introduce small frictions.
+Travel times become slightly longer.
+Surface conditions deteriorate.
+Minor delays emerge at points where none should exist.
 
-A slightly longer travel time.\
-A rougher surface.\
-A delay at a junction that should not be there.
+Individually, these effects appear negligible.
+Collectively, they alter the performance of the system.
 
-Individually, these are insignificant.\
-Collectively, they reshape how a system performs.
+For freight movement, such changes are particularly significant.
 
-For freight, this matters more than it seems.
+Increased costs, reduced reliability, and declining route viability emerge not from disconnection, but from inefficiency within existing networks.
 
-Costs increase, reliability decreases, and certain routes become less viable over time.\
-Not because they are disconnected, but because they are inefficient.
+This form of failure is difficult to detect.
 
-This is the kind of failure that is difficult to see.
+It is not reflected in conventional representations of infrastructure, such as maps or network diagrams, and it rarely prompts immediate intervention.
 
-It does not appear in maps.\
-It does not trigger immediate intervention.
+Instead, it accumulates gradually.
 
-But it accumulates.
+Over time, it produces disparities between locations that appear equivalent in terms of connectivity.
 
-And when it does, it creates differences between places that look identical on paper.
+Understanding this requires moving beyond the question of whether infrastructure exists.
 
-Understanding this requires looking beyond whether infrastructure exists.
+It requires examining how infrastructure performs under real conditions.
 
-It requires measuring how it behaves.
-
-Because in transport systems, performance is not defined by connection alone, but by the quality of movement that connection allows.
-
-<!--EndFragment-->
+In transport systems, performance is not defined solely by connectivity, but by the quality, reliability, and efficiency of movement that such connectivity enables.
