@@ -102,6 +102,10 @@ section{padding:110px 52px;position:relative}
 .r-btn{font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;padding:5px 14px;border:1px solid rgba(201,168,76,0.25);color:var(--gold);text-decoration:none;transition:background .25s;cursor:pointer;background:none}
 .r-btn:hover,.r-btn.filled{background:var(--gold-dim);border-color:rgba(201,168,76,.5)}
 .r-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.r-abstract{display:none;margin-top:14px;font-size:15px;line-height:1.8;color:var(--muted);border-left:1px solid rgba(201,168,76,0.2);padding-left:16px}
+.r-item.open .r-abstract{display:block}
+.r-body h3{cursor:pointer}
+.r-body h3:hover{color:var(--gold)}
 .tag{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;padding:4px 11px;border:1px solid rgba(201,168,76,.2);color:rgba(201,168,76,.65);border-radius:1px}
 #pdf-overlay{position:fixed;inset:0;background:rgba(6,6,6,.97);z-index:500;display:none;flex-direction:column}
 #pdf-overlay.open{display:flex}
@@ -265,6 +269,7 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
             {% if paper.doi %}<a class="r-btn" href="{{ paper.doi }}" target="_blank">DOI Link</a>{% endif %}
             <a class="r-btn" href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank">Google Scholar</a>
           </div>
+{% if paper.abstract %}<div class="r-abstract">{{ paper.abstract }}</div>{% endif %}
           {% if paper.tags %}
           <div class="r-tags">
             {% for tag in paper.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
@@ -417,6 +422,9 @@ function closePdf(){
   document.getElementById('pdf-overlay').classList.remove('open');
   document.getElementById('pdf-frame').src='';
 }
+document.querySelectorAll('.r-body h3').forEach(h=>{
+  h.addEventListener('click',()=>h.closest('.r-item').classList.toggle('open'));
+});
 window.openPdf=openPdf;
 window.closePdf=closePdf;
 </script>
