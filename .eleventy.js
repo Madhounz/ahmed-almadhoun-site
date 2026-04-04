@@ -57,7 +57,10 @@ module.exports = function(eleventyConfig) {
     if (!date) return "";
     return new Date(date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long' });
   });
-
+eleventyConfig.addFilter("nl2br", function(str) {
+  if (!str) return '';
+  return str.replace(/\n/g, '\\n');
+});
   return {
     dir: {
       input: ".",
