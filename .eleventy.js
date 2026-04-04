@@ -9,7 +9,7 @@ function readMd(folderName) {
     .map(f => {
       try {
         const raw = fs.readFileSync(path.join(dir, f), 'utf8');
-        const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+        const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---([\s\S]*)$/);
         if (!m) return null;
         const obj = {};
         let cur = null;
@@ -38,6 +38,7 @@ function readMd(folderName) {
           }
           i++;
         }
+        if (m[2]) obj.body = m[2].trim();
         return obj;
       } catch(e) { return null; }
     })
