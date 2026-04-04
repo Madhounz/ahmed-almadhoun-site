@@ -65,22 +65,19 @@ section{padding:110px 52px;position:relative}
 #gallery{background:var(--black);padding-bottom:0}
 .gallery-intro{font-size:18px;line-height:1.85;color:var(--muted);max-width:520px;margin-bottom:72px}
 .gallery-intro em{color:var(--white);font-style:italic}
-.cinema-scroll{position:relative}
-.cinema-item{position:relative;width:100%;margin-bottom:2px;overflow:hidden;cursor:pointer}
-.cinema-item:nth-child(odd){width:75%}
-.cinema-item:nth-child(even){margin-left:auto;width:75%}
-.cinema-item:nth-child(3n){width:100%}
-.photo-placeholder{width:100%;background:var(--dim);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;transition:filter .5s ease}
-.cinema-item:hover .photo-placeholder img{transform:scale(1.03)}
-.photo-placeholder img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .7s ease}
-.ph-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:80px 40px;width:100%}
-.ph-icon{width:40px;height:40px;border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center}
-.ph-icon svg{width:18px;height:18px;stroke:var(--gold);fill:none;stroke-width:1.5;opacity:.5}
-.ph-label{font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--faint)}
-.cinema-caption{position:absolute;bottom:0;left:0;right:0;padding:48px 28px 22px;background:linear-gradient(to top,rgba(6,6,6,.88),transparent);transform:translateY(8px);opacity:0;transition:opacity .4s,transform .4s}
-.cinema-item:hover .cinema-caption{opacity:1;transform:translateY(0)}
-.cinema-caption h4{font-size:18px;font-weight:300;color:var(--white);margin-bottom:4px}
-.cinema-caption span{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.masonry-grid{columns:3;column-gap:4px;}
+.masonry-item{break-inside:avoid;margin-bottom:4px;position:relative;overflow:hidden;cursor:pointer;}
+.masonry-item img{width:100%;display:block;transition:transform .6s ease;}
+.masonry-item:hover img{transform:scale(1.04);}
+.masonry-caption{position:absolute;bottom:0;left:0;right:0;padding:32px 16px 14px;background:linear-gradient(to top,rgba(6,6,6,.88),transparent);opacity:0;transition:opacity .4s;transform:translateY(6px);transition:opacity .4s,transform .4s;}
+.masonry-item:hover .masonry-caption{opacity:1;transform:translateY(0);}
+.masonry-caption h4{font-size:15px;font-weight:300;color:var(--white);margin-bottom:2px;}
+.masonry-caption span{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);}
+.ph-inner{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:60px 20px;background:var(--dim);}
+.ph-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,0.2);display:flex;align-items:center;justify-content:center;}
+.ph-icon svg{width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:1.5;opacity:.5;}
+.ph-label{font-family:var(--mono);font-size:9px;letter-spacing:.25em;text-transform:uppercase;color:var(--faint);}
+@media(max-width:768px){.masonry-grid{columns:2;}}
 #lb{position:fixed;inset:0;background:rgba(6,6,6,.97);z-index:500;display:none;align-items:center;justify-content:center;cursor:zoom-out;flex-direction:column;gap:16px}
 #lb.open{display:flex}
 #lb img{max-width:90vw;max-height:85vh;object-fit:contain}
@@ -221,11 +218,11 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
   </div>
   <p class="gallery-intro reveal">Each frame is a question asked with light. <em>Warsaw's geometry, foreign streets, quiet moments.</em> The same eye that reads a freight corridor reads a composition.</p>
 
-  <div class="cinema-scroll reveal" id="cinema">
+  <div class="masonry-grid reveal" id="cinema">
     {% if photos and photos.length %}
       {% for photo in photos %}
-      <div class="cinema-item" data-title="{{ photo.title }}" data-loc="{{ photo.location }}">
-        <div class="photo-placeholder" style="aspect-ratio:{{ photo.ratio or '4/3' }}">
+      <div class="masonry-item" data-title="{{ photo.title }}" data-loc="{{ photo.location }}">
+        <div class="photo-placeholder">
           {% if photo.image %}
             <img src="{{ photo.image }}" alt="{{ photo.title }}">
           {% else %}
@@ -235,7 +232,7 @@ footer span{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-tran
             </div>
           {% endif %}
         </div>
-        <div class="cinema-caption"><h4>{{ photo.title }}</h4><span>{{ photo.location }}</span></div>
+        <div class="masonry-caption"><h4>{{ photo.title }}</h4><span>{{ photo.location }}</span></div>
       </div>
       {% endfor %}
     {% else %}
@@ -402,14 +399,7 @@ const obs=new IntersectionObserver(entries=>{
 },{threshold:.08});
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 window.addEventListener('scroll',()=>{
-  document.querySelectorAll('.cinema-item').forEach(item=>{
-    const rect=item.getBoundingClientRect();
-    const vis=Math.max(0,Math.min(1,1-(Math.abs(rect.top+rect.height/2-window.innerHeight/2)/(window.innerHeight*.7))));
-    const ph=item.querySelector('.photo-placeholder');
-    if(ph) ph.style.filter=`brightness(${0.5+vis*.5})`;
-  });
-});
-document.querySelectorAll('.cinema-item').forEach(item=>{
+document.querySelectorAll('.masonry-item').forEach(item=>{
   item.addEventListener('click',()=>{
     const img=item.querySelector('img');
     if(!img) return;
