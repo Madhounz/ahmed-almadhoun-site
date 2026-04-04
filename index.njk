@@ -194,11 +194,10 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   <p class="hero-micro">Freight systems, infrastructure, and simulation</p>
   <p class="hero-sub">Transport Engineer and PhD Researcher focused on freight systems, accessibility, and real-world infrastructure performance.</p>
   <p class="hero-body">I study how transport infrastructure shapes economic access, especially in freight systems that most people depend on but rarely notice.</p>
-<div class="hero-btns">
-  <a href="#research" class="btn btn-primary">View Research</a>
-  <a href="#photography" class="btn btn-outline">Photography</a>
-  <a href="/ahmed-almadhoun-cv.pdf" target="_blank" class="btn btn-outline">Download CV</a>
-</div>
+  <div class="hero-btns">
+    <a href="#research" class="btn btn-primary">View Research</a>
+    <a href="#photography" class="btn btn-outline">Photography</a>
+  </div>
   <p class="hero-cred">Published research, simulation models, and real-world infrastructure analysis.</p>
 </div>
 
@@ -462,6 +461,7 @@ document.querySelectorAll('.t-card').forEach(card=>{
     po.style.display='flex';
     requestAnimationFrame(()=>requestAnimationFrame(()=>po.classList.add('visible')));
     document.body.style.overflow='hidden';
+    po.onclick=e=>{if(e.target===po)closePost();};
   });
 });
 
