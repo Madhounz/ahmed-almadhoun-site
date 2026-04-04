@@ -161,6 +161,39 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   footer{padding:28px 20px}
   .footer-inner{flex-direction:column;align-items:flex-start}
 }
+
+.r-abstract{display:none;margin-top:14px;font-size:14px;line-height:1.75;color:var(--muted);border-left:2px solid var(--border);padding-left:14px}
+.r-card.open .r-abstract{display:block}
+.r-title{cursor:pointer;transition:color .2s}
+.r-title:hover{color:var(--accent)}
+.r-toggle{font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--faint);margin-top:10px;display:inline-block;transition:color .2s;cursor:pointer;background:none;border:none;font-family:var(--sans);padding:0}
+.r-toggle:hover{color:var(--accent)}
+
+#thoughts{background:var(--surface)}
+.thoughts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:2px}
+.t-card{background:var(--bg);padding:28px 24px;cursor:pointer;position:relative;overflow:hidden;transition:background .25s}
+.t-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .35s}
+.t-card:hover{background:var(--surface2)}
+.t-card:hover::after{transform:scaleX(1)}
+.t-date{font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin-bottom:12px}
+.t-title{font-family:var(--serif);font-size:20px;font-weight:300;line-height:1.25;color:var(--text);margin-bottom:10px;letter-spacing:-0.01em}
+.t-excerpt{font-size:13.5px;line-height:1.7;color:var(--muted)}
+.t-cat{display:inline-block;margin-top:16px;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:var(--accent-light);color:var(--accent-mid)}
+
+#post-overlay{position:fixed;inset:0;z-index:600;background:#100f0d;display:none;flex-direction:column;overflow-y:auto;cursor:default;opacity:0;transition:opacity .35s}
+#post-overlay.open{display:flex}
+#post-overlay.visible{opacity:1}
+.post-curtain{position:fixed;top:0;left:0;right:0;height:1px;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .9s ease;z-index:601}
+#post-overlay.visible .post-curtain{transform:scaleX(1)}
+.post-inner{max-width:660px;margin:0 auto;padding:100px 40px 80px;opacity:0;transform:translateY(20px);transition:opacity .6s ease .3s,transform .6s ease .3s}
+#post-overlay.visible .post-inner{opacity:1;transform:translateY(0)}
+.post-meta{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:rgba(201,168,76,0.5);margin-bottom:36px;display:flex;gap:20px}
+.post-heading{font-family:'Fraunces',Georgia,serif;font-size:clamp(34px,5.5vw,60px);font-weight:300;line-height:1.05;letter-spacing:-0.025em;color:#ede8df;margin-bottom:36px}
+.post-rule{width:36px;height:1px;background:rgba(201,168,76,0.4);margin-bottom:40px}
+.post-body{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:300;line-height:1.9;color:rgba(237,232,223,0.68)}
+.post-body p{margin-bottom:24px}
+.post-close{position:fixed;top:28px;right:36px;font-family:'Inter',sans-serif;font-size:11px;font-weight:500;letter-spacing:.15em;text-transform:uppercase;color:rgba(237,232,223,0.3);background:none;border:none;cursor:pointer;transition:color .2s;z-index:602}
+.post-close:hover{color:rgba(237,232,223,.8)}
 </style>
 </head>
 <body>
@@ -171,6 +204,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     <ul class="nav-links">
       <li><a href="#research">Research</a></li>
       <li><a href="#photography">Photography</a></li>
+      <li><a href="#thoughts">Thoughts</a></li>
       <li><a href="#about">About</a></li>
     </ul>
   </div>
@@ -237,8 +271,8 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="r-card">
           <div>
             <div class="r-num">{{ loop.index }}</div>
-            <h3 class="r-title">{{ paper.title }}</h3>
-            <p class="r-desc">{{ paper.abstract }}</p>
+            <h3 class="r-title" onclick="this.closest('.r-card').classList.toggle('open')">{{ paper.title }}</h3>
+            <p class="r-abstract">{{ paper.abstract }}</p>
             {% if paper.tags %}
             <div class="r-tags">
               {% for tag in paper.tags %}<span class="r-tag">{{ tag }}</span>{% endfor %}
@@ -333,6 +367,49 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   </div>
 </section>
 
+
+<section id="thoughts" class="section">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">Thoughts</div>
+      <h2 class="section-title">Ideas, notes, and observations.</h2>
+    </div>
+    <div class="thoughts-grid reveal">
+      {% if thoughts and thoughts.length %}
+        {% for post in thoughts %}
+        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}">
+          <div class="t-date">{{ post.date | dateDisplay }}</div>
+          <h3 class="t-title">{{ post.title }}</h3>
+          <p class="t-excerpt">{{ post.excerpt }}</p>
+          <span class="t-cat">{{ post.category }}</span>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="t-card">
+          <div class="t-date">April 2026</div>
+          <h3 class="t-title">Why freight never gets mentioned when we talk about transport poverty</h3>
+          <p class="t-excerpt">Everyone talks about buses, metros, and whether poor neighbourhoods have access to jobs. Nobody asks whether the businesses in those neighbourhoods can actually receive goods.</p>
+          <span class="t-cat">Research</span>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<div id="post-overlay">
+  <div class="post-curtain"></div>
+  <button class="post-close" onclick="closePost()">Close</button>
+  <div class="post-inner">
+    <div class="post-meta">
+      <span id="post-date"></span>
+      <span id="post-cat"></span>
+    </div>
+    <h1 class="post-heading" id="post-heading"></h1>
+    <div class="post-rule"></div>
+    <div class="post-body" id="post-body"></div>
+  </div>
+</div>
+
 <footer>
   <div class="footer-inner">
     <div>
@@ -381,6 +458,27 @@ document.querySelectorAll('.photo-cell').forEach(cell=>{
 lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
 document.getElementById('lb-close').addEventListener('click',closeLb);
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+document.querySelectorAll('.t-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    document.getElementById('post-heading').textContent=card.dataset.title||'';
+    document.getElementById('post-date').textContent=card.dataset.date||'';
+    document.getElementById('post-cat').textContent=card.dataset.cat||'';
+    document.getElementById('post-body').innerHTML='<p>'+(card.dataset.excerpt||'')+'</p>';
+    const po=document.getElementById('post-overlay');
+    po.style.display='flex';
+    requestAnimationFrame(()=>requestAnimationFrame(()=>po.classList.add('visible')));
+    document.body.style.overflow='hidden';
+  });
+});
+function closePost(){
+  const po=document.getElementById('post-overlay');
+  po.classList.remove('visible');
+  setTimeout(()=>{po.style.display='none';document.body.style.overflow='';},350);
+}
+window.closePost=closePost;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePost()});
+
 </script>
 
 <button id="theme-btn" onclick="document.body.classList.toggle('dark-mode');this.textContent=document.body.classList.contains('dark-mode')?'Light':'Dark'">Dark</button>
