@@ -6,8 +6,6 @@ excerpt: Most infrastructure does not fail dramatically. It continues to
   function, but introduces small frictions that gradually reshape how systems
   perform.
 ---
-### When infrastructure quietly fails
-
 Infrastructure rarely fails in a visible or dramatic way.
 
 It does not collapse, nor does it cease to function.
