@@ -854,9 +854,8 @@ function resize(){
   });
   const themeBtn=document.getElementById('theme-btn');
   if(themeBtn)themeBtn.addEventListener('click',()=>setTimeout(draw,50));
-  window.addEventListener('resize',resize);
+  window.addEventListener('resize',()=>{if(document.getElementById('map-overlay').style.display==='flex')resize();});
   window.resizeMap=resize;
-  resize();
 })();
 console.log('%c Ahmed Almadhoun ', 'background:#c48a42;color:#1a1714;font-size:14px;font-weight:bold;padding:6px 12px;border-radius:4px;');
 console.log('%c ahmedalmadhoun.com — built from scratch ', 'color:#c48a42;font-size:11px;');
