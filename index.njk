@@ -805,9 +805,11 @@ document.addEventListener('keydown',e=>{
     });
     ctx.textBaseline='alphabetic';
   }
-  function resize(){
-    canvas.width=canvas.parentElement.getBoundingClientRect().width;
-    canvas.height=480;
+function resize(){
+    const container=canvas.closest('.map-modal')||canvas.parentElement;
+    const w=container.getBoundingClientRect().width-80;
+    canvas.width=w>100?w:800;
+    canvas.height=420;
     draw();
   }
   function getHit(mx,my){
