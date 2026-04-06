@@ -4,12 +4,12 @@ venue: Elsevier Book Chapter, Blockchain-based communication systems
 abstract: >-
   The quick digitization of transportaion systems has made the adoption of
   digital twins better, quicker and needed. This would enable better monitoring,
-  simulkation and optimization of transport infrastructure, vehcles and
-  logistics networks. However, the effectiveness of digital twin environments
-  depends on the exchange of large volumes of data between assets, sensors and
-  digital platforms that are available. Ensuring data integrit, trust and the
-  validity of such connected systems remains the major challenge, specially in
-  the context of smart transportation ecosystem.
+  simulation and optimization of transport infrastructure, vehcles and logistics
+  networks. However, the effectiveness of digital twin environments depends on
+  the exchange of large volumes of data between assets, sensors and digital
+  platforms that are available. Ensuring data integrit, trust and the validity
+  of such connected systems remains the major challenge, specially in the
+  context of smart transportation ecosystem.
 
 
   Blockchain technology has began as a promising solution for addressing these challenges by providing decentralized and transparent mechanisms for data validation and secure communication. By leveraging the distributed ledger technologies and smart contracts, blockchain can enhance trust among stakeholders, protect critical transportaiton data from manipulation and support strong and reliable communication between digital twins components.
