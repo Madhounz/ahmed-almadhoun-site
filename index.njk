@@ -458,6 +458,30 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     </div>
   </div>
 </section>
+<section id="photography" class="section">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">Photography</div>
+      <h2 class="section-title">Through the viewfinder.</h2>
+      <p class="photo-intro">Photography focused on stillness, structure, and quiet geometry in everyday environments.</p>
+    </div>
+    <div class="photo-grid reveal">
+      {% if photos and photos.length %}
+        {% for photo in photos %}
+        <div class="photo-cell" data-title="{{ photo.title }}" data-loc="{{ photo.location }}">
+          {% if photo.image %}
+            <img src="{{ photo.image }}" alt="{{ photo.title }}">
+          {% endif %}
+          <div class="photo-caption"><span>{{ photo.location }}</span></div>
+        </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+    <div class="photo-footer">
+      <a href="https://www.instagram.com/fotozitake/" target="_blank">@fotozitake on Instagram &rarr;</a>
+    </div>
+  </div>
+</section>
 <section id="about" class="section">
   <div class="wrap">
     <div class="reveal">
