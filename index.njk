@@ -427,74 +427,37 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       <button onclick="toggleMap()" id="map-toggle-btn" class="btn btn-outline" style="font-size:13px">
         View Warsaw Corridor Data <span id="map-btn-icon">↓</span>
       </button>
-      <div id="map-section" style="max-height:0;overflow:hidden;transition:max-height .6s ease,opacity .4s ease;opacity:0">
-        <div style="padding-top:40px">
-          <!-- paste your entire existing map inner content here -->
-        </div>
+<div id="map-section" style="max-height:0;overflow:hidden;transition:max-height .6s ease,opacity .4s ease;opacity:0">
+  <div style="padding-top:40px">
+    <div class="map-container">
+      <canvas id="corridor-map" height="480"></canvas>
+      <div class="map-tooltip" id="map-tt">
+        <div class="tt-name" id="tt-name"></div>
+        <div class="tt-row"><span>Distance</span><span class="tt-val" id="tt-dist"></span></div>
+        <div class="tt-row"><span>Travel time</span><span class="tt-val" id="tt-time"></span></div>
+        <div class="tt-row"><span>AES raw</span><span class="tt-val" id="tt-aes-raw"></span></div>
+        <div class="tt-row"><span>AES adjusted</span><span class="tt-val" id="tt-aes-adj"></span></div>
+        <div class="tt-row"><span>Surface factor</span><span class="tt-val" id="tt-sf"></span></div>
+        <div class="tt-row"><span>Constraint factor</span><span class="tt-val" id="tt-cf"></span></div>
+        <div class="tt-fap" id="tt-fap"></div>
       </div>
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div>Low penalty (FAP &lt; 5%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c48a42"></div>Moderate penalty (FAP 5–10%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e07060"></div>High penalty (FAP &gt; 10%)</div>
+    </div>
+    <div class="map-stats">
+      <div class="mstat"><div class="mstat-label">Corridors evaluated</div><div class="mstat-val">8</div><div class="mstat-sub">Warsaw metro area</div></div>
+      <div class="mstat"><div class="mstat-label">Highest penalty</div><div class="mstat-val">14.5%</div><div class="mstat-sub">Okęcie &amp; Targówek</div></div>
+      <div class="mstat"><div class="mstat-label">Best performer</div><div class="mstat-val">0%</div><div class="mstat-sub">Pruszków &amp; Mszczonów</div></div>
+      <div class="mstat"><div class="mstat-label">Avg. penalty</div><div class="mstat-val">7.1%</div><div class="mstat-sub">Across all corridors</div></div>
+    </div>
+  </div>
+</div>
     </div>
   </div>
 </section>
-<section id="map-section" class="section">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="section-label">Research Visualised</div>
-      <h2 class="section-title">Warsaw freight accessibility map.</h2>
-      <p class="photo-intro">Eight freight corridors evaluated for infrastructure-induced accessibility penalties. Hover any corridor to see its AES and FAP scores from the paper.</p>
-    </div>
-    <div class="reveal">
-      <div class="map-container">
-        <canvas id="corridor-map" height="480"></canvas>
-        <div class="map-tooltip" id="map-tt">
-          <div class="tt-name" id="tt-name"></div>
-          <div class="tt-row"><span>Distance</span><span class="tt-val" id="tt-dist"></span></div>
-          <div class="tt-row"><span>Travel time</span><span class="tt-val" id="tt-time"></span></div>
-          <div class="tt-row"><span>AES raw</span><span class="tt-val" id="tt-aes-raw"></span></div>
-          <div class="tt-row"><span>AES adjusted</span><span class="tt-val" id="tt-aes-adj"></span></div>
-          <div class="tt-row"><span>Surface factor</span><span class="tt-val" id="tt-sf"></span></div>
-          <div class="tt-row"><span>Constraint factor</span><span class="tt-val" id="tt-cf"></span></div>
-          <div class="tt-fap" id="tt-fap"></div>
-        </div>
-      </div>
-      <div class="map-legend">
-        <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div>Low penalty (FAP &lt; 5%)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#c48a42"></div>Moderate penalty (FAP 5–10%)</div>
-        <div class="legend-item"><div class="legend-dot" style="background:#e07060"></div>High penalty (FAP &gt; 10%)</div>
-      </div>
-      <div class="map-stats">
-        <div class="mstat"><div class="mstat-label">Corridors evaluated</div><div class="mstat-val">8</div><div class="mstat-sub">Warsaw metro area</div></div>
-        <div class="mstat"><div class="mstat-label">Highest penalty</div><div class="mstat-val">14.5%</div><div class="mstat-sub">Okęcie &amp; Targówek</div></div>
-        <div class="mstat"><div class="mstat-label">Best performer</div><div class="mstat-val">0%</div><div class="mstat-sub">Pruszków &amp; Mszczonów</div></div>
-        <div class="mstat"><div class="mstat-label">Avg. penalty</div><div class="mstat-val">7.1%</div><div class="mstat-sub">Across all corridors</div></div>
-      </div>
-    </div>
-  </div>
-</section>
-<section id="photography" class="section">
-  <div class="wrap">
-    <div class="reveal">
-      <div class="section-label">Photography</div>
-      <h2 class="section-title">Through the viewfinder.</h2>
-      <p class="photo-intro">Photography focused on stillness, structure, and quiet geometry in everyday environments.</p>
-    </div>
-    <div class="photo-grid reveal">
-      {% if photos and photos.length %}
-        {% for photo in photos %}
-        <div class="photo-cell" data-title="{{ photo.title }}" data-loc="{{ photo.location }}">
-          {% if photo.image %}
-            <img src="{{ photo.image }}" alt="{{ photo.title }}">
-          {% endif %}
-          <div class="photo-caption"><span>{{ photo.location }}</span></div>
-        </div>
-        {% endfor %}
-      {% endif %}
-    </div>
-    <div class="photo-footer">
-      <a href="https://www.instagram.com/fotozitake/" target="_blank">@fotozitake on Instagram &rarr;</a>
-    </div>
-  </div>
-</section>
-
 <section id="about" class="section">
   <div class="wrap">
     <div class="reveal">
