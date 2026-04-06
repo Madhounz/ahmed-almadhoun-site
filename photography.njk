@@ -43,7 +43,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 
 /* MAP STAGE */
 .map-stage{position:relative;margin:52px 0 0;overflow:hidden}
-.map-canvas-wrap{position:relative;width:100%;height:520px;cursor:crosshair}
+.map-canvas-wrap{position:relative;width:100%;height:520px}
 #ph-map{width:100%;height:100%;display:block}
 
 /* CITY PINS */
@@ -122,43 +122,57 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 </div>
 
 <div class="map-stage">
-  <canvas id="ph-map"></canvas>
+  <div class="map-canvas-wrap" id="map-wrap">
+    <svg id="ph-map" viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%;display:block">
+      <rect width="1200" height="520" fill="#1a1714"/>
+      <line x1="0" y1="130" x2="1200" y2="130" stroke="#c48a42" stroke-width="0.4" opacity="0.06"/>
+      <line x1="0" y1="260" x2="1200" y2="260" stroke="#c48a42" stroke-width="0.4" opacity="0.06"/>
+      <line x1="0" y1="390" x2="1200" y2="390" stroke="#c48a42" stroke-width="0.4" opacity="0.06"/>
+      <line x1="300" y1="0" x2="300" y2="520" stroke="#c48a42" stroke-width="0.4" opacity="0.06"/>
+      <line x1="600" y1="0" x2="600" y2="520" stroke="#c48a42" stroke-width="0.4" opacity="0.06"/>
+      <line x1="900" y1="0" x2="900" y2="520" stroke="#c48a42" stroke-width="0.4" opacity="0.06"/>
+      <path d="M 180,60 L 220,45 L 270,50 L 310,42 L 350,48 L 390,38 L 430,44 L 470,36 L 510,42 L 540,35 L 570,42 L 600,38 L 640,44 L 670,52 L 700,48 L 720,58 L 740,52 L 760,60 L 780,55 L 800,65 L 820,58 L 850,68 L 870,62 L 890,72 L 910,68 L 930,78 L 950,72 L 970,82 L 990,78 L 1010,90 L 1020,100 L 1020,120 L 1010,135 L 1000,148 L 980,155 L 960,162 L 950,175 L 940,188 L 930,200 L 920,215 L 900,225 L 880,230 L 860,238 L 840,245 L 820,252 L 800,260 L 780,268 L 760,272 L 740,278 L 720,285 L 700,290 L 680,295 L 660,300 L 640,308 L 620,315 L 600,320 L 580,325 L 560,318 L 540,310 L 520,318 L 500,312 L 480,320 L 460,315 L 440,322 L 420,318 L 400,325 L 380,318 L 360,325 L 340,318 L 320,322 L 300,315 L 280,320 L 260,312 L 240,318 L 220,308 L 200,312 L 185,305 L 175,292 L 170,278 L 165,262 L 162,248 L 160,232 L 158,218 L 155,202 L 152,185 L 150,168 L 148,150 L 145,132 L 142,115 L 140,98 L 142,82 L 155,70 L 168,62 Z" fill="rgba(196,138,66,0.05)" stroke="rgba(196,138,66,0.2)" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M 420,44 L 430,20 L 450,12 L 470,18 L 480,30 L 470,36 Z" fill="rgba(196,138,66,0.04)" stroke="rgba(196,138,66,0.15)" stroke-width="0.8"/>
+      <path d="M 185,305 L 175,320 L 165,338 L 155,355 L 158,370 L 168,382 L 182,388 L 200,382 L 215,368 L 222,352 L 218,338 L 208,322 L 200,312 Z" fill="rgba(196,138,66,0.04)" stroke="rgba(196,138,66,0.15)" stroke-width="0.8"/>
+      <path d="M 560,318 L 555,335 L 548,350 L 542,365 L 538,382 L 542,395 L 552,402 L 562,398 L 568,385 L 570,368 L 568,352 L 565,338 Z" fill="rgba(196,138,66,0.04)" stroke="rgba(196,138,66,0.15)" stroke-width="0.8"/>
+      <path d="M 700,290 L 710,308 L 718,325 L 712,340 L 702,352 L 692,358 L 682,355 L 675,340 L 678,325 L 685,310 L 692,298 Z" fill="rgba(196,138,66,0.04)" stroke="rgba(196,138,66,0.15)" stroke-width="0.8"/>
+      <path d="M 970,82 L 1020,90 L 1060,95 L 1090,105 L 1110,118 L 1115,132 L 1105,145 L 1085,152 L 1060,155 L 1035,150 L 1010,148 L 990,155 L 970,148 L 955,135 L 950,120 L 955,105 Z" fill="rgba(196,138,66,0.05)" stroke="rgba(196,138,66,0.2)" stroke-width="0.8"/>
+      <path d="M 1060,155 L 1090,165 L 1115,178 L 1135,195 L 1150,215 L 1158,238 L 1155,260 L 1145,278 L 1130,292 L 1110,300 L 1085,305 L 1060,298 L 1040,282 L 1028,265 L 1025,245 L 1030,225 L 1040,208 L 1048,188 L 1052,168 Z" fill="rgba(196,138,66,0.04)" stroke="rgba(196,138,66,0.15)" stroke-width="0.8"/>
+      <text x="680" y="380" font-family="Inter,sans-serif" font-size="9" fill="rgba(196,138,66,0.2)" text-anchor="middle" letter-spacing="3">MEDITERRANEAN</text>
+      <path d="M 680,165 Q 750,120 860,200" stroke="rgba(196,138,66,0.1)" stroke-width="0.8" stroke-dasharray="4,6" fill="none"/>
+      <path d="M 860,200 Q 920,185 980,130" stroke="rgba(196,138,66,0.1)" stroke-width="0.8" stroke-dasharray="4,6" fill="none"/>
+      <path d="M 640,138 Q 660,150 680,165" stroke="rgba(196,138,66,0.1)" stroke-width="0.8" stroke-dasharray="4,6" fill="none"/>
+    </svg>
 
-  <!-- CITY PINS — positions are % of canvas width/height -->
-  <!-- To add a new city: copy a pin div, update data-city, data-label, data-count, and style left/top -->
+    <div class="city-pin active" id="pin-krakow" data-city="krakow" style="left:53.5%;top:31.5%">
+      <div class="pin-pulse"></div><div class="pin-pulse pin-pulse2"></div>
+      <div class="pin-body"></div>
+      <div class="pin-badge" id="badge-krakow">2</div>
+      <div class="pin-tooltip">Kraków</div>
+    </div>
 
-  <div class="city-pin active" id="pin-budapest" data-city="budapest" style="left:51%;top:38%">
-    <div class="pin-pulse"></div>
-    <div class="pin-pulse pin-pulse2"></div>
-    <div class="pin-body"></div>
-    <div class="pin-badge" id="badge-budapest">3</div>
-    <div class="pin-tooltip">Budapest</div>
+    <div class="city-pin" id="pin-budapest" data-city="budapest" style="left:56.5%;top:38%">
+      <div class="pin-pulse"></div><div class="pin-pulse pin-pulse2"></div>
+      <div class="pin-body"></div>
+      <div class="pin-badge" id="badge-budapest">3</div>
+      <div class="pin-tooltip">Budapest</div>
+    </div>
+
+    <div class="city-pin" id="pin-istanbul" data-city="istanbul" style="left:71.5%;top:46%">
+      <div class="pin-pulse"></div><div class="pin-pulse pin-pulse2"></div>
+      <div class="pin-body"></div>
+      <div class="pin-badge" id="badge-istanbul">6</div>
+      <div class="pin-tooltip">Istanbul</div>
+    </div>
+
+    <div class="city-pin" id="pin-turkiye" data-city="turkiye" style="left:80%;top:40%">
+      <div class="pin-pulse"></div><div class="pin-pulse pin-pulse2"></div>
+      <div class="pin-body"></div>
+      <div class="pin-badge" id="badge-turkiye">1</div>
+      <div class="pin-tooltip">Türkiye</div>
+    </div>
+
   </div>
-
-  <div class="city-pin" id="pin-istanbul" data-city="istanbul" style="left:60%;top:54%">
-    <div class="pin-pulse"></div>
-    <div class="pin-pulse pin-pulse2"></div>
-    <div class="pin-body"></div>
-    <div class="pin-badge" id="badge-istanbul">6</div>
-    <div class="pin-tooltip">Istanbul</div>
-  </div>
-
-  <div class="city-pin" id="pin-krakow" data-city="krakow" style="left:48%;top:30%">
-    <div class="pin-pulse"></div>
-    <div class="pin-pulse pin-pulse2"></div>
-    <div class="pin-body"></div>
-    <div class="pin-badge" id="badge-krakow">2</div>
-    <div class="pin-tooltip">Kraków</div>
-  </div>
-
-  <div class="city-pin" id="pin-turkiye" data-city="turkiye" style="left:64%;top:60%">
-    <div class="pin-pulse"></div>
-    <div class="pin-pulse pin-pulse2"></div>
-    <div class="pin-body"></div>
-    <div class="pin-badge" id="badge-turkiye">1</div>
-    <div class="pin-tooltip">Türkiye</div>
-  </div>
-
 </div>
 
 <div class="city-bar" id="city-bar">
@@ -230,90 +244,9 @@ const CITIES = {
   },
 };
 
-// ═══════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 // MAP DRAWING
-// ═══════════════════════════════════════════════════
-const canvas = document.getElementById('ph-map');
-const ctx = canvas.getContext('2d');
-
-function drawMapBg() {
-  const W = canvas.width, H = canvas.height;
-  ctx.clearRect(0, 0, W, H);
-  ctx.fillStyle = '#1a1714';
-  ctx.fillRect(0, 0, W, H);
-
-  // Subtle grid
-  ctx.strokeStyle = 'rgba(196,138,66,0.06)';
-  ctx.lineWidth = 0.5;
-  for (let i = 0; i <= 12; i++) {
-    ctx.beginPath(); ctx.moveTo(W/12*i, 0); ctx.lineTo(W/12*i, H); ctx.stroke();
-  }
-  for (let i = 0; i <= 6; i++) {
-    ctx.beginPath(); ctx.moveTo(0, H/6*i); ctx.lineTo(W, H/6*i); ctx.stroke();
-  }
-
-  // Latitude lines (decorative)
-  ctx.strokeStyle = 'rgba(196,138,66,0.04)';
-  ctx.lineWidth = 1;
-  [0.25, 0.5, 0.75].forEach(y => {
-    ctx.beginPath();
-    ctx.moveTo(0, H * y);
-    ctx.bezierCurveTo(W*0.25, H*y - H*0.03, W*0.75, H*y + H*0.03, W, H*y);
-    ctx.stroke();
-  });
-
-  // Europe landmass outline (stylised)
-  ctx.strokeStyle = 'rgba(196,138,66,0.18)';
-  ctx.lineWidth = 1;
-  ctx.beginPath();
-  ctx.moveTo(W*0.12, H*0.22);
-  ctx.bezierCurveTo(W*0.18, H*0.08, W*0.32, H*0.05, W*0.42, H*0.12);
-  ctx.bezierCurveTo(W*0.52, H*0.08, W*0.65, H*0.10, W*0.72, H*0.18);
-  ctx.bezierCurveTo(W*0.80, H*0.22, W*0.88, H*0.28, W*0.92, H*0.38);
-  ctx.bezierCurveTo(W*0.90, H*0.52, W*0.82, H*0.65, W*0.75, H*0.72);
-  ctx.bezierCurveTo(W*0.68, H*0.80, W*0.58, H*0.82, W*0.52, H*0.78);
-  ctx.bezierCurveTo(W*0.44, H*0.88, W*0.36, H*0.90, W*0.30, H*0.85);
-  ctx.bezierCurveTo(W*0.22, H*0.78, W*0.16, H*0.68, W*0.12, H*0.58);
-  ctx.bezierCurveTo(W*0.06, H*0.48, W*0.04, H*0.38, W*0.08, H*0.28);
-  ctx.closePath();
-  ctx.stroke();
-
-  // Fill landmass
-  ctx.fillStyle = 'rgba(196,138,66,0.04)';
-  ctx.fill();
-
-  // City connection lines (dashed, between active pins)
-  ctx.setLineDash([3, 6]);
-  ctx.strokeStyle = 'rgba(196,138,66,0.12)';
-  ctx.lineWidth = 0.8;
-
-  const pins = document.querySelectorAll('.city-pin');
-  const positions = [];
-  pins.forEach(pin => {
-    const l = parseFloat(pin.style.left) / 100;
-    const t = parseFloat(pin.style.top) / 100;
-    positions.push({ x: W * l, y: H * t });
-  });
-
-  for (let i = 0; i < positions.length - 1; i++) {
-    ctx.beginPath();
-    const mx = (positions[i].x + positions[i+1].x) / 2;
-    const my = (positions[i].y + positions[i+1].y) / 2 - 30;
-    ctx.moveTo(positions[i].x, positions[i].y);
-    ctx.quadraticCurveTo(mx, my, positions[i+1].x, positions[i+1].y);
-    ctx.stroke();
-  }
-  ctx.setLineDash([]);
-}
-
-function resizeMap() {
-  canvas.width = canvas.offsetWidth;
-  canvas.height = canvas.offsetHeight;
-  drawMapBg();
-}
-
-window.addEventListener('resize', resizeMap);
-setTimeout(resizeMap, 50);
+// ═══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════
 
 // ═══════════════════════════════════════════════════
 // GALLERY
