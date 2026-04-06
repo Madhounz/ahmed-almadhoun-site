@@ -408,6 +408,13 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
             <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
           </div>
           <div class="r-meta">{{ paper.venue }}</div>
+          {% if loop.index === 2 %}
+          <div style="margin-top:20px">
+            <button onclick="toggleMap()" id="map-toggle-btn" class="btn btn-outline" style="font-size:13px">
+              View Warsaw Corridor Data <span id="map-btn-icon">↓</span>
+            </button>
+          </div>
+          {% endif %}
         </div>
         {% endfor %}
       {% else %}
