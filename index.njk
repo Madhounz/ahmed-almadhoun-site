@@ -14,7 +14,7 @@ permalink: /index.html
 -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ahmed Almadhoun, Transport Engineer & Researcher</title>
+<title>Ahmed Almadhoun, Transport Engineer &amp; Researcher</title>
 <meta name="description" content="Transport Engineer and PhD Researcher focused on freight systems, accessibility, and infrastructure.">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
 <style>
@@ -54,11 +54,12 @@ body.dark-mode{
 html{scroll-behavior:smooth;font-size:16px}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:400;line-height:1.6;overflow-x:hidden}
 nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,0.08);padding:0 40px}
-.nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
+.nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px;position:relative}
 .nav-name{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:-0.01em}
-.nav-links{display:flex;gap:32px;list-:none}
+.nav-links{display:flex;gap:32px;list-style:none}
 .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;letter-spacing:0.01em;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
+.nav-toggle{display:none;background:none;border:none;color:var(--text);font-family:var(--sans);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
 #hero{padding:100px 40px 96px;max-width:var(--max);margin:0 auto}
 .hero-location{font-size:11.5px;font-weight:500;letter-spacing:0.13em;text-transform:uppercase;color:var(--faint);margin-bottom:28px}
@@ -159,7 +160,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .footer-name{font-family:var(--serif);font-size:17px;font-weight:300;color:var(--text)}
 .footer-desc{font-size:12.5px;color:var(--faint);margin-top:3px}
-.footer-links{display:flex;gap:20px}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap}
 .footer-links a{font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s}
 .footer-links a:hover{color:var(--text)}
 #lb{display:none;position:fixed;inset:0;background:rgba(4,3,2,0.97);backdrop-filter:blur(2px);z-index:1000;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .3s}
@@ -170,19 +171,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 #lb-close:hover{color:rgba(255,255,255,.85)}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .75s ease,transform .75s ease}
 .reveal.visible{opacity:1;transform:translateY(0)}
-@media(max-width:768px){
-  nav{padding:0 20px}
-  .nav-links{display:none}
-  #hero{padding:64px 20px 56px}
-  .wrap{padding:0 20px}
-  .section{padding:56px 0}
-  .what-grid,.about-grid{grid-template-columns:1fr;gap:32px}
-  .photo-grid{grid-template-columns:1fr 1fr}
-  .photo-cell:nth-child(1),.photo-cell:nth-child(4){grid-column:span 1;aspect-ratio:4/3}
-  .photo-cell:nth-child(2){aspect-ratio:4/3}
-  footer{padding:28px 20px}
-  .footer-inner{flex-direction:column;align-items:flex-start}
-}
 #contact{background:var(--surface)}
 .contact-form{max-width:580px}
 .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
@@ -192,12 +180,8 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 .cf-input:focus,.cf-textarea:focus{border-color:var(--accent);background:var(--surface2)}
 .cf-input::placeholder,.cf-textarea::placeholder{color:var(--faint)}
 .cf-success{display:none;margin-top:24px;padding:16px 20px;border-left:2px solid var(--accent);background:var(--accent-light);color:var(--muted);font-size:14px;line-height:1.6}
-@media(max-width:768px){.cf-row{grid-template-columns:1fr}}
-/* === FEATURE 1: Typed animation === */
 .typed-cursor{display:inline-block;width:2px;height:12px;background:var(--accent);margin-left:2px;vertical-align:middle;animation:blink .75s step-end infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-
-/* === FEATURE 2: Timeline === */
 #timeline{background:var(--bg)}
 .tl-wrap{position:relative;max-width:700px}
 .tl-line{position:absolute;left:18px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--border) 60px,var(--border) calc(100% - 60px),transparent);opacity:.5}
@@ -211,11 +195,14 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 .tl-sub{font-size:13.5px;color:var(--muted);line-height:1.65}
 .tl-tag{display:inline-block;margin-top:10px;font-size:10.5px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:var(--accent-light);color:var(--accent)}
 .tl-item:last-child{padding-bottom:0}
-
-/* === FEATURE 3: Map === */
+.tl-item.tl-ongoing .tl-dot{border-color:var(--accent);background:var(--accent-light);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(196,138,66,0.4)}50%{box-shadow:0 0 0 6px rgba(196,138,66,0)}}
+.tl-item.tl-ongoing .tl-tag{position:relative;overflow:hidden}
+.tl-item.tl-ongoing .tl-tag::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(196,138,66,0.3),transparent);animation:shimmer 2s ease-in-out infinite}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
 #map-section{background:var(--surface)}
 .map-container{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
-#corridor-map{width:100%;height:480px;background:var(--bg)}
+#corridor-map{width:100%;height:380px;background:var(--bg);display:block}
 .map-legend{display:flex;align-items:center;gap:24px;margin-top:18px;flex-wrap:wrap}
 .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
 .legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
@@ -233,32 +220,44 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 .mstat-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
 .mstat-val{font-size:22px;font-weight:300;font-family:var(--serif);color:var(--text)}
 .mstat-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
-@media(max-width:768px){
-  #corridor-map{height:320px}
-  .map-stats{grid-template-columns:repeat(2,1fr)}
-  .map-legend{gap:14px}
-}
-.tl-item.tl-ongoing .tl-dot{border-color:var(--accent);background:var(--accent-light);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(196,138,66,0.4)}50%{box-shadow:0 0 0 6px rgba(196,138,66,0)}}
-.tl-item.tl-ongoing .tl-tag{position:relative;overflow:hidden}
-.tl-item.tl-ongoing .tl-tag::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(196,138,66,0.3),transparent);animation:shimmer 2s ease-in-out infinite}
-@keyframes shimmer{0%{left:-100%}100%{left:100%}}
 #map-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,8,6,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .4s}
 #map-overlay.visible{opacity:1}
-.map-modal{background:var(--surface);border:1px solid var(--border-light);border-radius:12px;width:100%;max-width:880px;overflow:hidden;padding:32px;position:relative}
+.map-modal{background:var(--surface);border:1px solid var(--border-light);border-radius:12px;width:100%;max-width:880px;max-height:88vh;overflow-y:auto;padding:32px;position:relative}
 .map-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);cursor:pointer;transition:color .2s}
 .map-modal-close:hover{color:var(--accent)}
 .map-modal-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
 .map-modal-label{font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;opacity:.8}
 .map-modal-title{font-family:var(--serif);font-size:28px;font-weight:300;color:var(--text);line-height:1.1;letter-spacing:-0.02em;margin-bottom:6px}
 .map-modal-sub{font-size:13px;color:var(--muted);line-height:1.6}
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .nav-toggle{display:block}
+  .nav-links{display:none;position:absolute;top:56px;left:0;right:0;flex-direction:column;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:8px;overflow:hidden;padding:8px 0;box-shadow:0 8px 30px rgba(0,0,0,0.18)}
+  .nav-links.open{display:flex}
+  .nav-links li{width:100%}
+  .nav-links a{display:block;padding:12px 16px}
+  #hero{padding:64px 20px 56px}
+  .wrap{padding:0 20px}
+  .section{padding:56px 0}
+  .what-grid,.about-grid{grid-template-columns:1fr;gap:32px}
+  .photo-grid{grid-template-columns:1fr 1fr}
+  .photo-cell:nth-child(1),.photo-cell:nth-child(4){grid-column:span 1;aspect-ratio:4/3}
+  .photo-cell:nth-child(2){aspect-ratio:4/3}
+  .cf-row{grid-template-columns:1fr}
+  #corridor-map{height:320px}
+  .map-stats{grid-template-columns:repeat(2,1fr)}
+  .map-legend{gap:14px}
+  footer{padding:28px 20px}
+  .footer-inner{flex-direction:column;align-items:flex-start}
+}
 </style>
 </head>
 <body>
 <nav>
   <div class="nav-inner">
     <a href="#hero" class="nav-name">Ahmed Almadhoun</a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-links">Menu</button>
+    <ul class="nav-links" id="nav-links">
       <li><a href="#research">Research</a></li>
       <li><a href="#photography">Photography</a></li>
       <li><a href="#thoughts">Thoughts</a></li>
@@ -317,6 +316,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     </div>
   </div>
 </section>
+
 <section id="timeline" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -325,7 +325,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     </div>
     <div class="tl-wrap reveal">
       <div class="tl-line"></div>
-
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2018</div>
@@ -333,7 +332,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Completed undergraduate studies in Civil Engineering, building the technical foundation in infrastructure, structural analysis, and transport systems.</div>
         <span class="tl-tag">Education</span>
       </div>
-
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2024</div>
@@ -341,7 +339,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Completed a Master's thesis reconstructing and optimising the urban transportation system of Wrocław city using PTV VISUM. Full network modelling and scenario analysis to propose a better-performing system.</div>
         <span class="tl-tag">Education</span>
       </div>
-
       <div class="tl-item tl-active">
         <div class="tl-dot"></div>
         <div class="tl-year">2024</div>
@@ -349,7 +346,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Started doctoral research at the Faculty of Transport under Prof. Mariusz Kostrzewski. Focus: freight accessibility, transport poverty, and infrastructure equity in metropolitan systems.</div>
         <span class="tl-tag">PhD Start</span>
       </div>
-
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2025</div>
@@ -357,7 +353,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">First conference paper presented at TRANSCOM 2025. Applied PTV VISSIM to model the 79th Street corridor in Musaffah, Abu Dhabi, calibrating from field-collected peak and off-peak traffic data to evaluate congestion interventions.</div>
         <span class="tl-tag">Conference Paper</span>
       </div>
-
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2025</div>
@@ -365,7 +360,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Co-authored research on integrating electromobility and freight accessibility into post-war urban reconstruction frameworks. Published with Oficyna Wydawnicza Politechniki Warszawskiej.</div>
         <span class="tl-tag">Publication</span>
       </div>
-
       <div class="tl-item">
         <div class="tl-dot"></div>
         <div class="tl-year">2025</div>
@@ -373,7 +367,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Developed the Freight Accessibility Penalty (FAP) framework. Evaluated 8 freight corridors connecting Warsaw logistics hubs to expressway interchanges. Quantified infrastructure-induced transport poverty in a Warsaw metropolitan context. Awaiting publication.</div>
         <span class="tl-tag">Core Research</span>
       </div>
-
       <div class="tl-item tl-ongoing">
         <div class="tl-dot"></div>
         <div class="tl-year">2026</div>
@@ -381,7 +374,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Writing a chapter on blockchain-enabled digital twin architectures for smart transportation, exploring secure data communication between physical and virtual transport assets. Part of an Elsevier volume on Digital Twins for Smart Transportation, due 2027.</div>
         <span class="tl-tag">Book Chapter</span>
       </div>
-
       <div class="tl-item tl-ongoing">
         <div class="tl-dot"></div>
         <div class="tl-year">2028</div>
@@ -389,10 +381,10 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <div class="tl-sub">Engineering challenges, impacts, and strategic solutions for improved economic connectivity. Combining analytical and simulation-based approaches across Warsaw's metropolitan freight network.</div>
         <span class="tl-tag">Expected</span>
       </div>
-
     </div>
   </div>
 </section>
+
 <section id="research" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -412,9 +404,9 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
           </div>
           {% endif %}
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-            {% if paper.pdf %}<button onclick="window.open('{{ paper.pdf }}','_blank')" style="background:none;border:none;padding:0;cursor:pointer;font-family:inherit" class="r-link">Read Paper <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></button>{% endif %}
-            {% if paper.doi %}<a href="{{ paper.doi }}" target="_blank" class="r-link">DOI Link <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>{% endif %}
-            <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
+            {% if paper.pdf %}<button onclick="window.open('{{ paper.pdf }}','_blank','noopener,noreferrer')" style="background:none;border:none;padding:0;cursor:pointer;font-family:inherit" class="r-link">Read Paper <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></button>{% endif %}
+            {% if paper.doi %}<a href="{{ paper.doi }}" target="_blank" rel="noopener noreferrer" class="r-link">DOI Link <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>{% endif %}
+            <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
           </div>
           <div class="r-meta">{{ paper.venue }}</div>
           {% if loop.index === 2 %}
@@ -433,15 +425,15 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
           <p class="r-abstract">A spatial framework measuring how well urban logistics corridors serve the areas they connect. Applied to Warsaw's freight network to identify hidden penalties in infrastructure quality and corridor performance.</p>
           <div class="r-tags"><span class="r-tag">Spatial Analysis</span><span class="r-tag">Warsaw</span><span class="r-tag">Q1 Target</span></div>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px">
-            <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
+            <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer" class="r-link">Google Scholar <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 10L10 2M10 2H5M10 2v5"/></svg></a>
           </div>
           <div class="r-meta">WUT · 2025 · Transportation Research Part A</div>
         </div>
       {% endif %}
     </div>
-    </div>
   </div>
 </section>
+
 <section id="photography" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -462,10 +454,11 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       {% endif %}
     </div>
     <div class="photo-footer">
-      <a href="https://www.instagram.com/fotozitake/" target="_blank">@fotozitake on Instagram &rarr;</a>
+      <a href="https://www.instagram.com/fotozitake/" target="_blank" rel="noopener noreferrer">@fotozitake on Instagram &rarr;</a>
     </div>
   </div>
 </section>
+
 <section id="about" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -513,7 +506,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     <div class="thoughts-grid reveal">
       {% if thoughts and thoughts.length %}
         {% for post in thoughts %}
-        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}" >
+        <div class="t-card" data-title="{{ post.title }}" data-date="{{ post.date | dateDisplay }}" data-cat="{{ post.category }}" data-excerpt="{{ post.excerpt }}">
           <div class="t-date">{{ post.date | dateDisplay }}</div>
           <h3 class="t-title">{{ post.title }}</h3>
           <p class="t-excerpt">{{ post.excerpt }}</p>
@@ -561,6 +554,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     </form>
   </div>
 </section>
+
 <div id="post-overlay">
   <div class="post-curtain"></div>
   <button class="post-close" onclick="closePost()">Close</button>
@@ -579,13 +573,14 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   <div class="footer-inner">
     <div>
       <div class="footer-name">Ahmed Almadhoun</div>
-      <div class="footer-desc">Transport Engineering, Freight Systems, Simulation, Photography</div> <div class="footer-desc" style="margin-top:6px;font-size:11px;opacity:.4;">© 2026 Ahmed Almadhoun</div>
+      <div class="footer-desc">Transport Engineering, Freight Systems, Simulation, Photography</div>
+      <div class="footer-desc" style="margin-top:6px;font-size:11px;opacity:.4;">© 2026 Ahmed Almadhoun</div>
     </div>
     <div class="footer-links">
-      <a href="https://www.linkedin.com/in/ahmed-madhoun/" target="_blank">LinkedIn</a>
-      <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank">Google Scholar</a>
-      <a href="https://www.instagram.com/fotozitake/" target="_blank">Instagram</a>
-      <a href="/ahmed-almadhoun-cv.pdf" target="_blank">CV</a>
+      <a href="https://www.linkedin.com/in/ahmed-madhoun/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&amp;hl=en" target="_blank" rel="noopener noreferrer">Google Scholar</a>
+      <a href="https://www.instagram.com/fotozitake/" target="_blank" rel="noopener noreferrer">Instagram</a>
+      <a href="/ahmed-almadhoun-cv.pdf" target="_blank" rel="noopener noreferrer">CV</a>
     </div>
   </div>
 </footer>
@@ -602,6 +597,41 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   localStorage.setItem('theme',dark?'dark':'light');
 ">Dark</button>
 
+<div id="map-overlay">
+  <div class="map-modal">
+    <button class="map-modal-close" onclick="closeMap()">Close ✕</button>
+    <div class="map-modal-header">
+      <div class="map-modal-label">Research Visualised</div>
+      <div class="map-modal-title">Warsaw freight accessibility map.</div>
+      <div class="map-modal-sub">Eight corridors evaluated for infrastructure-induced accessibility penalties.<br>Hover any corridor to see its AES and FAP scores from the paper.</div>
+    </div>
+    <div class="map-container">
+      <canvas id="corridor-map"></canvas>
+      <div class="map-tooltip" id="map-tt">
+        <div class="tt-name" id="tt-name"></div>
+        <div class="tt-row"><span>Distance</span><span class="tt-val" id="tt-dist"></span></div>
+        <div class="tt-row"><span>Travel time</span><span class="tt-val" id="tt-time"></span></div>
+        <div class="tt-row"><span>AES raw</span><span class="tt-val" id="tt-aes-raw"></span></div>
+        <div class="tt-row"><span>AES adjusted</span><span class="tt-val" id="tt-aes-adj"></span></div>
+        <div class="tt-row"><span>Surface factor</span><span class="tt-val" id="tt-sf"></span></div>
+        <div class="tt-row"><span>Constraint factor</span><span class="tt-val" id="tt-cf"></span></div>
+        <div class="tt-fap" id="tt-fap"></div>
+      </div>
+    </div>
+    <div class="map-legend" style="margin-top:10px">
+      <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div>Low penalty (FAP &lt; 5%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#c48a42"></div>Moderate penalty (FAP 5–10%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e07060"></div>High penalty (FAP &gt; 10%)</div>
+    </div>
+    <div class="map-stats" style="margin-top:10px">
+      <div class="mstat"><div class="mstat-label">Corridors evaluated</div><div class="mstat-val">8</div><div class="mstat-sub">Warsaw metro area</div></div>
+      <div class="mstat"><div class="mstat-label">Highest penalty</div><div class="mstat-val">14.5%</div><div class="mstat-sub">Okęcie &amp; Targówek</div></div>
+      <div class="mstat"><div class="mstat-label">Best performer</div><div class="mstat-val">0%</div><div class="mstat-sub">Pruszków &amp; Mszczonów</div></div>
+      <div class="mstat"><div class="mstat-label">Avg. penalty</div><div class="mstat-val">7.1%</div><div class="mstat-sub">Across all corridors</div></div>
+    </div>
+  </div>
+</div>
+
 <script>
 (function(){
   const saved=localStorage.getItem('theme');
@@ -611,6 +641,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     if(btn)btn.textContent='Light';
   }
 })();
+
 const obs=new IntersectionObserver(entries=>{
   entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
 },{threshold:.07});
@@ -626,7 +657,7 @@ function openLb(src){
 }
 function closeLb(){
   lb.classList.remove('visible');
-  setTimeout(()=>{lb.style.display='none';lbImg.src=''},300);
+  setTimeout(()=>{lb.style.display='none';lbImg.src='';},300);
 }
 
 document.querySelectorAll('.photo-cell').forEach(cell=>{
@@ -667,26 +698,32 @@ function toggleResearch(el){
 }
 window.toggleResearch=toggleResearch;
 window.closePost=closePost;
-const cf=document.getElementById('contact-form');
-if(cf){cf.addEventListener('submit',async e=>{
-  e.preventDefault();
-  const data=new FormData(cf);
-  await fetch('/',{method:'POST',body:data});
-  cf.querySelectorAll('.cf-input,.cf-textarea').forEach(el=>el.value='');
-  const s=document.getElementById('cf-success');
-  s.style.display='block';
-  setTimeout(()=>s.style.display='none',5000);
-});}
 
+const cf=document.getElementById('contact-form');
+if(cf){
+  cf.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const data=new URLSearchParams(new FormData(cf)).toString();
+    await fetch('/',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:data
+    });
+    cf.querySelectorAll('.cf-input,.cf-textarea').forEach(el=>el.value='');
+    const s=document.getElementById('cf-success');
+    s.style.display='block';
+    setTimeout(()=>s.style.display='none',5000);
+  });
+}
 
 document.addEventListener('keydown',e=>{
   if(e.key==='Escape'){
     if(document.getElementById('post-overlay').classList.contains('visible')) closePost();
     else if(document.getElementById('map-overlay').classList.contains('visible')) closeMap();
-    else closeLb();
+    else if(lb.style.display==='flex') closeLb();
   }
 });
-// === FEATURE 1: Typed hero ===
+
 (function(){
   const phrases=['Freight systems & accessibility','Transport poverty research','Infrastructure equity','Spatial analysis','The invisible things.'];
   let i=0,j=0,deleting=false,pause=false;
@@ -708,18 +745,32 @@ document.addEventListener('keydown',e=>{
   setTimeout(tick,1200);
 })();
 
-// === FEATURE 2: Timeline scroll reveal ===
 (function(){
   const items=document.querySelectorAll('.tl-item');
-  const obs=new IntersectionObserver(entries=>{
+  const tlObs=new IntersectionObserver(entries=>{
     entries.forEach(e=>{
       if(e.isIntersecting)e.target.classList.add('tl-visible');
     });
   },{threshold:.15});
-  items.forEach(el=>obs.observe(el));
+  items.forEach(el=>tlObs.observe(el));
 })();
 
-// === FEATURE 3: Warsaw freight map ===
+(function(){
+  const navToggle=document.getElementById('nav-toggle');
+  const navLinks=document.getElementById('nav-links');
+  if(!navToggle||!navLinks)return;
+  navToggle.addEventListener('click',()=>{
+    const open=navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded',open?'true':'false');
+  });
+  navLinks.querySelectorAll('a').forEach(link=>{
+    link.addEventListener('click',()=>{
+      navLinks.classList.remove('open');
+      navToggle.setAttribute('aria-expanded','false');
+    });
+  });
+})();
+
 (function(){
   const corridors=[
     {name:'Błonie (Western Hub)',dest:'Grodzisk Maz. Interchange',dist:15.6,time:22,sf:1.00,cf:0.95,lat:52.198,lng:20.614},
@@ -741,7 +792,6 @@ document.addEventListener('keydown',e=>{
 
   function getCanvas(){return document.getElementById('corridor-map');}
   function getTt(){return document.getElementById('map-tt');}
-
   function project(lat,lng,W,H){
     return{
       x:(lng-bounds.minLng)/(bounds.maxLng-bounds.minLng)*W,
@@ -749,9 +799,14 @@ document.addEventListener('keydown',e=>{
     };
   }
   function fapColor(fap){
-    if(fap<=0.001)return '#6aaa7a';
-    if(fap<0.10)return '#c48a42';
+    if(fap<0.05)return '#6aaa7a';
+    if(fap<=0.10)return '#c48a42';
     return '#e07060';
+  }
+  function fapClass(fap){
+    if(fap<0.05)return 'low';
+    if(fap<=0.10)return 'mid';
+    return 'high';
   }
   function drawMap(){
     const canvas=getCanvas();
@@ -805,22 +860,23 @@ document.addEventListener('keydown',e=>{
     ctx.textBaseline='alphabetic';
   }
   function getHit(canvas,mx,my){
-    const W=canvas.width,H=canvas.height;
     for(let i=0;i<corridors.length;i++){
-      const p=project(corridors[i].lat,corridors[i].lng,W,H);
+      const p=project(corridors[i].lat,corridors[i].lng,canvas.width,canvas.height);
       if((mx-p.x)**2+(my-p.y)**2<196)return i;
     }
     return -1;
   }
   document.addEventListener('mousemove',e=>{
     const canvas=getCanvas();
-    if(!canvas||document.getElementById('map-overlay').style.display!=='flex')return;
+    const overlay=document.getElementById('map-overlay');
+    if(!canvas||!overlay||overlay.style.display!=='flex')return;
     const r=canvas.getBoundingClientRect();
     const mx=e.clientX-r.left,my=e.clientY-r.top;
     if(mx<0||my<0||mx>r.width||my>r.height){
       corridors.forEach(c=>c._hovered=false);
       getTt().classList.remove('visible');
-      drawMap();return;
+      drawMap();
+      return;
     }
     const idx=getHit(canvas,mx*(canvas.width/r.width),my*(canvas.height/r.height));
     corridors.forEach((c,i)=>c._hovered=(i===idx));
@@ -838,13 +894,14 @@ document.addEventListener('keydown',e=>{
       const fp=(c.fap*100).toFixed(1);
       const fel=document.getElementById('tt-fap');
       fel.textContent='FAP: '+fp+'% accessibility loss';
-      fel.className='tt-fap '+(c.fap>0.10?'high':c.fap>0.001?'mid':'low');
+      fel.className='tt-fap '+fapClass(c.fap);
       canvas.style.cursor='pointer';
       let tx=e.clientX-r.left+16,ty=e.clientY-r.top-20;
       if(tx+250>r.width)tx=e.clientX-r.left-260;
       if(ty<0)ty=10;
       if(ty+200>r.height)ty=e.clientY-r.top-210;
-      tt.style.left=tx+'px';tt.style.top=ty+'px';
+      tt.style.left=tx+'px';
+      tt.style.top=ty+'px';
       tt.classList.add('visible');
     } else {
       tt.classList.remove('visible');
@@ -853,66 +910,40 @@ document.addEventListener('keydown',e=>{
   });
   const themeBtn=document.getElementById('theme-btn');
   if(themeBtn)themeBtn.addEventListener('click',()=>{
-    if(document.getElementById('map-overlay').style.display==='flex')drawMap();
+    const overlay=document.getElementById('map-overlay');
+    if(overlay&&overlay.style.display==='flex')drawMap();
   });
   window.resizeMap=drawMap;
 })();
+
 console.log('%c Ahmed Almadhoun ', 'background:#c48a42;color:#1a1714;font-size:14px;font-weight:bold;padding:6px 12px;border-radius:4px;');
 console.log('%c ahmedalmadhoun.com — built from scratch ', 'color:#c48a42;font-size:11px;');
 console.log('%c Transport Engineer · PhD Researcher · Warsaw ', 'color:#6a6158;font-size:11px;');
+
 function toggleMap(){
   const o=document.getElementById('map-overlay');
+  if(!o)return;
   o.style.display='flex';
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     o.classList.add('visible');
-    window.resizeMap();
+    if(typeof window.resizeMap==='function') window.resizeMap();
   }));
   document.body.style.overflow='hidden';
 }
 function closeMap(){
   const o=document.getElementById('map-overlay');
+  if(!o)return;
   o.classList.remove('visible');
   setTimeout(()=>{o.style.display='none';document.body.style.overflow='';},400);
 }
-document.getElementById('map-overlay').addEventListener('click',e=>{
-  if(e.target===document.getElementById('map-overlay'))closeMap();
-});
+const mapOverlay=document.getElementById('map-overlay');
+if(mapOverlay){
+  mapOverlay.addEventListener('click',e=>{
+    if(e.target===mapOverlay)closeMap();
+  });
+}
 window.toggleMap=toggleMap;
 window.closeMap=closeMap;
 </script>
-<div id="map-overlay">
-  <div class="map-modal">
-    <button class="map-modal-close" onclick="closeMap()">Close ✕</button>
-    <div class="map-modal-header">
-      <div class="map-modal-label">Research Visualised</div>
-      <div class="map-modal-title">Warsaw freight accessibility map.</div>
-      <div class="map-modal-sub">Eight corridors evaluated for infrastructure-induced accessibility penalties.<br>Hover any corridor to see its AES and FAP scores from the paper.</div>
-    </div>
-    <div class="map-container">
-      <canvas id="corridor-map" style="width:100%;max-width:800px;display:block;border-radius:6px"></canvas>
-      <div class="map-tooltip" id="map-tt">
-        <div class="tt-name" id="tt-name"></div>
-        <div class="tt-row"><span>Distance</span><span class="tt-val" id="tt-dist"></span></div>
-        <div class="tt-row"><span>Travel time</span><span class="tt-val" id="tt-time"></span></div>
-        <div class="tt-row"><span>AES raw</span><span class="tt-val" id="tt-aes-raw"></span></div>
-        <div class="tt-row"><span>AES adjusted</span><span class="tt-val" id="tt-aes-adj"></span></div>
-        <div class="tt-row"><span>Surface factor</span><span class="tt-val" id="tt-sf"></span></div>
-        <div class="tt-row"><span>Constraint factor</span><span class="tt-val" id="tt-cf"></span></div>
-        <div class="tt-fap" id="tt-fap"></div>
-      </div>
-    </div>
-    <div class="map-legend" style="margin-top:10px">
-      <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div>Low penalty (FAP &lt; 5%)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#c48a42"></div>Moderate penalty (FAP 5–10%)</div>
-      <div class="legend-item"><div class="legend-dot" style="background:#e07060"></div>High penalty (FAP &gt; 10%)</div>
-    </div>
-    <div class="map-stats" style="margin-top:10px">
-      <div class="mstat"><div class="mstat-label">Corridors evaluated</div><div class="mstat-val">8</div><div class="mstat-sub">Warsaw metro area</div></div>
-      <div class="mstat"><div class="mstat-label">Highest penalty</div><div class="mstat-val">14.5%</div><div class="mstat-sub">Okęcie &amp; Targówek</div></div>
-      <div class="mstat"><div class="mstat-label">Best performer</div><div class="mstat-val">0%</div><div class="mstat-sub">Pruszków &amp; Mszczonów</div></div>
-      <div class="mstat"><div class="mstat-label">Avg. penalty</div><div class="mstat-val">7.1%</div><div class="mstat-sub">Across all corridors</div></div>
-    </div>
-  </div>
-</div>
 </body>
 </html>
