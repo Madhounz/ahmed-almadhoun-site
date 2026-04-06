@@ -1,0 +1,410 @@
+---
+permalink: /photography/index.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography — Ahmed Almadhoun</title>
+<meta name="description" content="Photography by Ahmed Almadhoun — Budapest, Istanbul, Kraków, Türkiye.">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#1a1714;
+  --surface:#221f1b;
+  --surface2:#2b2722;
+  --border:#3a3530;
+  --text:#f0ebe2;
+  --muted:#9a9085;
+  --faint:#5a5248;
+  --accent:#c48a42;
+  --accent-mid:#ad7336;
+  --accent-light:#2a1a08;
+  --sans:'Inter',system-ui,sans-serif;
+  --serif:'Fraunces',Georgia,serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(26,23,20,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(196,138,66,0.08)}
+.nav-name{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--text);text-decoration:none;letter-spacing:-0.01em;opacity:.7;transition:opacity .2s}
+.nav-name:hover{opacity:1}
+.nav-back{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);text-decoration:none;opacity:.7;transition:opacity .2s}
+.nav-back:hover{opacity:1}
+
+/* HERO */
+.ph-hero{padding:100px 40px 0;max-width:1200px;margin:0 auto}
+.ph-label{font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;opacity:.7}
+.ph-title{font-family:var(--serif);font-size:clamp(42px,6vw,80px);font-weight:300;line-height:.97;letter-spacing:-.03em;color:var(--text);margin-bottom:16px}
+.ph-sub{font-size:15px;color:var(--muted);max-width:440px;line-height:1.7}
+
+/* MAP STAGE */
+.map-stage{position:relative;margin:52px 0 0;overflow:hidden}
+.map-canvas-wrap{position:relative;width:100%;height:520px;cursor:crosshair}
+#ph-map{width:100%;height:100%;display:block}
+
+/* CITY PINS */
+.city-pin{position:absolute;transform:translate(-50%,-50%);cursor:pointer}
+.pin-pulse{position:absolute;width:28px;height:28px;border-radius:50%;border:1px solid var(--accent);top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;animation:pinPulse 2.8s ease-out infinite}
+.pin-pulse2{animation-delay:1.4s}
+.pin-body{position:relative;z-index:2;width:12px;height:12px;border-radius:50%;background:var(--accent);border:2px solid rgba(255,255,255,.15);transition:transform .3s,background .3s}
+.city-pin:hover .pin-body,.city-pin.active .pin-body{transform:scale(1.6);background:#e0a050}
+.city-pin.active .pin-pulse{opacity:.5}
+.pin-badge{position:absolute;top:-8px;right:-10px;background:var(--accent);color:#1a1714;font-size:9px;font-weight:700;width:16px;height:16px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:3;transition:transform .3s}
+.city-pin:hover .pin-badge,.city-pin.active .pin-badge{transform:scale(1.2)}
+.pin-tooltip{position:absolute;bottom:calc(100% + 14px);left:50%;transform:translateX(-50%);white-space:nowrap;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 12px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text);opacity:0;pointer-events:none;transition:opacity .2s;z-index:10}
+.pin-tooltip::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:5px solid transparent;border-top-color:var(--border)}
+.city-pin:hover .pin-tooltip,.city-pin.active .pin-tooltip{opacity:1}
+
+@keyframes pinPulse{0%{transform:translate(-50%,-50%) scale(1);opacity:.5}100%{transform:translate(-50%,-50%) scale(2.8);opacity:0}}
+
+/* CITY SELECTOR BAR */
+.city-bar{display:flex;gap:0;border-bottom:1px solid var(--border);margin:0;overflow-x:auto;scrollbar-width:none}
+.city-bar::-webkit-scrollbar{display:none}
+.city-btn{padding:14px 24px;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .2s;white-space:nowrap;font-family:var(--sans)}
+.city-btn:hover{color:var(--muted)}
+.city-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* GALLERY */
+.gallery-stage{max-width:1200px;margin:0 auto;padding:0 40px 80px}
+.gallery-header{display:flex;align-items:baseline;justify-content:space-between;padding:36px 0 28px}
+.gallery-city-name{font-family:var(--serif);font-size:clamp(28px,4vw,48px);font-weight:300;color:var(--text);letter-spacing:-.02em}
+.gallery-meta{font-size:11px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
+.gallery-grid{columns:3;gap:6px}
+.gallery-grid.cols-2{columns:2}
+.gallery-cell{break-inside:avoid;margin-bottom:6px;position:relative;overflow:hidden;border-radius:6px;cursor:pointer;background:var(--surface2)}
+.gallery-cell img{width:100%;height:auto;display:block;transition:transform .6s ease,filter .4s ease;filter:saturate(.9) brightness(.92) contrast(1.05)}
+.gallery-cell:hover img{transform:scale(1.04);filter:saturate(1) brightness(1)}
+.gallery-cell-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 45%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:16px}
+.gallery-cell:hover .gallery-cell-overlay{opacity:1}
+.cell-title{font-family:var(--serif);font-size:16px;font-weight:300;color:#f3ede4;line-height:1.1}
+
+/* LIGHTBOX */
+#lb{display:none;position:fixed;inset:0;background:rgba(4,3,2,.97);z-index:1000;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .3s}
+#lb.open{display:flex}
+#lb.visible{opacity:1}
+#lb img{max-width:90vw;max-height:90vh;object-fit:contain}
+#lb-close{position:absolute;top:24px;right:32px;background:none;border:none;color:rgba(255,255,255,.4);font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;font-family:var(--sans);font-weight:500;transition:color .2s}
+#lb-close:hover{color:rgba(255,255,255,.85)}
+#lb-caption{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-family:var(--serif);font-size:15px;font-weight:300;color:rgba(255,255,255,.5);letter-spacing:.02em;white-space:nowrap}
+
+/* INSTAGRAM FOOTER */
+.ph-footer{border-top:1px solid var(--border);padding:28px 40px;display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto}
+.ph-footer a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none}
+.ph-footer a:hover{text-decoration:underline}
+.ph-total{font-size:11px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase}
+
+@media(max-width:768px){
+  nav{padding:0 20px}
+  .ph-hero{padding:90px 20px 0}
+  .map-canvas-wrap{height:340px}
+  .gallery-stage{padding:0 20px 60px}
+  .gallery-grid{columns:2}
+  .gallery-grid.cols-2{columns:1}
+  .ph-footer{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="/" class="nav-name">Ahmed Almadhoun</a>
+  <a href="/#photography" class="nav-back">← Back</a>
+</nav>
+
+<div class="ph-hero">
+  <div class="ph-label">Photography</div>
+  <h1 class="ph-title">Through<br>the viewfinder.</h1>
+  <p class="ph-sub">Stillness, structure, and quiet geometry. Select a city on the map to explore.</p>
+</div>
+
+<div class="map-stage">
+  <canvas id="ph-map"></canvas>
+
+  <!-- CITY PINS — positions are % of canvas width/height -->
+  <!-- To add a new city: copy a pin div, update data-city, data-label, data-count, and style left/top -->
+
+  <div class="city-pin active" id="pin-budapest" data-city="budapest" style="left:51%;top:38%">
+    <div class="pin-pulse"></div>
+    <div class="pin-pulse pin-pulse2"></div>
+    <div class="pin-body"></div>
+    <div class="pin-badge" id="badge-budapest">3</div>
+    <div class="pin-tooltip">Budapest</div>
+  </div>
+
+  <div class="city-pin" id="pin-istanbul" data-city="istanbul" style="left:60%;top:54%">
+    <div class="pin-pulse"></div>
+    <div class="pin-pulse pin-pulse2"></div>
+    <div class="pin-body"></div>
+    <div class="pin-badge" id="badge-istanbul">6</div>
+    <div class="pin-tooltip">Istanbul</div>
+  </div>
+
+  <div class="city-pin" id="pin-krakow" data-city="krakow" style="left:48%;top:30%">
+    <div class="pin-pulse"></div>
+    <div class="pin-pulse pin-pulse2"></div>
+    <div class="pin-body"></div>
+    <div class="pin-badge" id="badge-krakow">2</div>
+    <div class="pin-tooltip">Kraków</div>
+  </div>
+
+  <div class="city-pin" id="pin-turkiye" data-city="turkiye" style="left:64%;top:60%">
+    <div class="pin-pulse"></div>
+    <div class="pin-pulse pin-pulse2"></div>
+    <div class="pin-body"></div>
+    <div class="pin-badge" id="badge-turkiye">1</div>
+    <div class="pin-tooltip">Türkiye</div>
+  </div>
+
+</div>
+
+<div class="city-bar" id="city-bar">
+  <button class="city-btn active" data-city="budapest">Budapest</button>
+  <button class="city-btn" data-city="istanbul">Istanbul</button>
+  <button class="city-btn" data-city="krakow">Kraków</button>
+  <button class="city-btn" data-city="turkiye">Türkiye</button>
+</div>
+
+<div class="gallery-stage">
+  <div class="gallery-header">
+    <div class="gallery-city-name" id="gallery-city-name">Budapest, Hungary</div>
+    <div class="gallery-meta" id="gallery-meta">3 photographs</div>
+  </div>
+  <div class="gallery-grid" id="gallery-grid">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<div style="border-top:1px solid var(--border);padding:24px 40px;display:flex;justify-content:space-between;align-items:center">
+  <a href="https://www.instagram.com/fotozitake/" target="_blank" rel="noopener noreferrer" style="font-size:13px;font-weight:500;color:var(--accent);text-decoration:none">@fotozitake on Instagram →</a>
+  <span id="ph-total" style="font-size:11px;color:var(--faint);letter-spacing:.1em;text-transform:uppercase"></span>
+</div>
+
+<div id="lb">
+  <button id="lb-close">Close ✕</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-caption"></div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════
+// PHOTO DATA — grouped by city
+// To add a new city: add a new entry below
+// image paths must match your /photos/ directory
+// ═══════════════════════════════════════════════════
+const CITIES = {
+  budapest: {
+    label: 'Budapest, Hungary',
+    photos: [
+      { src: '/photos/3.jpg',   title: 'Convergence',   loc: 'Budapest, Hungary 2026' },
+      { src: '/photos/2.jpg',   title: 'Exhale',        loc: 'Budapest, Hungary 2026' },
+      { src: '/photos/1.jpg',   title: 'Sanctum',       loc: 'Budapest, Hungary 2026' },
+    ]
+  },
+  istanbul: {
+    label: 'Istanbul, Türkiye',
+    photos: [
+      { src: '/photos/img20251227170642.jpg', title: 'Every word falls short in Istanbul', loc: 'Istanbul, Türkiye 2025' },
+      { src: '/photos/dramatic-ship.jpg',     title: 'Gold',                               loc: 'Istanbul, 2021' },
+      { src: '/photos/12.jpg',                title: 'Hagia Sophia',                       loc: 'Istanbul, Türkiye 2021' },
+      { src: '/photos/dsc_0563.jpg',          title: 'Silence Above the City',             loc: 'Istanbul, Türkiye 2022' },
+      { src: '/photos/img20251227171746.jpg', title: 'Time, Ferried',                      loc: 'Istanbul, 2025' },
+      { src: '/photos/dsc_1275.jpg',          title: 'Visual Poetry',                      loc: 'Türkiye' },
+    ]
+  },
+  krakow: {
+    label: 'Kraków, Poland',
+    photos: [
+      { src: '/photos/topost.jpg',   title: 'Echoes of Streets', loc: 'Krakow' },
+      { src: '/photos/gem1-7.jpg',   title: 'Street Symphony',   loc: 'Krakow' },
+    ]
+  },
+  turkiye: {
+    label: 'Türkiye',
+    photos: [
+      { src: '/photos/dsc_1275.jpg', title: 'Visual Poetry', loc: 'Türkiye' },
+    ]
+  },
+};
+
+// ═══════════════════════════════════════════════════
+// MAP DRAWING
+// ═══════════════════════════════════════════════════
+const canvas = document.getElementById('ph-map');
+const ctx = canvas.getContext('2d');
+
+function drawMapBg() {
+  const W = canvas.width, H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = '#1a1714';
+  ctx.fillRect(0, 0, W, H);
+
+  // Subtle grid
+  ctx.strokeStyle = 'rgba(196,138,66,0.06)';
+  ctx.lineWidth = 0.5;
+  for (let i = 0; i <= 12; i++) {
+    ctx.beginPath(); ctx.moveTo(W/12*i, 0); ctx.lineTo(W/12*i, H); ctx.stroke();
+  }
+  for (let i = 0; i <= 6; i++) {
+    ctx.beginPath(); ctx.moveTo(0, H/6*i); ctx.lineTo(W, H/6*i); ctx.stroke();
+  }
+
+  // Latitude lines (decorative)
+  ctx.strokeStyle = 'rgba(196,138,66,0.04)';
+  ctx.lineWidth = 1;
+  [0.25, 0.5, 0.75].forEach(y => {
+    ctx.beginPath();
+    ctx.moveTo(0, H * y);
+    ctx.bezierCurveTo(W*0.25, H*y - H*0.03, W*0.75, H*y + H*0.03, W, H*y);
+    ctx.stroke();
+  });
+
+  // Europe landmass outline (stylised)
+  ctx.strokeStyle = 'rgba(196,138,66,0.18)';
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(W*0.12, H*0.22);
+  ctx.bezierCurveTo(W*0.18, H*0.08, W*0.32, H*0.05, W*0.42, H*0.12);
+  ctx.bezierCurveTo(W*0.52, H*0.08, W*0.65, H*0.10, W*0.72, H*0.18);
+  ctx.bezierCurveTo(W*0.80, H*0.22, W*0.88, H*0.28, W*0.92, H*0.38);
+  ctx.bezierCurveTo(W*0.90, H*0.52, W*0.82, H*0.65, W*0.75, H*0.72);
+  ctx.bezierCurveTo(W*0.68, H*0.80, W*0.58, H*0.82, W*0.52, H*0.78);
+  ctx.bezierCurveTo(W*0.44, H*0.88, W*0.36, H*0.90, W*0.30, H*0.85);
+  ctx.bezierCurveTo(W*0.22, H*0.78, W*0.16, H*0.68, W*0.12, H*0.58);
+  ctx.bezierCurveTo(W*0.06, H*0.48, W*0.04, H*0.38, W*0.08, H*0.28);
+  ctx.closePath();
+  ctx.stroke();
+
+  // Fill landmass
+  ctx.fillStyle = 'rgba(196,138,66,0.04)';
+  ctx.fill();
+
+  // City connection lines (dashed, between active pins)
+  ctx.setLineDash([3, 6]);
+  ctx.strokeStyle = 'rgba(196,138,66,0.12)';
+  ctx.lineWidth = 0.8;
+
+  const pins = document.querySelectorAll('.city-pin');
+  const positions = [];
+  pins.forEach(pin => {
+    const l = parseFloat(pin.style.left) / 100;
+    const t = parseFloat(pin.style.top) / 100;
+    positions.push({ x: W * l, y: H * t });
+  });
+
+  for (let i = 0; i < positions.length - 1; i++) {
+    ctx.beginPath();
+    const mx = (positions[i].x + positions[i+1].x) / 2;
+    const my = (positions[i].y + positions[i+1].y) / 2 - 30;
+    ctx.moveTo(positions[i].x, positions[i].y);
+    ctx.quadraticCurveTo(mx, my, positions[i+1].x, positions[i+1].y);
+    ctx.stroke();
+  }
+  ctx.setLineDash([]);
+}
+
+function resizeMap() {
+  canvas.width = canvas.offsetWidth;
+  canvas.height = canvas.offsetHeight;
+  drawMapBg();
+}
+
+window.addEventListener('resize', resizeMap);
+setTimeout(resizeMap, 50);
+
+// ═══════════════════════════════════════════════════
+// GALLERY
+// ═══════════════════════════════════════════════════
+let activeCity = 'budapest';
+
+function renderGallery(city) {
+  const data = CITIES[city];
+  if (!data) return;
+  activeCity = city;
+
+  document.getElementById('gallery-city-name').textContent = data.label;
+  document.getElementById('gallery-meta').textContent = data.photos.length + ' photograph' + (data.photos.length !== 1 ? 's' : '');
+
+  const grid = document.getElementById('gallery-grid');
+  grid.className = 'gallery-grid' + (data.photos.length <= 2 ? ' cols-2' : '');
+
+  grid.style.opacity = '0';
+  grid.style.transform = 'translateY(12px)';
+
+  setTimeout(() => {
+    grid.innerHTML = data.photos.map((p, i) =>
+      `<div class="gallery-cell" data-src="${p.src}" data-title="${p.title}" data-loc="${p.loc}">
+        <img src="${p.src}" alt="${p.title}" loading="lazy">
+        <div class="gallery-cell-overlay">
+          <div class="cell-title">${p.title}</div>
+        </div>
+      </div>`
+    ).join('');
+
+    grid.querySelectorAll('.gallery-cell').forEach(cell => {
+      cell.addEventListener('click', () => openLb(cell.dataset.src, cell.dataset.title + ' — ' + cell.dataset.loc));
+    });
+
+    grid.style.transition = 'opacity .45s ease, transform .45s ease';
+    grid.style.opacity = '1';
+    grid.style.transform = 'translateY(0)';
+  }, 120);
+
+  // total count
+  const total = Object.values(CITIES).reduce((s, c) => s + c.photos.length, 0);
+  document.getElementById('ph-total').textContent = total + ' photographs total';
+
+  // update badges
+  Object.keys(CITIES).forEach(k => {
+    const badge = document.getElementById('badge-' + k);
+    if (badge) badge.textContent = CITIES[k].photos.length;
+  });
+}
+
+// ═══════════════════════════════════════════════════
+// PIN & TAB INTERACTION
+// ═══════════════════════════════════════════════════
+function selectCity(city) {
+  document.querySelectorAll('.city-pin').forEach(p => p.classList.toggle('active', p.dataset.city === city));
+  document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.city === city));
+  renderGallery(city);
+}
+
+document.querySelectorAll('.city-pin').forEach(pin => {
+  pin.addEventListener('click', () => selectCity(pin.dataset.city));
+});
+document.querySelectorAll('.city-btn').forEach(btn => {
+  btn.addEventListener('click', () => selectCity(btn.dataset.city));
+});
+
+// ═══════════════════════════════════════════════════
+// LIGHTBOX
+// ═══════════════════════════════════════════════════
+const lb = document.getElementById('lb');
+const lbImg = document.getElementById('lb-img');
+const lbCaption = document.getElementById('lb-caption');
+
+function openLb(src, caption) {
+  lbImg.src = src;
+  lbCaption.textContent = caption || '';
+  lb.style.display = 'flex';
+  requestAnimationFrame(() => requestAnimationFrame(() => lb.classList.add('visible')));
+}
+function closeLb() {
+  lb.classList.remove('visible');
+  setTimeout(() => { lb.style.display = 'none'; lbImg.src = ''; }, 300);
+}
+document.getElementById('lb-close').addEventListener('click', closeLb);
+lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+
+// ═══════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════
+renderGallery('budapest');
+</script>
+</body>
+</html>
