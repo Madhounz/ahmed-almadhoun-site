@@ -757,7 +757,7 @@ document.addEventListener('keydown',e=>{
     const canvas=getCanvas();
     if(!canvas)return;
     canvas.width=800;
-    canvas.height=340;
+    canvas.height=380;
     const ctx=canvas.getContext('2d');
     const W=canvas.width,H=canvas.height;
     const dark=document.body.classList.contains('dark-mode');
@@ -843,6 +843,7 @@ document.addEventListener('keydown',e=>{
       let tx=e.clientX-r.left+16,ty=e.clientY-r.top-20;
       if(tx+250>r.width)tx=e.clientX-r.left-260;
       if(ty<0)ty=10;
+      if(ty+200>r.height)ty=e.clientY-r.top-210;
       tt.style.left=tx+'px';tt.style.top=ty+'px';
       tt.classList.add('visible');
     } else {
@@ -888,7 +889,7 @@ window.closeMap=closeMap;
       <div class="map-modal-sub">Eight corridors evaluated for infrastructure-induced accessibility penalties.<br>Hover any corridor to see its AES and FAP scores from the paper.</div>
     </div>
     <div class="map-container">
-      <canvas id="corridor-map" height="420"></canvas>
+      <canvas id="corridor-map" style="width:100%;max-width:800px;display:block;border-radius:6px"></canvas>
       <div class="map-tooltip" id="map-tt">
         <div class="tt-name" id="tt-name"></div>
         <div class="tt-row"><span>Distance</span><span class="tt-val" id="tt-dist"></span></div>
