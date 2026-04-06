@@ -881,14 +881,16 @@ console.log('%c ahmedalmadhoun.com — built from scratch ', 'color:#c48a42;font
 console.log('%c Transport Engineer · PhD Researcher · Warsaw ', 'color:#6a6158;font-size:11px;');
 function toggleMap(){
   const m=document.getElementById('map-section');
-  const btn=document.getElementById('map-toggle-btn');
   const icon=document.getElementById('map-btn-icon');
   const isOpen=m.style.maxHeight!=='0px'&&m.style.maxHeight!=='';
   if(isOpen){
     m.style.maxHeight='0';m.style.opacity='0';icon.textContent='↓';
   } else {
     m.style.maxHeight='900px';m.style.opacity='1';icon.textContent='↑';
-    setTimeout(()=>{if(window.resizeMap)window.resizeMap();},50);
+    setTimeout(()=>{
+      if(window.resizeMap)window.resizeMap();
+      m.scrollIntoView({behavior:'smooth',block:'start'});
+    },50);
   }
 }
 window.toggleMap=toggleMap;
