@@ -737,11 +737,10 @@ document.addEventListener('keydown',e=>{
     c.fap=+(1-c.aesAdj/c.aesRaw).toFixed(4);
   });
   const bounds={minLat:51.90,maxLat:52.36,minLng:20.40,maxLng:21.45};
-  const canvas=document.getElementById('corridor-map');
-  if(!canvas)return;
-  const ctx=canvas.getContext('2d');
-  const tt=document.getElementById('map-tt');
   const wc={lat:52.229,lng:21.012};
+
+  function getCanvas(){return document.getElementById('corridor-map');}
+  function getTt(){return document.getElementById('map-tt');}
 
   function project(lat,lng,W,H){
     return{
@@ -754,25 +753,26 @@ document.addEventListener('keydown',e=>{
     if(fap<0.10)return '#c48a42';
     return '#e07060';
   }
-  function draw(){
+  function drawMap(){
+    const canvas=getCanvas();
+    if(!canvas)return;
+    canvas.width=800;
+    canvas.height=420;
+    const ctx=canvas.getContext('2d');
     const W=canvas.width,H=canvas.height;
-    ctx.clearRect(0,0,W,H);
     const dark=document.body.classList.contains('dark-mode');
     ctx.fillStyle=dark?'#1a1d24':'#2b2926';
     ctx.fillRect(0,0,W,H);
-    // Grid
     ctx.strokeStyle='rgba(255,255,255,0.04)';
     ctx.lineWidth=0.5;
     for(let i=0;i<=10;i++){ctx.beginPath();ctx.moveTo(W/10*i,0);ctx.lineTo(W/10*i,H);ctx.stroke();}
     for(let i=0;i<=6;i++){ctx.beginPath();ctx.moveTo(0,H/6*i);ctx.lineTo(W,H/6*i);ctx.stroke();}
-    // Warsaw center
     const wp=project(wc.lat,wc.lng,W,H);
     ctx.beginPath();ctx.arc(wp.x,wp.y,6,0,Math.PI*2);
     ctx.fillStyle='rgba(196,138,66,0.25)';ctx.fill();
     ctx.strokeStyle='rgba(196,138,66,0.7)';ctx.lineWidth=1;ctx.stroke();
     ctx.font='500 11px Inter,sans-serif';ctx.fillStyle='rgba(196,138,66,0.8)';
     ctx.textAlign='center';ctx.fillText('Warsaw',wp.x,wp.y-10);
-    // Connector lines
     corridors.forEach(c=>{
       const pt=project(c.lat,c.lng,W,H);
       const color=fapColor(c.fap);
@@ -781,7 +781,6 @@ document.addEventListener('keydown',e=>{
       ctx.strokeStyle=color+'66';ctx.lineWidth=1.5;
       ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);
     });
-    // Dots
     corridors.forEach((c,i)=>{
       const pt=project(c.lat,c.lng,W,H);
       const color=fapColor(c.fap);
@@ -805,12 +804,7 @@ document.addEventListener('keydown',e=>{
     });
     ctx.textBaseline='alphabetic';
   }
-function resize(){
-    canvas.width=800;
-    canvas.height=420;
-    draw();
-  }
-  function getHit(mx,my){
+  function getHit(canvas,mx,my){
     const W=canvas.width,H=canvas.height;
     for(let i=0;i<corridors.length;i++){
       const p=project(corridors[i].lat,corridors[i].lng,W,H);
@@ -818,12 +812,20 @@ function resize(){
     }
     return -1;
   }
-  canvas.addEventListener('mousemove',e=>{
+  document.addEventListener('mousemove',e=>{
+    const canvas=getCanvas();
+    if(!canvas||document.getElementById('map-overlay').style.display!=='flex')return;
     const r=canvas.getBoundingClientRect();
     const mx=e.clientX-r.left,my=e.clientY-r.top;
-    const idx=getHit(mx,my);
+    if(mx<0||my<0||mx>r.width||my>r.height){
+      corridors.forEach(c=>c._hovered=false);
+      getTt().classList.remove('visible');
+      drawMap();return;
+    }
+    const idx=getHit(canvas,mx*(canvas.width/r.width),my*(canvas.height/r.height));
     corridors.forEach((c,i)=>c._hovered=(i===idx));
-    draw();
+    drawMap();
+    const tt=getTt();
     if(idx>=0){
       const c=corridors[idx];
       document.getElementById('tt-name').textContent=c.name+' → '+c.dest;
@@ -838,8 +840,8 @@ function resize(){
       fel.textContent='FAP: '+fp+'% accessibility loss';
       fel.className='tt-fap '+(c.fap>0.10?'high':c.fap>0.001?'mid':'low');
       canvas.style.cursor='pointer';
-      let tx=mx+16,ty=my-20;
-      if(tx+250>canvas.width)tx=mx-260;
+      let tx=e.clientX-r.left+16,ty=e.clientY-r.top-20;
+      if(tx+250>r.width)tx=e.clientX-r.left-260;
       if(ty<0)ty=10;
       tt.style.left=tx+'px';tt.style.top=ty+'px';
       tt.classList.add('visible');
@@ -848,14 +850,11 @@ function resize(){
       canvas.style.cursor='default';
     }
   });
-  canvas.addEventListener('mouseleave',()=>{
-    corridors.forEach(c=>c._hovered=false);
-    tt.classList.remove('visible');draw();
-  });
   const themeBtn=document.getElementById('theme-btn');
-  if(themeBtn)themeBtn.addEventListener('click',()=>setTimeout(draw,50));
-  window.addEventListener('resize',()=>{if(document.getElementById('map-overlay').style.display==='flex')resize();});
-  window.resizeMap=resize;
+  if(themeBtn)themeBtn.addEventListener('click',()=>{
+    if(document.getElementById('map-overlay').style.display==='flex')drawMap();
+  });
+  window.resizeMap=drawMap;
 })();
 console.log('%c Ahmed Almadhoun ', 'background:#c48a42;color:#1a1714;font-size:14px;font-weight:bold;padding:6px 12px;border-radius:4px;');
 console.log('%c ahmedalmadhoun.com — built from scratch ', 'color:#c48a42;font-size:11px;');
@@ -865,9 +864,7 @@ function toggleMap(){
   o.style.display='flex';
   requestAnimationFrame(()=>requestAnimationFrame(()=>{
     o.classList.add('visible');
-    canvas.width=800;
-    canvas.height=420;
-    draw();
+    window.resizeMap();
   }));
   document.body.style.overflow='hidden';
 }
