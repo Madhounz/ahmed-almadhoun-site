@@ -866,7 +866,7 @@ function toggleMap(){
   o.style.display='flex';
   requestAnimationFrame(()=>requestAnimationFrame(()=>o.classList.add('visible')));
   document.body.style.overflow='hidden';
-  setTimeout(()=>{if(window.resizeMap)window.resizeMap();},80);
+  setTimeout(()=>{if(window.resizeMap)window.resizeMap();},300);
 }
 function closeMap(){
   const o=document.getElementById('map-overlay');
