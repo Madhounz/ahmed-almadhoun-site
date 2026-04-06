@@ -863,9 +863,13 @@ console.log('%c Transport Engineer · PhD Researcher · Warsaw ', 'color:#6a6158
 function toggleMap(){
   const o=document.getElementById('map-overlay');
   o.style.display='flex';
-  requestAnimationFrame(()=>requestAnimationFrame(()=>o.classList.add('visible')));
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    o.classList.add('visible');
+    canvas.width=800;
+    canvas.height=420;
+    draw();
+  }));
   document.body.style.overflow='hidden';
-  setTimeout(()=>{if(window.resizeMap)window.resizeMap();},500);
 }
 function closeMap(){
   const o=document.getElementById('map-overlay');
