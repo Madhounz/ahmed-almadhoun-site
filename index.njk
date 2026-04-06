@@ -230,6 +230,11 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   .map-stats{grid-template-columns:repeat(2,1fr)}
   .map-legend{gap:14px}
 }
+.tl-item.tl-ongoing .tl-dot{border-color:var(--accent);background:var(--accent-light);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(196,138,66,0.4)}50%{box-shadow:0 0 0 6px rgba(196,138,66,0)}}
+.tl-item.tl-ongoing .tl-tag{position:relative;overflow:hidden}
+.tl-item.tl-ongoing .tl-tag::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(196,138,66,0.3),transparent);animation:shimmer 2s ease-in-out infinite}
+@keyframes shimmer{0%{left:-100%}100%{left:100%}}
 </style>
 </head>
 <body>
@@ -492,7 +497,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <span class="tl-tag">Core Research</span>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item tl-ongoing">
         <div class="tl-dot"></div>
         <div class="tl-year">2026</div>
         <div class="tl-title">Digital Twins &amp; Blockchain — Elsevier Book Chapter</div>
@@ -500,7 +505,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
         <span class="tl-tag">Book Chapter</span>
       </div>
 
-      <div class="tl-item">
+      <div class="tl-item tl-ongoing">
         <div class="tl-dot"></div>
         <div class="tl-year">2028</div>
         <div class="tl-title">PhD Thesis — Transport Poverty in Freight Transportation</div>
