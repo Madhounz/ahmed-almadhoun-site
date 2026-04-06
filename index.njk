@@ -245,7 +245,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 @keyframes shimmer{0%{left:-100%}100%{left:100%}}
 #map-overlay{display:none;position:fixed;inset:0;z-index:500;background:rgba(10,8,6,0.88);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:24px;opacity:0;transition:opacity .4s}
 #map-overlay.visible{opacity:1}
-.map-modal{background:var(--surface);border:1px solid var(--border-light);border-radius:12px;width:100%;max-width:880px;max-height:88vh;overflow-y:auto;padding:40px;position:relative}
+.map-modal{background:var(--surface);border:1px solid var(--border-light);border-radius:12px;width:100%;max-width:880px;overflow:hidden;padding:32px;position:relative}
 .map-modal-close{position:absolute;top:20px;right:24px;background:none;border:none;font-family:var(--sans);font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);cursor:pointer;transition:color .2s}
 .map-modal-close:hover{color:var(--accent)}
 .map-modal-header{margin-bottom:28px;padding-bottom:20px;border-bottom:1px solid var(--border)}
@@ -757,7 +757,7 @@ document.addEventListener('keydown',e=>{
     const canvas=getCanvas();
     if(!canvas)return;
     canvas.width=800;
-    canvas.height=420;
+    canvas.height=340;
     const ctx=canvas.getContext('2d');
     const W=canvas.width,H=canvas.height;
     const dark=document.body.classList.contains('dark-mode');
@@ -900,12 +900,12 @@ window.closeMap=closeMap;
         <div class="tt-fap" id="tt-fap"></div>
       </div>
     </div>
-    <div class="map-legend" style="margin-top:16px">
+    <div class="map-legend" style="margin-top:10px">
       <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div>Low penalty (FAP &lt; 5%)</div>
       <div class="legend-item"><div class="legend-dot" style="background:#c48a42"></div>Moderate penalty (FAP 5–10%)</div>
       <div class="legend-item"><div class="legend-dot" style="background:#e07060"></div>High penalty (FAP &gt; 10%)</div>
     </div>
-    <div class="map-stats" style="margin-top:16px">
+    <div class="map-stats" style="margin-top:10px">
       <div class="mstat"><div class="mstat-label">Corridors evaluated</div><div class="mstat-val">8</div><div class="mstat-sub">Warsaw metro area</div></div>
       <div class="mstat"><div class="mstat-label">Highest penalty</div><div class="mstat-val">14.5%</div><div class="mstat-sub">Okęcie &amp; Targówek</div></div>
       <div class="mstat"><div class="mstat-label">Best performer</div><div class="mstat-val">0%</div><div class="mstat-sub">Pruszków &amp; Mszczonów</div></div>
