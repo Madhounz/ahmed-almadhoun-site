@@ -185,6 +185,51 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 .cf-input::placeholder,.cf-textarea::placeholder{color:var(--faint)}
 .cf-success{display:none;margin-top:24px;padding:16px 20px;border-left:2px solid var(--accent);background:var(--accent-light);color:var(--muted);font-size:14px;line-height:1.6}
 @media(max-width:768px){.cf-row{grid-template-columns:1fr}}
+/* === FEATURE 1: Typed animation === */
+.typed-cursor{display:inline-block;width:2px;height:12px;background:var(--accent);margin-left:2px;vertical-align:middle;animation:blink .75s step-end infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+/* === FEATURE 2: Timeline === */
+#timeline{background:var(--bg)}
+.tl-wrap{position:relative;max-width:700px}
+.tl-line{position:absolute;left:18px;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--border) 60px,var(--border) calc(100% - 60px),transparent);opacity:.5}
+.tl-item{position:relative;padding:0 0 52px 56px;opacity:0;transform:translateX(-12px);transition:opacity .7s ease,transform .7s ease}
+.tl-item.tl-visible{opacity:1;transform:translateX(0)}
+.tl-dot{position:absolute;left:10px;top:4px;width:17px;height:17px;border-radius:50%;background:var(--bg);border:1.5px solid var(--border);transition:border-color .3s,background .3s}
+.tl-item:hover .tl-dot{border-color:var(--accent);background:var(--accent-light)}
+.tl-item.tl-active .tl-dot{border-color:var(--accent);background:var(--accent);box-shadow:0 0 0 4px var(--accent-light)}
+.tl-year{font-size:10.5px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;opacity:.8}
+.tl-title{font-family:var(--serif);font-size:19px;font-weight:300;color:var(--text);line-height:1.25;margin-bottom:6px;letter-spacing:-0.01em}
+.tl-sub{font-size:13.5px;color:var(--muted);line-height:1.65}
+.tl-tag{display:inline-block;margin-top:10px;font-size:10.5px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;padding:3px 9px;border-radius:3px;background:var(--accent-light);color:var(--accent)}
+.tl-item:last-child{padding-bottom:0}
+
+/* === FEATURE 3: Map === */
+#map-section{background:var(--surface)}
+.map-container{position:relative;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+#corridor-map{width:100%;height:480px;background:var(--bg)}
+.map-legend{display:flex;align-items:center;gap:24px;margin-top:18px;flex-wrap:wrap}
+.legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.legend-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.map-tooltip{position:absolute;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:14px 16px;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10;max-width:240px}
+.map-tooltip.visible{opacity:1}
+.tt-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px;font-family:var(--serif)}
+.tt-row{display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:var(--muted);margin-bottom:4px}
+.tt-val{color:var(--text);font-weight:500}
+.tt-fap{font-size:12px;font-weight:600;margin-top:8px;padding-top:8px;border-top:1px solid var(--border)}
+.tt-fap.high{color:#e07060}
+.tt-fap.mid{color:#c48a42}
+.tt-fap.low{color:#6aaa7a}
+.map-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px}
+.mstat{background:var(--bg);border:1px solid var(--border);border-radius:6px;padding:14px 16px}
+.mstat-label{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--faint);margin-bottom:6px}
+.mstat-val{font-size:22px;font-weight:300;font-family:var(--serif);color:var(--text)}
+.mstat-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+@media(max-width:768px){
+  #corridor-map{height:320px}
+  .map-stats{grid-template-columns:repeat(2,1fr)}
+  .map-legend{gap:14px}
+}
 </style>
 </head>
 <body>
@@ -204,7 +249,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
 <div id="hero">
   <div class="hero-location">Warsaw, Poland</div>
   <h1 class="hero-name">Ahmed<br>Almadhoun</h1>
-  <p class="hero-micro">Freight systems, infrastructure, and simulation</p>
+  <p class="hero-micro"><span id="typed-text"></span><span class="typed-cursor"></span></p>
   <p class="hero-sub">Transport Engineer and PhD Researcher focused on freight systems, accessibility, and real-world infrastructure performance.</p>
   <p class="hero-body">I study how transport infrastructure shapes economic access, especially in freight systems that most people depend on but rarely notice.</p>
   <div class="hero-btns">
@@ -291,7 +336,41 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     </div>
   </div>
 </section>
-
+<section id="map-section" class="section">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">Research Visualised</div>
+      <h2 class="section-title">Warsaw freight accessibility map.</h2>
+      <p class="photo-intro">Eight freight corridors evaluated for infrastructure-induced accessibility penalties. Hover any corridor to see its AES and FAP scores from the paper.</p>
+    </div>
+    <div class="reveal">
+      <div class="map-container">
+        <canvas id="corridor-map" height="480"></canvas>
+        <div class="map-tooltip" id="map-tt">
+          <div class="tt-name" id="tt-name"></div>
+          <div class="tt-row"><span>Distance</span><span class="tt-val" id="tt-dist"></span></div>
+          <div class="tt-row"><span>Travel time</span><span class="tt-val" id="tt-time"></span></div>
+          <div class="tt-row"><span>AES raw</span><span class="tt-val" id="tt-aes-raw"></span></div>
+          <div class="tt-row"><span>AES adjusted</span><span class="tt-val" id="tt-aes-adj"></span></div>
+          <div class="tt-row"><span>Surface factor</span><span class="tt-val" id="tt-sf"></span></div>
+          <div class="tt-row"><span>Constraint factor</span><span class="tt-val" id="tt-cf"></span></div>
+          <div class="tt-fap" id="tt-fap"></div>
+        </div>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><div class="legend-dot" style="background:#6aaa7a"></div>Low penalty (FAP &lt; 5%)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#c48a42"></div>Moderate penalty (FAP 5–10%)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#e07060"></div>High penalty (FAP &gt; 10%)</div>
+      </div>
+      <div class="map-stats">
+        <div class="mstat"><div class="mstat-label">Corridors evaluated</div><div class="mstat-val">8</div><div class="mstat-sub">Warsaw metro area</div></div>
+        <div class="mstat"><div class="mstat-label">Highest penalty</div><div class="mstat-val">14.5%</div><div class="mstat-sub">Okęcie &amp; Targówek</div></div>
+        <div class="mstat"><div class="mstat-label">Best performer</div><div class="mstat-val">0%</div><div class="mstat-sub">Pruszków &amp; Mszczonów</div></div>
+        <div class="mstat"><div class="mstat-label">Avg. penalty</div><div class="mstat-val">7.1%</div><div class="mstat-sub">Across all corridors</div></div>
+      </div>
+    </div>
+  </div>
+</section>
 <section id="photography" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -354,7 +433,66 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
     </div>
   </div>
 </section>
-
+<section id="timeline" class="section">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">Journey</div>
+      <h2 class="section-title">How the work unfolded.</h2>
+    </div>
+    <div class="tl-wrap reveal">
+      <div class="tl-line"></div>
+      <div class="tl-item tl-active">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2021</div>
+        <div class="tl-title">First Steps in Urban Traffic Simulation</div>
+        <div class="tl-sub">Deployed PTV VISSIM to model the 79th Street corridor in Musaffah, Abu Dhabi. Calibrated from peak/off-peak traffic counts. First experience turning raw field data into a working simulation.</div>
+        <span class="tl-tag">Simulation</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023</div>
+        <div class="tl-title">Smart City &amp; Post-War Reconstruction</div>
+        <div class="tl-sub">Co-authored research on integrating electromobility and freight accessibility into post-war urban reconstruction. Published with Oficyna Wydawnicza Politechniki Warszawskiej.</div>
+        <span class="tl-tag">Urban Planning</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2024</div>
+        <div class="tl-title">PhD Begins — Warsaw University of Technology</div>
+        <div class="tl-sub">Started doctoral research at the Faculty of Transport under Prof. Mariusz Kostrzewski. Focus: freight accessibility, transport poverty, and infrastructure equity in metropolitan systems.</div>
+        <span class="tl-tag">PhD Start</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+        <div class="tl-title">Freight Accessibility Penalty — Warsaw Case Study</div>
+        <div class="tl-sub">Developed the Freight Accessibility Penalty (FAP) framework. Evaluated 8 freight corridors connecting Warsaw logistics hubs to expressway interchanges. Quantified infrastructure-induced transport poverty for the first time in a Warsaw context.</div>
+        <span class="tl-tag">Core Research</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2025</div>
+        <div class="tl-title">Digital Twins &amp; Blockchain in Transportation</div>
+        <div class="tl-sub">Contributed a chapter to an Elsevier volume on blockchain-enabled digital twin architectures for smart transportation. Explored secure data communication between physical and virtual transport assets.</div>
+        <span class="tl-tag">Publication</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2026</div>
+        <div class="tl-title">Transportation Research Procedia</div>
+        <div class="tl-sub">Published simulation-based alternatives for the 79th Street corridor. DOI: 10.1016/j.trpro.2025.12.010.</div>
+        <span class="tl-tag">Journal Paper</span>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2028</div>
+        <div class="tl-title">PhD Thesis — Transport Poverty in Freight Transportation</div>
+        <div class="tl-sub">Engineering challenges, system-level impacts, and strategic solutions for improved freight economic connectivity across Warsaw's metropolitan freight network.</div>
+        <span class="tl-tag">Expected</span>
+      </div>
+    </div>
+  </div>
+</section>
 <section id="thoughts" class="section">
   <div class="wrap">
     <div class="reveal">
@@ -536,6 +674,177 @@ document.addEventListener('keydown',e=>{
     else closeLb();
   }
 });
+// === FEATURE 1: Typed hero ===
+(function(){
+  const phrases=['Freight systems & accessibility','Transport poverty research','Infrastructure equity','Spatial analysis','The invisible things.'];
+  let i=0,j=0,deleting=false,pause=false;
+  const el=document.getElementById('typed-text');
+  if(!el)return;
+  function tick(){
+    const word=phrases[i];
+    if(pause){pause=false;setTimeout(tick,1800);return;}
+    if(!deleting){
+      el.textContent=word.slice(0,++j);
+      if(j===word.length){deleting=true;pause=true;setTimeout(tick,60);return;}
+      setTimeout(tick,65);
+    } else {
+      el.textContent=word.slice(0,--j);
+      if(j===0){deleting=false;i=(i+1)%phrases.length;setTimeout(tick,400);return;}
+      setTimeout(tick,35);
+    }
+  }
+  setTimeout(tick,1200);
+})();
+
+// === FEATURE 2: Timeline scroll reveal ===
+(function(){
+  const items=document.querySelectorAll('.tl-item');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting)e.target.classList.add('tl-visible');
+    });
+  },{threshold:.15});
+  items.forEach(el=>obs.observe(el));
+})();
+
+// === FEATURE 3: Warsaw freight map ===
+(function(){
+  const corridors=[
+    {name:'Błonie (Western Hub)',dest:'Grodzisk Maz. Interchange',dist:15.6,time:22,sf:1.00,cf:0.95,lat:52.198,lng:20.614},
+    {name:'Ożarów Mazowiecki',dest:'Konotopa Interchange',dist:5.6,time:7,sf:1.00,cf:0.95,lat:52.217,lng:20.801},
+    {name:'Pruszków (MLP I/II)',dest:'Żbików Interchange',dist:2.4,time:3,sf:1.00,cf:1.00,lat:52.168,lng:20.811},
+    {name:'Lesznowola / Janki',dest:'Janki Interchange',dist:8.3,time:10,sf:0.95,cf:0.95,lat:52.113,lng:20.951},
+    {name:'Okęcie / Służewiec',dest:'Warszawa Lotnisko',dist:4.9,time:8,sf:0.90,cf:0.95,lat:52.178,lng:20.978},
+    {name:'Targówek / Żerań',dest:'Marki Interchange',dist:5.6,time:10,sf:0.90,cf:0.95,lat:52.284,lng:21.068},
+    {name:'Mszczonów Logistics',dest:'Mszczonów Interchange S8',dist:3.3,time:7,sf:1.00,cf:1.00,lat:51.975,lng:20.524},
+    {name:'Stary Konik / Halinów',dest:'Lubelska Interchange',dist:22.5,time:25,sf:0.95,cf:0.95,lat:52.223,lng:21.321}
+  ];
+  corridors.forEach(c=>{
+    c.aesRaw=+(c.dist/c.time*60).toFixed(2);
+    c.aesAdj=+(c.aesRaw*c.sf*c.cf).toFixed(2);
+    c.fap=+(1-c.aesAdj/c.aesRaw).toFixed(4);
+  });
+  const bounds={minLat:51.90,maxLat:52.36,minLng:20.40,maxLng:21.45};
+  const canvas=document.getElementById('corridor-map');
+  if(!canvas)return;
+  const ctx=canvas.getContext('2d');
+  const tt=document.getElementById('map-tt');
+  const wc={lat:52.229,lng:21.012};
+
+  function project(lat,lng,W,H){
+    return{
+      x:(lng-bounds.minLng)/(bounds.maxLng-bounds.minLng)*W,
+      y:(1-(lat-bounds.minLat)/(bounds.maxLat-bounds.minLat))*H
+    };
+  }
+  function fapColor(fap){
+    if(fap<=0.001)return '#6aaa7a';
+    if(fap<0.10)return '#c48a42';
+    return '#e07060';
+  }
+  function draw(){
+    const W=canvas.width,H=canvas.height;
+    ctx.clearRect(0,0,W,H);
+    const dark=document.body.classList.contains('dark-mode');
+    ctx.fillStyle=dark?'#1a1d24':'#2b2926';
+    ctx.fillRect(0,0,W,H);
+    // Grid
+    ctx.strokeStyle='rgba(255,255,255,0.04)';
+    ctx.lineWidth=0.5;
+    for(let i=0;i<=10;i++){ctx.beginPath();ctx.moveTo(W/10*i,0);ctx.lineTo(W/10*i,H);ctx.stroke();}
+    for(let i=0;i<=6;i++){ctx.beginPath();ctx.moveTo(0,H/6*i);ctx.lineTo(W,H/6*i);ctx.stroke();}
+    // Warsaw center
+    const wp=project(wc.lat,wc.lng,W,H);
+    ctx.beginPath();ctx.arc(wp.x,wp.y,6,0,Math.PI*2);
+    ctx.fillStyle='rgba(196,138,66,0.25)';ctx.fill();
+    ctx.strokeStyle='rgba(196,138,66,0.7)';ctx.lineWidth=1;ctx.stroke();
+    ctx.font='500 11px Inter,sans-serif';ctx.fillStyle='rgba(196,138,66,0.8)';
+    ctx.textAlign='center';ctx.fillText('Warsaw',wp.x,wp.y-10);
+    // Connector lines
+    corridors.forEach(c=>{
+      const pt=project(c.lat,c.lng,W,H);
+      const color=fapColor(c.fap);
+      ctx.beginPath();ctx.moveTo(pt.x,pt.y);
+      ctx.lineTo(pt.x+(wp.x-pt.x)*0.55,pt.y+(wp.y-pt.y)*0.55);
+      ctx.strokeStyle=color+'66';ctx.lineWidth=1.5;
+      ctx.setLineDash([4,5]);ctx.stroke();ctx.setLineDash([]);
+    });
+    // Dots
+    corridors.forEach((c,i)=>{
+      const pt=project(c.lat,c.lng,W,H);
+      const color=fapColor(c.fap);
+      const r=c._hovered?11:7;
+      if(c._hovered){
+        ctx.beginPath();ctx.arc(pt.x,pt.y,r+6,0,Math.PI*2);
+        ctx.strokeStyle=color+'33';ctx.lineWidth=2;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(pt.x,pt.y,r,0,Math.PI*2);
+      ctx.fillStyle=color;ctx.fill();
+      ctx.strokeStyle='rgba(0,0,0,0.35)';ctx.lineWidth=1.5;ctx.stroke();
+      ctx.font=`600 ${r>7?11:9}px Inter,sans-serif`;
+      ctx.fillStyle='#1a1714';ctx.textAlign='center';ctx.textBaseline='middle';
+      ctx.fillText(i+1,pt.x,pt.y);
+      if(c._hovered){
+        ctx.font='500 11px Inter,sans-serif';
+        ctx.fillStyle='rgba(240,235,226,0.92)';
+        ctx.textBaseline='bottom';
+        ctx.fillText(c.name.split('(')[0].trim(),pt.x,pt.y-r-6);
+      }
+    });
+    ctx.textBaseline='alphabetic';
+  }
+  function resize(){
+    canvas.width=canvas.parentElement.getBoundingClientRect().width;
+    canvas.height=480;
+    draw();
+  }
+  function getHit(mx,my){
+    const W=canvas.width,H=canvas.height;
+    for(let i=0;i<corridors.length;i++){
+      const p=project(corridors[i].lat,corridors[i].lng,W,H);
+      if((mx-p.x)**2+(my-p.y)**2<196)return i;
+    }
+    return -1;
+  }
+  canvas.addEventListener('mousemove',e=>{
+    const r=canvas.getBoundingClientRect();
+    const mx=e.clientX-r.left,my=e.clientY-r.top;
+    const idx=getHit(mx,my);
+    corridors.forEach((c,i)=>c._hovered=(i===idx));
+    draw();
+    if(idx>=0){
+      const c=corridors[idx];
+      document.getElementById('tt-name').textContent=c.name+' → '+c.dest;
+      document.getElementById('tt-dist').textContent=c.dist+' km';
+      document.getElementById('tt-time').textContent=c.time+' min';
+      document.getElementById('tt-aes-raw').textContent=c.aesRaw+' km/h';
+      document.getElementById('tt-aes-adj').textContent=c.aesAdj+' km/h';
+      document.getElementById('tt-sf').textContent=c.sf.toFixed(2);
+      document.getElementById('tt-cf').textContent=c.cf.toFixed(2);
+      const fp=(c.fap*100).toFixed(1);
+      const fel=document.getElementById('tt-fap');
+      fel.textContent='FAP: '+fp+'% accessibility loss';
+      fel.className='tt-fap '+(c.fap>0.10?'high':c.fap>0.001?'mid':'low');
+      canvas.style.cursor='pointer';
+      let tx=mx+16,ty=my-20;
+      if(tx+250>canvas.width)tx=mx-260;
+      if(ty<0)ty=10;
+      tt.style.left=tx+'px';tt.style.top=ty+'px';
+      tt.classList.add('visible');
+    } else {
+      tt.classList.remove('visible');
+      canvas.style.cursor='default';
+    }
+  });
+  canvas.addEventListener('mouseleave',()=>{
+    corridors.forEach(c=>c._hovered=false);
+    tt.classList.remove('visible');draw();
+  });
+  const themeBtn=document.getElementById('theme-btn');
+  if(themeBtn)themeBtn.addEventListener('click',()=>setTimeout(draw,50));
+  window.addEventListener('resize',resize);
+  resize();
+})();
 </script>
 </body>
 </html>
