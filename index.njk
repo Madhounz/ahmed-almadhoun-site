@@ -48,7 +48,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:
 nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,0,0,0.08);padding:0 40px}
 .nav-inner{max-width:var(--max);margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:56px}
 .nav-name{font-family:var(--serif);font-size:17px;font-weight:400;color:var(--text);text-decoration:none;letter-spacing:-0.01em}
-.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links{display:flex;gap:32px;list-:none}
 .nav-links a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:500;letter-spacing:0.01em;transition:color .2s}
 .nav-links a:hover{color:var(--text)}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 40px}
@@ -175,6 +175,16 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   footer{padding:28px 20px}
   .footer-inner{flex-direction:column;align-items:flex-start}
 }
+#contact{background:var(--surface)}
+.contact-form{max-width:580px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.cf-field{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.cf-label{font-size:11px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--faint)}
+.cf-input,.cf-textarea{background:var(--bg);border:1px solid var(--border);color:var(--text);font-family:var(--sans);font-size:14px;padding:13px 16px;border-radius:5px;outline:none;transition:border-color .25s,background .25s;resize:none;width:100%}
+.cf-input:focus,.cf-textarea:focus{border-color:var(--accent);background:var(--surface2)}
+.cf-input::placeholder,.cf-textarea::placeholder{color:var(--faint)}
+.cf-success{display:none;margin-top:24px;padding:16px 20px;border-left:2px solid var(--accent);background:var(--accent-light);color:var(--muted);font-size:14px;line-height:1.6}
+@media(max-width:768px){.cf-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -186,6 +196,7 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       <li><a href="#photography">Photography</a></li>
       <li><a href="#thoughts">Thoughts</a></li>
       <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
@@ -373,6 +384,34 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
   </div>
 </section>
 
+<section id="contact" class="section">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Get in touch.</h2>
+    </div>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form reveal" id="contact-form">
+      <input type="hidden" name="form-name" value="contact">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="cf-row">
+        <div class="cf-field">
+          <label class="cf-label">Name</label>
+          <input type="text" name="name" required class="cf-input" placeholder="Your name">
+        </div>
+        <div class="cf-field">
+          <label class="cf-label">Email</label>
+          <input type="email" name="email" required class="cf-input" placeholder="your@email.com">
+        </div>
+      </div>
+      <div class="cf-field">
+        <label class="cf-label">Message</label>
+        <textarea name="message" required class="cf-textarea" placeholder="What's on your mind?" rows="5"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Send Message</button>
+      <div class="cf-success" id="cf-success">Message sent. I'll get back to you soon.</div>
+    </form>
+  </div>
+</section>
 <div id="post-overlay">
   <div class="post-curtain"></div>
   <button class="post-close" onclick="closePost()">Close</button>
@@ -397,7 +436,6 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       <a href="https://www.linkedin.com/in/ahmed-madhoun/" target="_blank">LinkedIn</a>
       <a href="https://scholar.google.com/citations?user=lB2_-wEAAAAJ&hl=en" target="_blank">Google Scholar</a>
       <a href="https://www.instagram.com/fotozitake/" target="_blank">Instagram</a>
-      <a href="mailto:ahmed.almadhoun@pw.edu.pl">Email</a>
       <a href="/ahmed-almadhoun-cv.pdf" target="_blank">CV</a>
     </div>
   </div>
@@ -480,6 +518,16 @@ function toggleResearch(el){
 }
 window.toggleResearch=toggleResearch;
 window.closePost=closePost;
+const cf=document.getElementById('contact-form');
+if(cf){cf.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const data=new FormData(cf);
+  await fetch('/',{method:'POST',body:data});
+  cf.querySelectorAll('.cf-input,.cf-textarea').forEach(el=>el.value='');
+  const s=document.getElementById('cf-success');
+  s.style.display='block';
+  setTimeout(()=>s.style.display='none',5000);
+});}
 
 
 document.addEventListener('keydown',e=>{
