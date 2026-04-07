@@ -3,5 +3,5 @@ title: Gold
 date: "2021"
 location: Istanbul, Türkiye
 image: /photos/dramatic-ship.jpg
-ratio: 4/3
+ratio: 16/9
 ---
