@@ -12,35 +12,22 @@ permalink: /photography/index.html
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#131110;
-  --surface:#1c1916;
-  --surface2:#242018;
-  --border:#322e28;
-  --text:#f0ebe2;
-  --muted:#9a9085;
-  --faint:#5a5248;
-  --accent:#c48a42;
-  --accent-mid:#ad7336;
-  --accent-light:#2a1a08;
-  --sans:'Inter',system-ui,sans-serif;
-  --serif:'Fraunces',Georgia,serif;
+  --bg:#131110;--surface:#1c1916;--surface2:#242018;--border:#322e28;
+  --text:#f0ebe2;--muted:#9a9085;--faint:#5a5248;
+  --accent:#c48a42;--accent-mid:#ad7336;--accent-light:#2a1a08;
+  --sans:'Inter',system-ui,sans-serif;--serif:'Fraunces',Georgia,serif;
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden;min-height:100vh}
-
 nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;display:flex;align-items:center;justify-content:space-between;background:rgba(19,17,16,0.9);backdrop-filter:blur(20px);border-bottom:1px solid rgba(196,138,66,0.07)}
 .nav-name{font-family:var(--serif);font-size:16px;font-weight:300;color:var(--text);text-decoration:none;letter-spacing:-0.01em;opacity:.65;transition:opacity .2s}
 .nav-name:hover{opacity:1}
 .nav-back{font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);text-decoration:none;opacity:.65;transition:opacity .2s}
 .nav-back:hover{opacity:1}
-
 .ph-hero{padding:108px 48px 0;max-width:1240px;margin:0 auto;display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px}
-.ph-hero-left{}
 .ph-label{font-size:10px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:16px;opacity:.7}
 .ph-title{font-family:var(--serif);font-size:clamp(44px,6vw,82px);font-weight:300;line-height:.95;letter-spacing:-.03em;color:var(--text)}
 .ph-hero-right{font-size:13px;color:var(--muted);max-width:320px;line-height:1.75;text-align:right}
-
-/* CONSTELLATION */
 .constellation-wrap{position:relative;margin:56px 0 0;height:440px;overflow:hidden}
 #constellation-canvas{position:absolute;inset:0;width:100%;height:100%}
 .city-node{position:absolute;transform:translate(-50%,-50%);cursor:pointer;z-index:2}
@@ -49,7 +36,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 .city-node.active .node-ring,.city-node:hover .node-ring{opacity:.4}
 .node-core{position:relative;z-index:2;width:8px;height:8px;border-radius:50%;background:var(--faint);border:1.5px solid var(--border);transition:all .4s}
 .city-node:hover .node-core,.city-node.active .node-core{background:var(--accent);border-color:var(--accent);width:12px;height:12px;box-shadow:0 0 0 4px rgba(196,138,66,0.15)}
-.node-label{position:absolute;white-space:nowrap;pointer-events:none;transition:all .3s}
+.node-label{position:absolute;white-space:nowrap;pointer-events:none}
 .node-label-name{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);transition:color .3s;line-height:1.2}
 .node-label-coord{font-size:9px;letter-spacing:.08em;color:rgba(196,138,66,0.3);font-family:var(--sans);margin-top:2px;transition:color .3s}
 .node-label-count{display:inline-block;margin-top:4px;font-size:9px;font-weight:600;letter-spacing:.1em;background:var(--accent-light);color:var(--accent);padding:2px 7px;border-radius:2px;opacity:0;transition:opacity .3s}
@@ -57,15 +44,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 .city-node:hover .node-label-coord,.city-node.active .node-label-coord{color:rgba(196,138,66,0.7)}
 .city-node:hover .node-label-count,.city-node.active .node-label-count{opacity:1}
 @keyframes nodeRing{0%{transform:translate(-50%,-50%) scale(1);opacity:.4}100%{transform:translate(-50%,-50%) scale(2.5);opacity:0}}
-
-/* CITY SELECTOR */
 .city-bar{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto;scrollbar-width:none;max-width:1240px;margin:0 auto;padding:0 48px}
 .city-bar::-webkit-scrollbar{display:none}
 .city-btn{padding:14px 20px;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);background:none;border:none;border-bottom:1.5px solid transparent;margin-bottom:-1px;cursor:pointer;transition:all .25s;white-space:nowrap;font-family:var(--sans)}
 .city-btn:hover{color:var(--muted)}
 .city-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
-
-/* GALLERY */
 .gallery-wrap{max-width:1240px;margin:0 auto;padding:0 48px 80px}
 .gallery-header{padding:36px 0 28px;display:flex;align-items:baseline;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .gallery-city-name{font-family:var(--serif);font-size:clamp(30px,4vw,52px);font-weight:300;color:var(--text);letter-spacing:-.02em;line-height:1}
@@ -82,8 +65,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 .cell-title{font-family:var(--serif);font-size:15px;font-weight:300;color:#f0ebe2;line-height:1.15;margin-bottom:4px}
 .cell-loc{font-size:9px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45)}
 .gallery-cell:hover .cell-overlay{opacity:1}
-
-/* LIGHTBOX */
 #lb{display:none;position:fixed;inset:0;background:rgba(6,4,3,.96);z-index:1000;align-items:center;justify-content:center;cursor:zoom-out;opacity:0;transition:opacity .3s}
 #lb.open{display:flex}
 #lb.visible{opacity:1}
@@ -93,12 +74,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 .lb-info{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);text-align:center}
 .lb-title{font-family:var(--serif);font-size:16px;font-weight:300;color:rgba(255,255,255,.55);letter-spacing:.01em}
 .lb-loc{font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(196,138,66,.4);margin-top:4px}
-
 .ph-foot{border-top:1px solid var(--border);padding:24px 48px;display:flex;justify-content:space-between;align-items:center;max-width:1240px;margin:0 auto}
 .ph-foot a{font-size:12px;font-weight:500;color:var(--accent);text-decoration:none;letter-spacing:.02em}
 .ph-foot a:hover{text-decoration:underline}
 .ph-foot-total{font-size:10px;color:var(--faint);letter-spacing:.12em;text-transform:uppercase}
-
 @media(max-width:768px){
   nav,.ph-hero,.city-bar,.gallery-wrap,.ph-foot{padding-left:20px;padding-right:20px}
   .ph-hero{padding-top:88px;flex-direction:column;align-items:flex-start}
@@ -120,79 +99,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
     <div class="ph-label">Photography</div>
     <h1 class="ph-title">Through<br>the viewfinder.</h1>
   </div>
-  <div class="ph-hero-right">Stillness, structure, and quiet geometry in everyday environments. Select a city to explore.</div>
+  <div class="ph-hero-right">Stillness, structure, and quiet geometry in everyday environments. Select a country to explore.</div>
 </div>
 
-<!-- CONSTELLATION MAP -->
-<div class="constellation-wrap">
+<div class="constellation-wrap" id="constellation-wrap">
   <canvas id="constellation-canvas"></canvas>
-
-  <!-- ═══════════════════════════════════════════════
-       CITY NODES — positions as % of container
-       left = longitude mapped ~10°W to 60°E across 100%
-       top  = latitude mapped ~60°N to 30°N across 100%
-
-       Formula to add a new city:
-         left = (lng + 10) / 70 * 100  %
-         top  = (60 - lat) / 30 * 100  %
-
-       To add UAE (lat 24, lng 54):
-         left = (54+10)/70*100 = 91.4%
-         top  = (60-24)/30*100 = 120% → off map, adjust bounds
-  ═══════════════════════════════════════════════ -->
-
-<div class="city-node active" id="node-hungary" data-city="hungary" style="left:41.4%;top:43.3%">
-  <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-  <div class="node-core"></div>
-  <div class="node-label" style="top:18px;left:14px">
-    <div class="node-label-name">Hungary</div>
-    <div class="node-label-coord">47°N 19°E</div>
-    <div class="node-label-count" id="ncount-hungary">— photos</div>
-  </div>
 </div>
 
-<div class="city-node" id="node-poland" data-city="poland" style="left:42.9%;top:30%">
-  <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-  <div class="node-core"></div>
-  <div class="node-label" style="top:18px;left:14px">
-    <div class="node-label-name">Poland</div>
-    <div class="node-label-coord">52°N 19°E</div>
-    <div class="node-label-count" id="ncount-poland">— photos</div>
-  </div>
-</div>
+<div class="city-bar" id="city-bar"></div>
 
-<div class="city-node" id="node-turkiye" data-city="turkiye" style="left:60%;top:58%">
-  <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-  <div class="node-core"></div>
-  <div class="node-label" style="bottom:18px;left:14px">
-    <div class="node-label-name">Türkiye</div>
-    <div class="node-label-coord">39°N 35°E</div>
-    <div class="node-label-count" id="ncount-turkiye">— photos</div>
-  </div>
-</div>
-
-  <!-- ADD NEW CITY EXAMPLE (uncomment and fill):
-  <div class="city-node" id="node-uae" data-city="uae" style="left:88%;top:100%">
-    ...
-  </div>
-  -->
-
-</div>
-
-<!-- CITY TABS -->
-<div class="city-bar" id="city-bar">
-  <button class="city-btn active" data-city="hungary">Hungary</button>
-  <button class="city-btn" data-city="poland">Poland</button>
-  <button class="city-btn" data-city="turkiye">Türkiye</button>
-</div>
-
-<!-- GALLERY -->
 <div class="gallery-wrap">
   <div class="gallery-header">
-    <div class="gallery-city-name" id="gallery-city-name">Kraków</div>
+    <div class="gallery-city-name" id="gallery-city-name"></div>
     <div class="gallery-right">
       <div class="gallery-count" id="gallery-count"></div>
-      <div class="gallery-coords" id="gallery-coords">50°03′N 19°56′E</div>
+      <div class="gallery-coords" id="gallery-coords"></div>
     </div>
   </div>
   <div class="gallery-grid" id="gallery-grid"></div>
@@ -213,10 +134,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════
-// PHOTO DATA — injected from CMS via Nunjucks
-// Each photo's location field is matched to a city key
-// ═══════════════════════════════════════════════════════
 const ALL_PHOTOS = [
   {% if photos and photos.length %}
     {% for photo in photos %}
@@ -225,231 +142,200 @@ const ALL_PHOTOS = [
   {% endif %}
 ];
 
-// ═══════════════════════════════════════════════════════
-// CITY CONFIG
-// keyword: substring to match against photo.loc
-// label:   display name
-// coords:  coordinate string for display
-// To add a new city: add an entry here + a node in the HTML
-// ═══════════════════════════════════════════════════════
-const CITY_CONFIG = {
-  hungary: { keyword: 'Hungary', label: 'Hungary',  coords: '47°30′N  19°03′E' },
-  poland:  { keyword: 'Poland',  label: 'Poland',   coords: '51°55′N  19°08′E' },
-  turkiye: { keyword: 'Türkiye', label: 'Türkiye',  coords: '38°57′N  35°14′E' },
+// Known coordinates — add new countries here as you travel
+// Formula: left=(lng+10)/80*100, top=(65-lat)/50*100
+const COORDS = {
+  'Poland':         { coords: '51°55′N 19°08′E', left: 36.4, top: 26.0 },
+  'Hungary':        { coords: '47°30′N 19°03′E', left: 36.3, top: 34.0 },
+  'Türkiye':        { coords: '38°57′N 35°14′E', left: 56.4, top: 52.0 },
+  'UAE':            { coords: '24°28′N 54°22′E', left: 80.3, top: 81.0 },
+  'Germany':        { coords: '51°09′N 10°27′E', left: 25.5, top: 27.0 },
+  'France':         { coords: '46°13′N 02°12′E', left: 15.3, top: 37.0 },
+  'Italy':          { coords: '42°50′N 12°49′E', left: 28.5, top: 44.0 },
+  'Spain':          { coords: '40°24′N 03°41′W', left: 7.9,  top: 49.0 },
+  'Greece':         { coords: '39°04′N 22°56′E', left: 41.2, top: 52.0 },
+  'Netherlands':    { coords: '52°22′N 04°54′E', left: 18.6, top: 25.0 },
+  'Austria':        { coords: '47°48′N 13°46′E', left: 29.7, top: 34.0 },
+  'Czech Republic': { coords: '49°48′N 15°29′E', left: 31.9, top: 30.0 },
+  'Jordan':         { coords: '30°35′N 36°14′E', left: 57.8, top: 69.0 },
+  'Egypt':          { coords: '26°49′N 30°51′E', left: 51.1, top: 76.0 },
+  'Morocco':        { coords: '31°47′N 07°05′W', left: 3.7,  top: 66.0 },
+  'Portugal':       { coords: '39°33′N 07°60′W', left: 2.5,  top: 51.0 },
+  'Belgium':        { coords: '50°30′N 04°28′E', left: 18.1, top: 29.0 },
+  'Switzerland':    { coords: '46°49′N 08°13′E', left: 22.8, top: 36.0 },
+  'Croatia':        { coords: '45°10′N 15°30′E', left: 31.9, top: 40.0 },
+  'United Kingdom': { coords: '54°21′N 02°00′W', left: 10.0, top: 22.0 },
+  'Japan':          { coords: '36°12′N 138°15′E', left: 98.0, top: 58.0 },
 };
 
-// Group photos by city
-function groupPhotos() {
-  const groups = {};
-  Object.keys(CITY_CONFIG).forEach(k => groups[k] = []);
-  ALL_PHOTOS.forEach(p => {
-    const loc = (p.loc || '').toLowerCase();
-    let matched = false;
-    Object.entries(CITY_CONFIG).forEach(([key, cfg]) => {
-      if (!matched && loc.includes(cfg.keyword.toLowerCase())) {
-        groups[key].push(p);
-        matched = true;
-      }
-    });
-  });
-  return groups;
+// Extract country from location — last segment after comma, strip year
+function extractCountry(loc) {
+  if (!loc) return null;
+  const parts = loc.split(',');
+  return parts[parts.length - 1].trim().replace(/\s+\d{4}$/, '').trim();
 }
 
-const GROUPS = groupPhotos();
-
-// Update node counts
-Object.keys(CITY_CONFIG).forEach(k => {
-  const el = document.getElementById('ncount-' + k);
-  if (el) el.textContent = (GROUPS[k] || []).length + ' photo' + ((GROUPS[k]||[]).length !== 1 ? 's' : '');
+// Group photos by country
+const GROUPS = {};
+ALL_PHOTOS.forEach(p => {
+  const country = extractCountry(p.loc);
+  if (!country) return;
+  if (!GROUPS[country]) GROUPS[country] = [];
+  GROUPS[country].push(p);
 });
 
-// Total
+const countries = Object.keys(GROUPS);
 const total = ALL_PHOTOS.length;
 document.getElementById('ph-total').textContent = total + ' photograph' + (total !== 1 ? 's' : '') + ' total';
 
-// ═══════════════════════════════════════════════════════
-// CONSTELLATION CANVAS
-// ═══════════════════════════════════════════════════════
+let activeCountry = countries[0] || null;
+
+// Build nodes + tabs dynamically from detected countries
+function buildUI() {
+  const wrap = document.getElementById('constellation-wrap');
+  const bar = document.getElementById('city-bar');
+  document.querySelectorAll('.city-node').forEach(n => n.remove());
+  bar.innerHTML = '';
+
+  countries.forEach((country, i) => {
+    const cfg = COORDS[country] || { coords: '—', left: 15 + (i * 18) % 60, top: 45 };
+    const count = GROUPS[country].length;
+    const isFirst = i === 0;
+    const labelBelow = cfg.top < 65;
+
+    const node = document.createElement('div');
+    node.className = 'city-node' + (isFirst ? ' active' : '');
+    node.dataset.city = country;
+    node.style.cssText = `left:${cfg.left}%;top:${cfg.top}%`;
+    node.innerHTML = `
+      <div class="node-ring"></div>
+      <div class="node-ring node-ring2"></div>
+      <div class="node-core"></div>
+      <div class="node-label" style="${labelBelow ? 'top:18px;left:14px' : 'bottom:18px;left:14px'}">
+        <div class="node-label-name">${country}</div>
+        <div class="node-label-coord">${cfg.coords}</div>
+        <div class="node-label-count">${count} photo${count !== 1 ? 's' : ''}</div>
+      </div>`;
+    node.addEventListener('click', () => selectCountry(country));
+    wrap.appendChild(node);
+
+    const btn = document.createElement('button');
+    btn.className = 'city-btn' + (isFirst ? ' active' : '');
+    btn.dataset.city = country;
+    btn.textContent = country;
+    btn.addEventListener('click', () => selectCountry(country));
+    bar.appendChild(btn);
+  });
+
+  if (activeCountry) renderGallery(activeCountry);
+  setTimeout(drawConstellation, 120);
+}
+
+// Canvas drawing
 const canvas = document.getElementById('constellation-canvas');
 const ctx = canvas.getContext('2d');
 
 function drawConstellation() {
-  const W = canvas.offsetWidth;
-  const H = canvas.offsetHeight;
-  canvas.width = W;
-  canvas.height = H;
+  const W = canvas.offsetWidth, H = canvas.offsetHeight;
+  if (!W || !H) return;
+  canvas.width = W; canvas.height = H;
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle = '#131110'; ctx.fillRect(0,0,W,H);
 
-  ctx.clearRect(0, 0, W, H);
+  ctx.strokeStyle = 'rgba(196,138,66,0.05)'; ctx.lineWidth = 0.5;
+  for (let i=0;i<=16;i++){ctx.beginPath();ctx.moveTo(W/16*i,0);ctx.lineTo(W/16*i,H);ctx.stroke();}
+  for (let i=0;i<=8;i++){ctx.beginPath();ctx.moveTo(0,H/8*i);ctx.lineTo(W,H/8*i);ctx.stroke();}
 
-  // Background
-  ctx.fillStyle = '#131110';
-  ctx.fillRect(0, 0, W, H);
-
-  // Subtle grid
-  ctx.strokeStyle = 'rgba(196,138,66,0.055)';
-  ctx.lineWidth = 0.5;
-  for (let i = 0; i <= 16; i++) {
-    ctx.beginPath(); ctx.moveTo(W/16*i, 0); ctx.lineTo(W/16*i, H); ctx.stroke();
-  }
-  for (let i = 0; i <= 8; i++) {
-    ctx.beginPath(); ctx.moveTo(0, H/8*i); ctx.lineTo(W, H/8*i); ctx.stroke();
-  }
-
-  // Latitude arc lines (like a coordinate system)
-  [0.2, 0.45, 0.7, 0.9].forEach((t, i) => {
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(196,138,66,${0.04 + i*0.01})`;
-    ctx.lineWidth = 0.6;
-    ctx.moveTo(0, H * t);
-    ctx.bezierCurveTo(W*0.3, H*t - H*0.04, W*0.7, H*t + H*0.04, W, H*t);
-    ctx.stroke();
+  [0.18,0.38,0.58,0.78,0.92].forEach(t=>{
+    ctx.beginPath();ctx.strokeStyle='rgba(196,138,66,0.055)';ctx.lineWidth=0.7;
+    ctx.moveTo(0,H*t);ctx.bezierCurveTo(W*0.3,H*t-H*0.03,W*0.7,H*t+H*0.03,W,H*t);ctx.stroke();
+  });
+  [0.12,0.28,0.45,0.62,0.78,0.92].forEach(l=>{
+    ctx.beginPath();ctx.strokeStyle='rgba(196,138,66,0.04)';ctx.lineWidth=0.5;
+    ctx.moveTo(W*l,0);ctx.bezierCurveTo(W*l+5,H*0.4,W*l-5,H*0.6,W*l,H);ctx.stroke();
   });
 
-  // Longitude arc lines
-  [0.15, 0.35, 0.55, 0.72, 0.88].forEach((l, i) => {
-    ctx.beginPath();
-    ctx.strokeStyle = `rgba(196,138,66,0.04)`;
-    ctx.lineWidth = 0.5;
-    ctx.moveTo(W*l, 0);
-    ctx.bezierCurveTo(W*l + 8, H*0.4, W*l - 8, H*0.6, W*l, H);
-    ctx.stroke();
-  });
+  ctx.font='500 8px Inter,sans-serif';ctx.fillStyle='rgba(196,138,66,0.15)';
+  ctx.textAlign='left';
+  ['65°N','55°N','45°N','35°N','25°N','15°N'].forEach((l,i)=>ctx.fillText(l,6,H/5*i+14));
+  ctx.textAlign='center';
+  ['10°W','10°E','30°E','50°E','70°E'].forEach((l,i)=>ctx.fillText(l,W/4*i+W/8,H-5));
 
-  // Coordinate labels
-  ctx.font = '500 8px Inter, sans-serif';
-  ctx.fillStyle = 'rgba(196,138,66,0.18)';
-  ctx.textAlign = 'left';
-  ['60°N','55°N','50°N','45°N','40°N','35°N','30°N'].forEach((label, i) => {
-    ctx.fillText(label, 8, H/6*i + 12);
-  });
-  ctx.textAlign = 'center';
-  ['10°W','0°','10°E','20°E','30°E','40°E','50°E'].forEach((label, i) => {
-    ctx.fillText(label, W/6*i + W/12, H - 6);
-  });
-
-  // Connection lines between nodes
   const nodes = document.querySelectorAll('.city-node');
   const positions = [];
-  nodes.forEach(node => {
-    const rect = node.getBoundingClientRect();
-    const canvRect = canvas.getBoundingClientRect();
-    positions.push({
-      x: rect.left + rect.width/2 - canvRect.left,
-      y: rect.top + rect.height/2 - canvRect.top,
-      city: node.dataset.city,
-      active: node.classList.contains('active')
-    });
+  nodes.forEach(n=>{
+    const r=n.getBoundingClientRect(),cr=canvas.getBoundingClientRect();
+    positions.push({x:r.left+r.width/2-cr.left,y:r.top+r.height/2-cr.top,active:n.classList.contains('active')});
   });
 
-  // Draw arcing connection lines
-  for (let i = 0; i < positions.length; i++) {
-    for (let j = i+1; j < positions.length; j++) {
-      const a = positions[i], b = positions[j];
-      const mx = (a.x + b.x) / 2;
-      const my = (a.y + b.y) / 2 - 25;
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(196,138,66,0.08)';
-      ctx.lineWidth = 0.7;
-      ctx.setLineDash([3, 7]);
-      ctx.moveTo(a.x, a.y);
-      ctx.quadraticCurveTo(mx, my, b.x, b.y);
-      ctx.stroke();
-      ctx.setLineDash([]);
+  for(let i=0;i<positions.length;i++){
+    for(let j=i+1;j<positions.length;j++){
+      const a=positions[i],b=positions[j];
+      ctx.beginPath();ctx.strokeStyle='rgba(196,138,66,0.07)';ctx.lineWidth=0.8;
+      ctx.setLineDash([3,8]);
+      ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo((a.x+b.x)/2,(a.y+b.y)/2-28,b.x,b.y);
+      ctx.stroke();ctx.setLineDash([]);
     }
   }
-
-  // Glow dots at node positions (drawn behind the HTML pins)
-  positions.forEach(p => {
-    const isActive = p.active;
-    if (isActive) {
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, 18, 0, Math.PI*2);
-      ctx.fillStyle = 'rgba(196,138,66,0.06)';
-      ctx.fill();
-    }
+  positions.forEach(p=>{
+    if(p.active){ctx.beginPath();ctx.arc(p.x,p.y,20,0,Math.PI*2);ctx.fillStyle='rgba(196,138,66,0.07)';ctx.fill();}
   });
 }
 
-window.addEventListener('resize', () => { setTimeout(drawConstellation, 50); });
-setTimeout(drawConstellation, 100);
+window.addEventListener('resize',()=>setTimeout(drawConstellation,60));
 
-// ═══════════════════════════════════════════════════════
-// GALLERY RENDERING
-// ═══════════════════════════════════════════════════════
-let activeCity = 'krakow';
-
-function renderGallery(city) {
-  activeCity = city;
-  const cfg = CITY_CONFIG[city];
-  const photos = GROUPS[city] || [];
-
-  document.getElementById('gallery-city-name').textContent = cfg.label;
+function renderGallery(country) {
+  activeCountry = country;
+  const photos = GROUPS[country] || [];
+  const cfg = COORDS[country] || {};
+  document.getElementById('gallery-city-name').textContent = country;
   document.getElementById('gallery-count').textContent = photos.length + ' photograph' + (photos.length !== 1 ? 's' : '');
-  document.getElementById('gallery-coords').textContent = cfg.coords;
-
+  document.getElementById('gallery-coords').textContent = cfg.coords || '';
   const grid = document.getElementById('gallery-grid');
   grid.classList.add('fade-out');
-
-  setTimeout(() => {
-    if (photos.length === 0) {
-      grid.innerHTML = '<div style="color:var(--faint);font-size:13px;padding:40px 0">No photos yet for this location.</div>';
-    } else {
-      grid.style.columns = photos.length <= 2 ? '2' : '3';
-      grid.innerHTML = photos.map(p =>
-        `<div class="gallery-cell" data-src="${p.src}" data-title="${p.title}" data-loc="${p.loc}">
+  setTimeout(()=>{
+    grid.style.columns = photos.length <= 2 ? '2' : '3';
+    grid.innerHTML = photos.length === 0
+      ? '<div style="color:var(--faint);font-size:13px;padding:40px 0">No photos yet.</div>'
+      : photos.map(p=>`<div class="gallery-cell" data-src="${p.src}" data-title="${p.title}" data-loc="${p.loc}">
           <img src="${p.src}" alt="${p.title}" loading="lazy">
-          <div class="cell-overlay">
-            <div class="cell-overlay-inner">
-              <div class="cell-title">${p.title}</div>
-              <div class="cell-loc">${p.loc}</div>
-            </div>
-          </div>
-        </div>`
-      ).join('');
-
-      grid.querySelectorAll('.gallery-cell').forEach(cell => {
-        cell.addEventListener('click', () => openLb(cell.dataset.src, cell.dataset.title, cell.dataset.loc));
-      });
-    }
-
+          <div class="cell-overlay"><div class="cell-overlay-inner">
+            <div class="cell-title">${p.title}</div>
+            <div class="cell-loc">${p.loc}</div>
+          </div></div>
+        </div>`).join('');
+    grid.querySelectorAll('.gallery-cell').forEach(c=>{
+      c.addEventListener('click',()=>openLb(c.dataset.src,c.dataset.title,c.dataset.loc));
+    });
     grid.classList.remove('fade-out');
-  }, 200);
+  },180);
 }
 
-// ═══════════════════════════════════════════════════════
-// NODE & TAB INTERACTION
-// ═══════════════════════════════════════════════════════
-function selectCity(city) {
-  document.querySelectorAll('.city-node').forEach(n => n.classList.toggle('active', n.dataset.city === city));
-  document.querySelectorAll('.city-btn').forEach(b => b.classList.toggle('active', b.dataset.city === city));
-  renderGallery(city);
-  setTimeout(drawConstellation, 50);
+function selectCountry(country) {
+  activeCountry = country;
+  document.querySelectorAll('.city-node').forEach(n=>n.classList.toggle('active',n.dataset.city===country));
+  document.querySelectorAll('.city-btn').forEach(b=>b.classList.toggle('active',b.dataset.city===country));
+  renderGallery(country);
+  setTimeout(drawConstellation,50);
 }
 
-document.querySelectorAll('.city-node').forEach(n => n.addEventListener('click', () => selectCity(n.dataset.city)));
-document.querySelectorAll('.city-btn').forEach(b => b.addEventListener('click', () => selectCity(b.dataset.city)));
-
-// ═══════════════════════════════════════════════════════
-// LIGHTBOX
-// ═══════════════════════════════════════════════════════
 const lb = document.getElementById('lb');
-function openLb(src, title, loc) {
-  document.getElementById('lb-img').src = src;
-  document.getElementById('lb-title').textContent = title || '';
-  document.getElementById('lb-loc').textContent = loc || '';
-  lb.style.display = 'flex';
-  requestAnimationFrame(() => requestAnimationFrame(() => lb.classList.add('visible')));
+function openLb(src,title,loc){
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lb-title').textContent=title||'';
+  document.getElementById('lb-loc').textContent=loc||'';
+  lb.style.display='flex';
+  requestAnimationFrame(()=>requestAnimationFrame(()=>lb.classList.add('visible')));
 }
-function closeLb() {
+function closeLb(){
   lb.classList.remove('visible');
-  setTimeout(() => { lb.style.display = 'none'; document.getElementById('lb-img').src = ''; }, 300);
+  setTimeout(()=>{lb.style.display='none';document.getElementById('lb-img').src='';},300);
 }
-document.getElementById('lb-close').addEventListener('click', closeLb);
-lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
+document.getElementById('lb-close').addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb();});
 
-// INIT
-renderGallery('hungary');
+buildUI();
 </script>
 </body>
 </html>
