@@ -16,6 +16,7 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
+      - { label: "Date", name: "date", widget: "date", format: "YYYY-MM-DD", required: false }
       - label: "Location"
         name: "location"
         widget: "select"
