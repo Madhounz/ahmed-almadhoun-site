@@ -1,6 +1,7 @@
 ---
 title: Sanctum
-location: Budapest, Hungary 2026
+date: "2026"
+location: Budapest, Hungary
 image: /photos/1.jpg
 ratio: 16/9
 ---
