@@ -1,6 +1,7 @@
 ---
 title: Convergence
-location: Budapest, Hungary 2026
+date: "2026"
+location: Budapest, Hungary
 image: /photos/3.jpg
 ratio: 4/3
 ---
