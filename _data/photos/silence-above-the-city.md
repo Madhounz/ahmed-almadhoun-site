@@ -1,6 +1,7 @@
 ---
 title: Silence Above the City
-location: Istanbul ,Türkiye 2022
+date: "2021"
+location: Istanbul, Türkiye
 image: /photos/dsc_0563.jpg
 ratio: 16/9
 ---
