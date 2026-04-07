@@ -135,6 +135,23 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .photo-footer{margin-top:18px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .photo-footer a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none}
 .photo-footer a:hover{text-decoration:underline}
+.ph-banner{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;height:160px;border:1px solid var(--border-light);transition:border-color .8s;margin-top:24px;text-decoration:none;display:block}
+.ph-banner:hover{border-color:rgba(196,138,66,.3)}
+.ph-banner canvas{position:absolute;inset:0;width:100%;height:100%}
+.ph-banner-content{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 36px;pointer-events:none}
+.ph-b-eyebrow{font-size:8px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--accent);opacity:.35;margin-bottom:13px;transition:opacity .6s}
+.ph-banner:hover .ph-b-eyebrow{opacity:.75}
+.ph-b-heading{font-family:var(--serif);font-size:28px;font-weight:300;line-height:1.02;letter-spacing:-.03em;color:var(--text);opacity:.9}
+.ph-b-heading span{display:block;font-style:italic;color:var(--accent);opacity:.8}
+.ph-b-locs{display:flex;align-items:center;gap:0;margin-top:12px}
+.ph-b-loc{font-size:8px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:transparent;font-family:var(--sans);transition:color .5s,opacity .5s;opacity:0}
+.ph-b-loc.on{opacity:1;color:var(--faint)}
+.ph-b-sep{width:3px;height:3px;border-radius:50%;background:var(--border);margin:0 10px;flex-shrink:0}
+.ph-b-sigil{width:50px;height:50px;position:relative;flex-shrink:0}
+.ph-b-sigil svg{width:100%;height:100%;overflow:visible}
+.ph-b-cta{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.3;transition:opacity .4s;white-space:nowrap;margin-top:14px}
+.ph-banner:hover .ph-b-cta{opacity:.9}
+.ph-b-right{display:flex;flex-direction:column;align-items:flex-end}
 
 #about{background:var(--bg)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start}
@@ -497,9 +514,42 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
       </div>
       <div class="photo-progress"><div class="photo-progress-bar" id="photo-progress-bar"></div></div>
     </div>
-    <div class="photo-footer">
+<div class="photo-footer">
       <a href="https://www.instagram.com/fotozitake/" target="_blank" rel="noopener noreferrer">@fotozitake on Instagram &rarr;</a>
     </div>
+
+    <a href="/photography" class="ph-banner" id="ph-banner">
+      <canvas id="ph-banner-canvas"></canvas>
+      <div class="ph-banner-content">
+        <div>
+          <div class="ph-b-eyebrow">Photography · Full Archive</div>
+          <div class="ph-b-heading">Everywhere<br><span>I've stood still.</span></div>
+          <div class="ph-b-locs">
+            <span class="ph-b-loc" id="phbl0">Hungary</span>
+            <div class="ph-b-sep"></div>
+            <span class="ph-b-loc" id="phbl1">Poland</span>
+            <div class="ph-b-sep"></div>
+            <span class="ph-b-loc" id="phbl2">Türkiye</span>
+            <div class="ph-b-sep"></div>
+            <span class="ph-b-loc" id="phbl3">UAE</span>
+            <div class="ph-b-sep"></div>
+            <span class="ph-b-loc" style="font-style:italic;letter-spacing:.1em" id="phbl4">and beyond</span>
+          </div>
+        </div>
+        <div class="ph-b-right">
+          <div class="ph-b-sigil">
+            <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="26" cy="26" r="24" stroke="rgba(196,138,66,0.12)" stroke-width="0.5"/>
+              <circle cx="26" cy="26" r="16" stroke="rgba(196,138,66,0.08)" stroke-width="0.5" stroke-dasharray="2 4" id="ph-sigil-ring"/>
+              <circle cx="26" cy="26" r="3" fill="rgba(196,138,66,0.45)"/>
+              <line x1="26" y1="2" x2="26" y2="50" stroke="rgba(196,138,66,0.06)" stroke-width="0.5"/>
+              <line x1="2" y1="26" x2="50" y2="26" stroke="rgba(196,138,66,0.06)" stroke-width="0.5"/>
+            </svg>
+          </div>
+          <div class="ph-b-cta">Explore by location →</div>
+        </div>
+      </div>
+    </a>
   </div>
 </section>
 
@@ -1056,6 +1106,89 @@ if(mapOverlay){
 }
 window.toggleMap=toggleMap;
 window.closeMap=closeMap;
+// === PHOTOGRAPHY BANNER ===
+(function(){
+  const banner=document.getElementById('ph-banner');
+  const canvas=document.getElementById('ph-banner-canvas');
+  if(!banner||!canvas)return;
+  const ctx=canvas.getContext('2d');
+  let hov=false,t=0,bt=0,particles=[],raf;
+  const STARS=Array.from({length:80},()=>({x:Math.random(),y:Math.random(),r:Math.random()*.9+.2,ph:Math.random()*Math.PI*2,sp:Math.random()*.5+.3}));
+  const CITIES=[{x:.28,y:.42},{x:.30,y:.25},{x:.54,y:.62},{x:.80,y:.82}];
+  const EDGES=[[0,1],[1,2],[2,3],[0,2],[0,3],[1,3]];
+  function resize(){
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=banner.offsetWidth*dpr;
+    canvas.height=banner.offsetHeight*dpr;
+    canvas.style.width=banner.offsetWidth+'px';
+    canvas.style.height=banner.offsetHeight+'px';
+    ctx.setTransform(1,0,0,1,0,0);
+    ctx.scale(dpr,dpr);
+  }
+  function draw(){
+    const W=banner.offsetWidth,H=banner.offsetHeight;
+    ctx.clearRect(0,0,W,H);
+    ctx.fillStyle='#0d0b09';ctx.fillRect(0,0,W,H);
+    bt+=.006;
+    const fog=ctx.createRadialGradient(W*.4,H*.5,0,W*.4,H*.5,W*.5);
+    fog.addColorStop(0,`rgba(196,138,66,${hov?.03:.015})`);
+    fog.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=fog;ctx.fillRect(0,0,W,H);
+    STARS.forEach(s=>{
+      const pulse=Math.sin(bt*s.sp+s.ph)*.5+.5;
+      ctx.beginPath();ctx.arc(s.x*W,s.y*H,s.r*(.6+pulse*.4),0,Math.PI*2);
+      ctx.fillStyle=`rgba(196,138,66,${(hov?.18:.07)*pulse})`;ctx.fill();
+    });
+    [.12,.28,.44,.60,.76,.90].forEach(ty=>{
+      ctx.beginPath();ctx.strokeStyle=`rgba(196,138,66,${hov?.055:.02})`;ctx.lineWidth=.4;
+      ctx.moveTo(0,H*ty);ctx.bezierCurveTo(W*.3,H*ty-H*.04,W*.7,H*ty+H*.04,W,H*ty);ctx.stroke();
+    });
+    [.15,.35,.55,.72,.88].forEach(lx=>{
+      ctx.beginPath();ctx.strokeStyle=`rgba(196,138,66,${hov?.035:.012})`;ctx.lineWidth=.4;
+      ctx.moveTo(W*lx,0);ctx.bezierCurveTo(W*lx+5,H*.4,W*lx-5,H*.6,W*lx,H);ctx.stroke();
+    });
+    EDGES.forEach(([ai,bi],ei)=>{
+      const a={x:CITIES[ai].x*W,y:CITIES[ai].y*H},b={x:CITIES[bi].x*W,y:CITIES[bi].y*H};
+      const prog=hov?Math.min(1,Math.max(0,(t-ei*.1)*1.8)):0;
+      if(prog<=0)return;
+      const mx=(a.x+b.x)/2,my=(a.y+b.y)/2-22;
+      const ex=a.x+(b.x-a.x)*prog,ey=a.y+(b.y-a.y)*prog;
+      ctx.beginPath();ctx.strokeStyle=`rgba(196,138,66,${.1*prog})`;ctx.lineWidth=.6;
+      ctx.setLineDash([1.5,7]);ctx.moveTo(a.x,a.y);ctx.quadraticCurveTo(mx,my,ex,ey);ctx.stroke();ctx.setLineDash([]);
+      if(prog<1){ctx.beginPath();ctx.arc(ex,ey,1.5,0,Math.PI*2);ctx.fillStyle='rgba(196,138,66,0.6)';ctx.fill();}
+    });
+    CITIES.forEach((c,i)=>{
+      const px=c.x*W,py=c.y*H;
+      const appear=hov?Math.min(1,Math.max(0,(t-i*.12)*4)):.3;
+      const pulse=Math.sin(bt*1.4+i*1.1)*.35+.65;
+      if(hov&&appear>0){
+        ctx.beginPath();ctx.arc(px,py,14*pulse*appear,0,Math.PI*2);ctx.strokeStyle=`rgba(196,138,66,${.05*appear})`;ctx.lineWidth=1;ctx.stroke();
+        ctx.beginPath();ctx.arc(px,py,7*appear,0,Math.PI*2);ctx.strokeStyle=`rgba(196,138,66,${.15*appear})`;ctx.lineWidth=.7;ctx.stroke();
+      }
+      ctx.beginPath();ctx.arc(px,py,hov?3.5*pulse:2,0,Math.PI*2);
+      ctx.fillStyle=hov?`rgba(196,138,66,${.6+pulse*.4})`:'rgba(196,138,66,0.2)';ctx.fill();
+    });
+    if(hov&&Math.random()<.15){const c=CITIES[Math.floor(Math.random()*4)];particles.push({x:c.x*W,y:c.y*H,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,life:1,max:80+Math.random()*60});}
+    particles=particles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.life-=1/p.max;if(p.life<=0)return false;ctx.beginPath();ctx.arc(p.x,p.y,.8,0,Math.PI*2);ctx.fillStyle=`rgba(196,138,66,${p.life*.25})`;ctx.fill();return true;});
+    const scanY=((bt*.08)%1.4-.2)*H;
+    if(scanY>0&&scanY<H){ctx.beginPath();ctx.moveTo(0,scanY);ctx.lineTo(W,scanY);ctx.strokeStyle='rgba(196,138,66,0.018)';ctx.lineWidth=1.5;ctx.stroke();}
+    if(hov)t+=.014; else t=Math.max(0,t-.05);
+    raf=requestAnimationFrame(draw);
+  }
+  const sigilRing=document.getElementById('ph-sigil-ring');
+  let sAngle=0;
+  (function rotateSigil(){sigilRing&&sigilRing.setAttribute('transform',`rotate(${(sAngle+=.18)} 26 26)`);requestAnimationFrame(rotateSigil);})();
+  let litTimer;
+  function lightLocs(){
+    for(let k=0;k<5;k++)document.getElementById('phbl'+k)?.classList.remove('on');
+    let i=0;litTimer=setInterval(()=>{document.getElementById('phbl'+i++)?.classList.add('on');if(i>=5)clearInterval(litTimer);},100);
+  }
+  function dimLocs(){clearInterval(litTimer);for(let k=0;k<5;k++)document.getElementById('phbl'+k)?.classList.remove('on');}
+  banner.addEventListener('mouseenter',()=>{hov=true;lightLocs();});
+  banner.addEventListener('mouseleave',()=>{hov=false;dimLocs();particles=[];});
+  window.addEventListener('resize',()=>{resize();});
+  resize();draw();
+})();
 </script>
 </body>
 </html>
