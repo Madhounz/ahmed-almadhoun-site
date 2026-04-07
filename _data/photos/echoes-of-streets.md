@@ -1,6 +1,7 @@
 ---
 title: Echoes of Streets
-location: Krakow, Poland 2025
+date: "2025"
+location: Krakow, Poland
 image: /photos/topost.jpg
 ratio: 16/9
 ---
