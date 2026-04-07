@@ -16,7 +16,26 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Location", name: "location", widget: "string" }
+      - label: "Location"
+        name: "location"
+        widget: "select"
+        options:
+          - "Budapest, Hungary"
+          - "Krakow, Poland"
+          - "Istanbul, Türkiye"
+          - "Türkiye"
+          - "Abu Dhabi, UAE"
+          - "Dubai, UAE"
+          - "Warsaw, Poland"
+          - "Wroclaw, Poland"
+          - "Rome, Italy"
+          - "Paris, France"
+          - "Berlin, Germany"
+          - "Amsterdam, Netherlands"
+          - "Athens, Greece"
+          - "Barcelona, Spain"
+          - "Vienna, Austria"
+          - "Prague, Czech Republic"
       - { label: "Photo", name: "image", widget: "image" }
       - { label: "Aspect Ratio", name: "ratio", widget: "select", options: ["16/7", "4/3", "21/9", "3/4", "1/1", "16/9"], default: "4/3" }
       - { label: "Description", name: "description", widget: "text", required: false }
