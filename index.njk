@@ -135,7 +135,8 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .photo-footer{margin-top:18px;display:flex;align-items:center;flex-wrap:wrap;gap:8px}
 .photo-footer a{font-size:13px;font-weight:500;color:var(--accent);text-decoration:none}
 .photo-footer a:hover{text-decoration:underline}
-.ph-banner{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;height:160px;border:1px solid var(--border-light);transition:border-color .8s;margin-top:24px;text-decoration:none;display:block}
+.ph-banner{position:relative;border-radius:12px;overflow:hidden;cursor:pointer;height:160px;border:1px solid var(--border-light);transition:border-color .4s,box-shadow .4s;margin-top:24px;text-decoration:none;display:block}
+.ph-banner:hover{border-color:rgba(196,138,66,.3);box-shadow:inset 0 0 0 1px rgba(196,138,66,.06)}
 .ph-banner:hover{border-color:rgba(196,138,66,.3)}
 .ph-banner canvas{position:absolute;inset:0;width:100%;height:100%}
 .ph-banner-content{position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:0 36px;pointer-events:none}
@@ -149,8 +150,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(43,41,38,0.94);backdrop-fi
 .ph-b-sep{width:3px;height:3px;border-radius:50%;background:var(--border);margin:0 10px;flex-shrink:0}
 .ph-b-sigil{width:50px;height:50px;position:relative;flex-shrink:0}
 .ph-b-sigil svg{width:100%;height:100%;overflow:visible}
-.ph-b-cta{font-size:8px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.3;transition:opacity .4s;white-space:nowrap;margin-top:14px}
-.ph-banner:hover .ph-b-cta{opacity:.9}
+.ph-b-cta{display:flex;align-items:center;gap:10px;margin-top:14px}
+.ph-b-cta-text{font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);opacity:.4;transition:opacity .4s;white-space:nowrap;font-family:var(--sans)}
+.ph-b-cta-arrow{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all .35s;flex-shrink:0}
+.ph-banner:hover .ph-b-cta-text{opacity:1}
+.ph-banner:hover .ph-b-cta-arrow{border-color:var(--accent);background:var(--accent)}
+.ph-banner:hover .ph-b-cta-arrow svg{transform:translateX(2px)}
+.ph-b-cta-arrow svg{transition:transform .3s}
 .ph-b-right{display:flex;flex-direction:column;align-items:flex-end}
 
 #about{background:var(--bg)}
@@ -546,7 +552,14 @@ footer{padding:36px 40px;border-top:1px solid var(--border);background:var(--sur
               <line x1="2" y1="26" x2="50" y2="26" stroke="rgba(196,138,66,0.06)" stroke-width="0.5"/>
             </svg>
           </div>
-          <div class="ph-b-cta">Explore by location →</div>
+                    <div class="ph-b-cta">
+            <div class="ph-b-cta-text">Explore by location</div>
+            <div class="ph-b-cta-arrow">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="#1a1714" stroke-width="1.5">
+                <path d="M3 7h8M7 3l4 4-4 4"/>
+              </svg>
+            </div>
+          </div>
         </div>
       </div>
     </a>
