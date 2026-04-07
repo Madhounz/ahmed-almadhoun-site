@@ -141,45 +141,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
          top  = (60-24)/30*100 = 120% → off map, adjust bounds
   ═══════════════════════════════════════════════ -->
 
-  <div class="city-node active" id="node-krakow" data-city="krakow" style="left:42.9%;top:33.3%">
-    <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-    <div class="node-core"></div>
-    <div class="node-label" style="top:18px;left:14px">
-      <div class="node-label-name">Kraków</div>
-      <div class="node-label-coord">50°N 20°E</div>
-      <div class="node-label-count" id="ncount-krakow">— photos</div>
-    </div>
+<div class="city-node active" id="node-hungary" data-city="hungary" style="left:41.4%;top:43.3%">
+  <div class="node-ring"></div><div class="node-ring node-ring2"></div>
+  <div class="node-core"></div>
+  <div class="node-label" style="top:18px;left:14px">
+    <div class="node-label-name">Hungary</div>
+    <div class="node-label-coord">47°N 19°E</div>
+    <div class="node-label-count" id="ncount-hungary">— photos</div>
   </div>
+</div>
 
-  <div class="city-node" id="node-budapest" data-city="budapest" style="left:41.4%;top:43.3%">
-    <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-    <div class="node-core"></div>
-    <div class="node-label" style="top:18px;left:14px">
-      <div class="node-label-name">Budapest</div>
-      <div class="node-label-coord">47°N 19°E</div>
-      <div class="node-label-count" id="ncount-budapest">— photos</div>
-    </div>
+<div class="city-node" id="node-poland" data-city="poland" style="left:42.9%;top:30%">
+  <div class="node-ring"></div><div class="node-ring node-ring2"></div>
+  <div class="node-core"></div>
+  <div class="node-label" style="top:18px;left:14px">
+    <div class="node-label-name">Poland</div>
+    <div class="node-label-coord">52°N 19°E</div>
+    <div class="node-label-count" id="ncount-poland">— photos</div>
   </div>
+</div>
 
-  <div class="city-node" id="node-istanbul" data-city="istanbul" style="left:55.7%;top:63.3%">
-    <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-    <div class="node-core"></div>
-    <div class="node-label" style="bottom:18px;left:14px">
-      <div class="node-label-name">Istanbul</div>
-      <div class="node-label-coord">41°N 29°E</div>
-      <div class="node-label-count" id="ncount-istanbul">— photos</div>
-    </div>
+<div class="city-node" id="node-turkiye" data-city="turkiye" style="left:60%;top:58%">
+  <div class="node-ring"></div><div class="node-ring node-ring2"></div>
+  <div class="node-core"></div>
+  <div class="node-label" style="bottom:18px;left:14px">
+    <div class="node-label-name">Türkiye</div>
+    <div class="node-label-coord">39°N 35°E</div>
+    <div class="node-label-count" id="ncount-turkiye">— photos</div>
   </div>
-
-  <div class="city-node" id="node-turkiye" data-city="turkiye" style="left:62.9%;top:53.3%">
-    <div class="node-ring"></div><div class="node-ring node-ring2"></div>
-    <div class="node-core"></div>
-    <div class="node-label" style="bottom:18px;right:14px;text-align:right">
-      <div class="node-label-name">Türkiye</div>
-      <div class="node-label-coord">38°N 35°E</div>
-      <div class="node-label-count" id="ncount-turkiye">— photos</div>
-    </div>
-  </div>
+</div>
 
   <!-- ADD NEW CITY EXAMPLE (uncomment and fill):
   <div class="city-node" id="node-uae" data-city="uae" style="left:88%;top:100%">
@@ -191,9 +181,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 
 <!-- CITY TABS -->
 <div class="city-bar" id="city-bar">
-  <button class="city-btn active" data-city="krakow">Kraków</button>
-  <button class="city-btn" data-city="budapest">Budapest</button>
-  <button class="city-btn" data-city="istanbul">Istanbul</button>
+  <button class="city-btn active" data-city="hungary">Hungary</button>
+  <button class="city-btn" data-city="poland">Poland</button>
   <button class="city-btn" data-city="turkiye">Türkiye</button>
 </div>
 
@@ -244,11 +233,9 @@ const ALL_PHOTOS = [
 // To add a new city: add an entry here + a node in the HTML
 // ═══════════════════════════════════════════════════════
 const CITY_CONFIG = {
-  budapest: { keyword: 'Budapest', label: 'Budapest, Hungary',   coords: '47°30′N  19°03′E' },
-  istanbul: { keyword: 'Istanbul', label: 'Istanbul, Türkiye',   coords: '41°00′N  28°57′E' },
-  krakow:   { keyword: 'Krak',     label: 'Kraków, Poland',      coords: '50°03′N  19°56′E' },
-  turkiye:  { keyword: 'Türkiye',  label: 'Türkiye',             coords: '38°57′N  35°14′E' },
-  // uae:   { keyword: 'UAE',      label: 'United Arab Emirates', coords: '24°28′N  54°22′E' },
+  hungary: { keyword: 'Hungary', label: 'Hungary',  coords: '47°30′N  19°03′E' },
+  poland:  { keyword: 'Poland',  label: 'Poland',   coords: '51°55′N  19°08′E' },
+  turkiye: { keyword: 'Türkiye', label: 'Türkiye',  coords: '38°57′N  35°14′E' },
 };
 
 // Group photos by city
@@ -462,7 +449,7 @@ lb.addEventListener('click', e => { if (e.target === lb) closeLb(); });
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLb(); });
 
 // INIT
-renderGallery('krakow');
+renderGallery('hungary');
 </script>
 </body>
 </html>
