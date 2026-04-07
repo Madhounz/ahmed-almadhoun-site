@@ -16,7 +16,22 @@ collections:
     slug: "{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - label: "Year"         name: "date"         widget: "select"         required: false         options:           - "2016"           - "2017"           - "2018"           - "2019"           - "2020"           - "2021"           - "2022"           - "2023"           - "2024"           - "2025"           - "2026"
+      - label: "Year"
+        name: "date"
+        widget: "select"
+        required: false
+        options:
+          - "2016"
+          - "2017"
+          - "2018"
+          - "2019"
+          - "2020"
+          - "2021"
+          - "2022"
+          - "2023"
+          - "2024"
+          - "2025"
+          - "2026"
       - label: "Location"
         name: "location"
         widget: "select"
