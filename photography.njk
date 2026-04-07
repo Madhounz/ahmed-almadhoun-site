@@ -137,7 +137,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 40px;height:56px;d
 const ALL_PHOTOS = [
   {% if photos and photos.length %}
     {% for photo in photos %}
-    { src: "{{ photo.image }}", title: "{{ photo.title }}", loc: "{{ photo.location }}" }{% if not loop.last %},{% endif %}
+    { src: "{{ photo.image }}", title: "{{ photo.title }}", loc: "{{ photo.location }}", date: "{{ photo.date }}" }{% if not loop.last %},{% endif %}
     {% endfor %}
   {% endif %}
 ];
@@ -184,7 +184,11 @@ ALL_PHOTOS.forEach(p => {
   GROUPS[country].push(p);
 });
 
-const countries = Object.keys(GROUPS);
+const countries = Object.keys(GROUPS).sort((a,b)=>{
+  const aDate = Math.max(...(GROUPS[a].map(p=>new Date(p.date||0))));
+  const bDate = Math.max(...(GROUPS[b].map(p=>new Date(p.date||0))));
+  return bDate - aDate;
+});
 const total = ALL_PHOTOS.length;
 document.getElementById('ph-total').textContent = total + ' photograph' + (total !== 1 ? 's' : '') + ' total';
 
