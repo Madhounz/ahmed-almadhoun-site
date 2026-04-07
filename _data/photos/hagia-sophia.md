@@ -1,6 +1,7 @@
 ---
 title: Hagia Sophia
-location: Istanbul ,Türkiye 2021
+date: "2021"
+location: Istanbul, Türkiye
 image: /photos/12.jpg
 ratio: 4/3
 ---
