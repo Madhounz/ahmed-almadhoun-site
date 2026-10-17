@@ -2,83 +2,26 @@ backend:
   name: github
   repo: Madhounz/ahmed-almadhoun-site
   branch: main
-
 media_folder: "photos"
 public_folder: "/photos"
-
 collections:
-
-  - name: "photos"
-    label: "Photography"
-    label_singular: "Photo"
-    folder: "_data/photos"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - label: "Year"
-        name: "date"
-        widget: "select"
-        required: false
-        options:
-          - "2016"
-          - "2017"
-          - "2018"
-          - "2019"
-          - "2020"
-          - "2021"
-          - "2022"
-          - "2023"
-          - "2024"
-          - "2025"
-          - "2026"
-      - label: "Location"
-        name: "location"
-        widget: "select"
-        options:
-          - "Budapest, Hungary"
-          - "Krakow, Poland"
-          - "Istanbul, Türkiye"
-          - "Türkiye"
-          - "Abu Dhabi, UAE"
-          - "Dubai, UAE"
-          - "Warsaw, Poland"
-          - "Wroclaw, Poland"
-          - "Rome, Italy"
-          - "Paris, France"
-          - "Berlin, Germany"
-          - "Amsterdam, Netherlands"
-          - "Athens, Greece"
-          - "Barcelona, Spain"
-          - "Vienna, Austria"
-          - "Prague, Czech Republic"
-      - { label: "Photo", name: "image", widget: "image" }
-      - { label: "Aspect Ratio", name: "ratio", widget: "select", options: ["16/7", "4/3", "21/9", "3/4", "1/1", "16/9"], default: "4/3" }
-      - { label: "Description", name: "description", widget: "text", required: false }
-
-  - name: "research"
-    label: "Research Papers"
-    label_singular: "Paper"
-    folder: "_data/research"
-    create: true
-    slug: "{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Journal / Venue", name: "venue", widget: "string" }
-      - { label: "DOI Link", name: "doi", widget: "string", required: false }
-      - { label: "PDF File", name: "pdf", widget: "file", required: false }
-      - { label: "Abstract", name: "abstract", widget: "text", required: false }
-      - { label: "Tags", name: "tags", widget: "list", required: false }
-
-  - name: "thoughts"
-    label: "Thoughts & Posts"
-    label_singular: "Post"
-    folder: "_data/thoughts"
-    create: true
-    slug: "{{year}}-{{month}}-{{slug}}"
-    fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Category", name: "category", widget: "select", options: ["Research", "Photography", "Academia", "Personal", "Travel"] }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Full Content", name: "body", widget: "markdown" }
+  - name: "portfolio"
+    label: "Professional Portfolio"
+    files:
+      - name: "selected-work"
+        label: "Selected Work"
+        file: "_data/portfolio.json"
+        fields:
+          - {label: "Last updated", name: "updated", widget: "string"}
+          - label: "Research outputs"
+            name: "works"
+            widget: "list"
+            fields:
+              - {label: "Year", name: "year", widget: "string"}
+              - {label: "Status", name: "status", widget: "select", options: ["Published", "Accepted", "Presented", "Submitted"]}
+              - {label: "Type", name: "type", widget: "string"}
+              - {label: "Title", name: "title", widget: "string"}
+              - {label: "Venue", name: "venue", widget: "string"}
+              - {label: "Description", name: "description", widget: "text"}
+              - {label: "Co-authors (published author order)", name: "authors", widget: "string", required: false}
+              - {label: "Publication URL", name: "url", widget: "string", required: false}
