@@ -23,4 +23,5 @@ collections:
               - {label: "Title", name: "title", widget: "string"}
               - {label: "Venue", name: "venue", widget: "string"}
               - {label: "Description", name: "description", widget: "text"}
+              - {label: "Co-authors (published author order)", name: "authors", widget: "string", required: false}
               - {label: "Publication URL", name: "url", widget: "string", required: false}
