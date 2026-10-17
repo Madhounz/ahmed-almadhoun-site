@@ -1,0 +1,11 @@
+{
+  "updated": "October 2026",
+  "works": [
+    {"year":"2026","status":"Published","type":"Journal article","title":"Application of Optimization Algorithms in Design of Railway Vehicles: Review of Selected Methods","venue":"Algorithms · 19(9), article 808","description":"A review of selected optimization methods applied to railway vehicle design."},
+    {"year":"2026","status":"Published","type":"Conference proceedings","title":"The 79th Street in Musaffah Abu Dhabi – The Simulation-Based Alternatives","venue":"Transportation Research Procedia · 93, 826–832","description":"Traffic simulation and digital shadowing to investigate congestion and assess alternatives for an urban corridor in Abu Dhabi.","url":"https://doi.org/10.1016/j.trpro.2025.12.010"},
+    {"year":"2025","status":"Published","type":"Book chapter","title":"Smart City Planning for Inclusive Postwar Urban Reconstruction: Integrating Electromobility and Freight Accessibility","venue":"Warsaw University of Technology Press · pp. 89–109","description":"Connecting urban reconstruction, electromobility and freight access in the planning of inclusive transport systems."},
+    {"year":"2026","status":"Accepted","type":"Conference contribution","title":"Towards an Accessibility-Based Framework for Assessing Freight Transport Poverty","venue":"TRANSBALTICA 2026 · Presented September 2026","description":"Accepted for future monograph publication. An accessibility-based approach to defining and investigating freight disadvantage."},
+    {"year":"2026","status":"Presented","type":"Conference contribution","title":"Microsimulation-Based Assessment of the Impact of Passenger Traffic on the Reliability of Freight Transport under Urban Congestion Conditions","venue":"LSTP 2026 · Presented September 2026","description":"An exploratory PTV Vissim corridor pilot examining passenger–freight interactions. Manuscript preparation is ongoing."},
+    {"year":"2027 expected","status":"Submitted","type":"Book chapter","title":"Blockchain-Based Secure Communication in Digital Twins for Smart Transportation","venue":"Elsevier · Final manuscript submitted July 2026","description":"Secure communication and trusted data exchange in transport digital twins. Not yet published."}
+  ]
+}

@@ -46,7 +46,9 @@ function readMd(folderName) {
 }
 
 module.exports = function(eleventyConfig) {
-  eleventyConfig.addPassthroughCopy("photos");
+  eleventyConfig.addPassthroughCopy("assets");
+  eleventyConfig.ignores.add("photography.njk");
+  eleventyConfig.ignores.add("yazan.html");
   eleventyConfig.addPassthroughCopy("admin");
   eleventyConfig.addPassthroughCopy("netlify.toml");
 
